@@ -1,0 +1,344 @@
+---
+title: "Appendix: Essays on Measuring Credit and Property Prices Gaps"
+author: "Nam Nguyen"
+institute: "UWM"
+short-institute: "UWM"
+date: '`r format(Sys.Date(), "%B %d, %Y")`'
+output: 
+  beamer_presentation:
+    theme: "default"
+    colortheme: "default"
+    fonttheme: "default"
+    keep_tex: true
+    slide_level: 2
+    includes:
+      in_header: preamble.tex
+    toc: false
+---
+# Appendix
+
+## Empirical Results
+### Extended Models Regression Results: United States
+
+```{r, echo=FALSE, message=FALSE}
+  options(kableExtra.latex.load_packages = FALSE)
+  options(knitr.table.format = "pandoc")
+  library('kableExtra')
+  library(dplyr)
+  library(knitr)
+
+  country='US'
+  filepath=sprintf('../../HPCredit/Regression/RegCombPercentile_%s.csv',country)
+  df<-read.csv(filepath, sep = ",", header=FALSE)
+
+  #rownames(df) <- df[,1]
+  #df<-df[,-1]
+
+  df<-df[,-1]
+  colnames(df) <- c("Parameters","Median", "[10$\\%$, 90$\\%$]", "Median", "[10$\\%$, 90$\\%$]", "Median", "[10$\\%$, 90$\\%$]")
+  options(knitr.kable.NA = '')
+
+  #df = df %>% mutate_if(is.numeric, format, digits=4)
+
+  #https://stackoverflow.com/questions/72388965/aesthetics-of-kable-extra-and-rmardown
+  kbl(df, "latex", booktabs = T, digits = c(4, 4, 4, 4, 4, 4, 4), escape=FALSE, linesep=c("", "", "", "\\addlinespace"), row.names=FALSE) %>%
+    add_header_above(c(" " = 1, "VAR2" = 2, "VAR2 1-cross lag" = 2, "VAR2 2-cross lags" = 2)) %>%
+    footnote(general="US Bayesian method random walk Metropolis-Hasting posterior distribution estimates") %>%
+    kable_styling(latex_options=c("striped","scale_down")) %>%
+    kable_paper(c("striped")) %>%
+    column_spec(c(1,4:5), bold = c(0,0,1,0,0,0,1,0,0,0,0,0,0,0,0))%>%
+		gsub(".(begin|end){table.*}", "", ., perl = TRUE)%>%
+  	gsub(".centering", "", ., perl = TRUE)
+```   
+
+## Empirical Results
+
+### Extended Models Regression Results: United Kingdom 
+
+
+```{r, echo=FALSE, message=FALSE}
+  options(kableExtra.latex.load_packages = FALSE)
+  options(knitr.table.format = "pandoc")
+  library('kableExtra')
+  library(dplyr)
+  library(knitr)
+
+  country='UK'
+  filepath=sprintf('../../HPCredit/Regression/RegCombPercentile_%s.csv',country)
+  df<-read.csv(filepath, sep = ",", header=FALSE)
+
+  #rownames(df) <- df[,1]
+  #df<-df[,-1]
+
+  df<-df[,-1]
+  colnames(df) <- c("Parameters","Median", "[10$\\%$, 90$\\%$]", "Median", "[10$\\%$, 90$\\%$]", "Median", "[10$\\%$, 90$\\%$]")
+  options(knitr.kable.NA = '')
+
+  #df = df %>% mutate_if(is.numeric, format, digits=4)
+
+  #https://stackoverflow.com/questions/72388965/aesthetics-of-kable-extra-and-rmardown
+  kbl(df, "latex", booktabs = T, digits = c(4, 4, 4, 4, 4, 4, 4), escape=FALSE, linesep=c("", "", "", "\\addlinespace"), row.names=FALSE) %>%
+    add_header_above(c(" " = 1, "VAR2" = 2, "VAR2 1-cross lag" = 2, "VAR2 2-cross lags" = 2)) %>%
+    footnote(general="UK Bayesian method random walk Metropolis-Hasting posterior distribution estimates") %>%
+    kable_styling(latex_options=c("striped","scale_down")) %>%
+    kable_paper(c("striped")) %>%
+    column_spec(c(1,4:5), bold = c(0,0,1,0,0,0,1,0,0,0,0,0,0,0,0))%>%
+		gsub(".(begin|end){table.*}", "", ., perl = TRUE)%>%
+  	gsub(".centering", "", ., perl = TRUE)
+```   
+
+
+## Model
+
+### State Space Representation
+	
+- Transition equation:
+	\begin{align}
+		\beta_t = F\beta_{t-1} + \tilde{v}_t
+	\end{align}
+	
+- Where the transitory components are:
+	
+	\begin{align*}
+    \begin{bmatrix}
+    \tau_{yt} \\
+    c_{yt}    \\
+    c_{yt-1}    \\
+    \tau_{ht} \\
+    c_{ht}    \\
+    c_{ht-1}  \\
+    \mu_{yt} \\
+    \mu_{ht}  
+    \end{bmatrix}
+    =
+    %F matrix
+    \begin{bmatrix}
+    1 & 0 & 0 & 0 & 0 & 0 & 1 & 0 \\
+    0 & \phi^1_y  & \phi^2_y  & 0 & \phi^{x1}_y & \phi^{x2}_y & 0 & 0\\
+    0 & 1 & 0 & 0 & 0 & 0 & 0 & 0\\
+    0 & 0 & 0 & 1 & 0 & 0 & 0 & 1\\
+    0 & \phi^{x1}_h & \phi^{x2}_h & 0 &\phi^1_h & \phi^2_h  & 0 & 0\\
+    0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 \\
+    0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 \\
+    0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 
+    \end{bmatrix}
+    %Bt-1 matrix
+    \begin{bmatrix}
+    \tau_{yt-1} \\
+    c_{yt-1}    \\
+    c_{yt-2}    \\
+    \tau_{ht-1} \\
+    c_{ht-1}    \\
+    c_{ht-2}    \\
+    \mu_{yt-1} \\
+    \mu_{ht-1} 
+    \end{bmatrix}
+    +
+    \begin{bmatrix}
+    \eta_{yt} \\
+    \varepsilon_{yt}    \\
+    0 \\
+    \eta_{ht} \\
+    \varepsilon_{ht}    \\
+    0 \\
+    \eta_{\mu yt} \\
+    \eta_{\mu ht}
+    \end{bmatrix}
+    \end{align*}
+
+
+
+<!--
+## Comparison with other decomposition methods: US
+```{r UKrobust, echo=FALSE, out.width='80%'}
+knitr::include_graphics('../../HPCredit/Regression/AR_2/Output/graphs/HP_Credit_2graphs_US.pdf')
+```
+
+## Comparison with other decomposition methods: UK
+```{r USrobust, echo=FALSE, out.width='80%'}
+knitr::include_graphics('../../HPCredit/Regression/AR_2/Output/graphs/HP_Credit_2graphs_UK.pdf')
+```
+-->
+
+
+
+## Chapter 2: Measuring Credit Gaps
+### Table of Contents
+#### Introduction
+- Motivation
+- Contribution
+
+#### Methodology
+- Data
+- Empirical Model
+- Results
+
+#### Conclusion
+
+
+## Empirical Results
+
+We perform these estimations recursively to preserve the 1-sided nature of the credit gap. 
+
+Our first estimation sample runs from 1983:Q1-1988:Q4 and saves the last estimate of the cycle. We keep adding one more observation to the estimation sample and keep saving the last observation of the cycle for different methods. 
+
+- This approach provides us with a 1-sided estimate of the credit gap from different methods.
+
+## Credit-to-GDP Ratios
+```{r Credit-to-GDP-Ratios, echo=FALSE, out.width='85%'}
+knitr::include_graphics('../../HPI-Credit-Trasitory-Forecast/plots/Credit-to-GDP.pdf')
+```
+
+
+## Chapter 3: Identifying Unsustainable Credit Gaps
+
+### Table of Contents
+#### Introduction
+- Motivation
+- Contribution
+- Literature Review
+
+
+#### Methodology
+- Data
+- Empirical Model
+  + Model Selection
+  + Model Averaging
+  + Weighted gap creation
+
+#### Results
+
+## Literature Review
+Beltran (2021) - measured and the performance of BIS Basel credit gap, along with other decomposition methods and optimized the smoothing parameters $\rho$ in those filters to minimize policy loss function. 
+
+\begin{align*}
+L_{\theta,\rho}=\alpha TypeI(\theta)+(1-\alpha)TypeII(\theta)|TPR\ge2/3
+\end{align*}
+
+- $\theta$ is the optimized threshold that minizes loss function.
+
+Galán (2019) proposed rolling sample of 15 and 20 years when creating one sided cycle.
+
+Drehmann (2021) created Hamilton filter in a panel setting with fixed coefficients on independent variables across countries.
+
+
+## AUROC 
+Each logistic regression with a different gap measurement yields a Area Under Curve (AUC) of receiver operating characteristic value. There is an underlying assumption that the higher the AUC value is the better overall performance of a credit gap is as an EWI. 
+
+- However, the AUC value received some criticism regarding the area on its lower left corner, where the predictive power of the threshold (TPR) is low.
+
+\begin{align*}
+AUC = \int_0^1 TPR d(FPR)
+\end{align*}
+
+A ROC curve in the EWI setting represents True Positive Rate (TPR) and False Positive Rate (FPR) of different credit gap thresholds indicating a pre-crisis period.
+
+## partial standardised AUROC (psAUROC)
+
+To overcome the issue of unnecessary information included in the full AUC. An approach to estimate partial AUC was proposed by Detken et al (2014) in the early warning literature.
+
+- psAUC can reveal useful additional information as long as the partial area does not become too restricted
+
+
+## pAUROC (or pAUC)
+
+Beltran (2021) constrainted the policy loss function to TPR $\ge 2/3$ or Type II error rate $< 1/3$. They then estimated the policy loss function value at different points on the ROC curve by assigning different policy preferences $\alpha$.
+
+$\Rightarrow$ In this paper, we propose to restrict the consideration of the ROC curve to TPR $\ge 2/3$, then estimate the psAUC of the restricted ROC curve region instead.
+
+\begin{align}
+pAUROC = \int_{\frac{2}{3}}^1 TNR \, d(TPR)
+\end{align}
+
+- TNR = 1- FPR
+- FPR = Type I error rate, FNR = Type II error rate
+
+
+
+## Variable selection (top 23 gaps ranked by psAUC)
+
+```{r varselect, echo=FALSE, warning=FALSE, message=FALSE}
+options(kableExtra.latex.load_packages = FALSE)
+options(knitr.table.format = "pandoc")
+library('kableExtra')
+library(dplyr)
+library(knitr)
+#library(rstudioapi)
+#setwd(dirname(getActiveDocumentContext()$path))
+#getwd()
+
+filepath='../../3rdPaper/Data/Output/Modelselection_512.csv'
+df<-read.csv(filepath, sep = ",", header=TRUE)
+
+#rownames(df) <- df[,1]
+name1<- df[,1]
+name1<- gsub("_", ".", name1)
+name1[which(name1=="c.hp400k")]<-"BIS Basel gap"
+df[,1]<-name1
+
+#df<-df[,-1]
+df<-df[-c(27:nrow(df)),-c(10:ncol(df))]
+#df<-df[-2,]
+
+#colnames(df) <- c("Median", "10pct", "90pct", "Median", "10pct", "90pct", "Median", "10pct", "90pct")
+
+#options(knitr.kable.NA = '')
+
+#df = df %>% mutate_if(is.numeric, format, digits=4)
+
+#kbl(data.frame(x=rnorm(10), y=rnorm(10), x= rnorm(10)), digits = c(1, 4, 4))
+
+kbl(df, "latex", booktabs = T, digits = c(4, 4, 4, 4, 4, 4, 4, 4), escape=FALSE, linesep=c("","", "", "", "\\addlinespace")
+      , row.names = FALSE) %>%
+  kable_paper("striped") %>%
+  #add_header_above(c("Parameters" = 1, "VAR2" = 3, "VAR2 1-cross lag" = 3, "VAR2 2-cross lags" = 3)) %>%
+  #footnote(general="UK Bayesian posterior distribution estimates") %>%
+  kable_styling(latex_options="scale_down") %>%
+  column_spec(5, bold = TRUE) %>% #c(0,0,1,0,0,0,1,0,0,0,0,0,0,0,0))
+  gsub(".(begin|end){table.*}", "", ., perl = TRUE)%>%
+  gsub(".centering", "", ., perl = TRUE)
+```
+
+
+## Model posterior probability
+- $BIC_k = 2log (Bayesfactor_{sk}) = \chi^2_{sk} - df_klog(n)$
+- $\chi^2_{sk}$ is the deviance of model K from the the saturated model
+  + $\chi^2_{sk} = 2(ll(Ms) - ll(Mk))$
+  + $ll(Mk)$ is the log-likelihood of model Mk given data D
+
+###  Alternate deviance measurement
+We propose using psAUC instead of log-likelihood in the measurement of deviance. Hence, an alternative BIC value can be estimated at:
+
+\begin{align}
+BIC_{alt,k} &= 2log (Bayesfactor_{alt,sk}) \\
+&= 2(1000*(psAUC_s-psAUC_k)) - df_klog(n)
+\end{align}
+- We scaled the psAUC value by 1000 since $0<psAUC<1$. Also, by design, $psAUC_s=1$.
+
+## Posterior distribution of coefficients of interest:
+
+$\beta_j$ is the coefficient of credit gap j ($c_j$) in a logistic regression model k against pre-crisis indicator. When considering a particular $\beta_1$ :
+
+\begin{align*}
+p(\beta_1|D, \beta_1\ne 0) = \sum\nolimits_{A_1} p(\beta_1|D,M_k)p'(M_k|D)
+\end{align*}
+
+
+- where $p'(M_k|D)=p(M_k|D)/ pr[\beta_1 \ne 0|D]$
+- and $pr[\beta_1 \ne 0|D] = \sum\limits_{A_1} p(M_k|D)$
+  + this is the probability that $\beta_1$ is in the averaged model
+  + $A_1= \{M_k: k=1,...,K; \beta_1 \ne 0\}$, is the set of models that includes $\beta_1$
+   
+
+
+
+## Approximation of point estimate:
+
+\begin{align}
+\hat{\beta}_1 = E[\beta_1|D, \beta_1\ne 0] = \sum\limits_{A_1} \hat{\beta}_1(k)p'(M_k|D)
+\end{align}
+
+$SD^2[\beta_1|D, \beta_1\ne 0] =[\sum\limits_{A_1}[se_1^2(k)+]+\hat{\beta_1}(k)]p'(M_k|D)
+- E[\beta_1|D, \beta_1\ne 0]^2$
+
+- Where $\hat{\beta}_1(k)$ and $se_1^2(k)$ are respectively the MLE and standard error of $\beta_1$ under the model $M_k$. (Leamer 1978, p.118; Raftery 1993a)

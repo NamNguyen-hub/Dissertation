@@ -1,0 +1,1301 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+  ignorenonframetext,
+]{beamer}
+\usepackage{pgfpages}
+\setbeamertemplate{caption}[numbered]
+\setbeamertemplate{caption label separator}{: }
+\setbeamercolor{caption name}{fg=normal text.fg}
+\beamertemplatenavigationsymbolsempty
+% Prevent slide breaks in the middle of a paragraph
+\widowpenalties 1 10000
+\raggedbottom
+\setbeamertemplate{part page}{
+  \centering
+  \begin{beamercolorbox}[sep=16pt,center]{part title}
+    \usebeamerfont{part title}\insertpart\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{section page}{
+  \centering
+  \begin{beamercolorbox}[sep=12pt,center]{part title}
+    \usebeamerfont{section title}\insertsection\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{subsection page}{
+  \centering
+  \begin{beamercolorbox}[sep=8pt,center]{part title}
+    \usebeamerfont{subsection title}\insertsubsection\par
+  \end{beamercolorbox}
+}
+\AtBeginPart{
+  \frame{\partpage}
+}
+\AtBeginSection{
+  \ifbibliography
+  \else
+    \frame{\sectionpage}
+  \fi
+}
+\AtBeginSubsection{
+  \frame{\subsectionpage}
+}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\newif\ifbibliography
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\PassOptionsToPackage{table}{xcolor}
+
+\setbeamertemplate{caption}[numbered]
+
+\setbeamertemplate{footline}{%
+	\leavevmode%
+	\hbox{\begin{beamercolorbox}[wd=.3\paperwidth,ht=2.5ex,dp=1.125ex,leftskip=.3cm plus1fill,rightskip=.3cm]{author in head/foot}%
+			\usebeamerfont{author in head/foot}\insertshortauthor~(\insertshortinstitute)
+		\end{beamercolorbox}%
+		\begin{beamercolorbox}[wd=.7\paperwidth,ht=2.5ex,dp=1.125ex,leftskip=0cm plus1fill,rightskip=.3cm]{title in head/foot}%
+			\usebeamerfont{title in head/foot}\insertshorttitle\;\;\;\;\hfill\insertframenumber\,/\,\inserttotalframenumber
+	\end{beamercolorbox}}%
+	\vskip0pt%
+}
+
+% \setbeamertemplate{footline}{%
+% 	\leavevmode%
+% 	\hbox{\begin{beamercolorbox}[wd=0.2\paperwidth,ht=2.5ex,dp=1.125ex,leftskip=.3cm plus1fill,rightskip=.3cm]{author in head/foot}%
+% 			\usebeamerfont{author in head/foot}\insertshortauthor~(\insertshortinstitute)
+% 		\end{beamercolorbox}%
+% 		\begin{beamercolorbox}[wd=0.35\paperwidth,ht=2.5ex,dp=1.125ex,leftskip=.3cm,rightskip=.3cm plus1fil]{title in head/foot}%
+% 			\usebeamerfont{title in head/foot}\insertshorttitle
+% 		\end{beamercolorbox}%
+% 		\begin{beamercolorbox}[wd=0.45\paperwidth,ht=2.5ex,dp=1.125ex,leftskip=.3cm,rightskip=.3cm plus1fil]{section in head/foot}%
+% 			\usebeamerfont{section in head/foot}\insertsection \; insertframenumber\,/\,\inserttotalframenumber
+% 		\end{beamercolorbox}}%
+% 	\vskip0pt%
+% }
+
+%\AtBeginSection{}
+\AtBeginSubsection{}
+
+\setbeamertemplate{section in toc}[sections numbered]
+\setbeamertemplate{subsection in toc}[subsections numbered]
+
+%\insertsectionnumber
+
+\setbeamertemplate{itemize items}[circle]
+
+\usepackage{amssymb,amsmath,amsfonts,eurosym,geometry,graphicx,caption,color,setspace,
+	comment,footmisc,caption,pdflscape,array}
+\usepackage{booktabs}   % for nice tables
+\usepackage{multirow}
+%\usepackage[round]{natbib}
+\setbeamertemplate{caption}[numbered]
+\usepackage[export]{adjustbox}
+
+\usepackage[skip=1pt]{caption}
+%\usepackage[capposition=top]{floatrow}
+
+%\usepackage[caption = false]{subfig}
+%\usepackage{floatrow}
+\usepackage[capposition=bottom]{floatrow}
+
+\usepackage{graphicx}
+\usepackage{tabularx}
+%\usepackage{threeparttable}
+\usepackage{float}
+\usepackage{mwe}
+%\usepackage{subfig}
+%\usepackage{polyglossia}
+\usepackage{subcaption}
+\setlength{\abovecaptionskip}{2pt}
+%\usepackage[tight,TABTOPCAP]{subfigure}
+\usepackage[round]{natbib}
+
+\usepackage{multicol, latexsym, amsmath, amssymb}
+
+\usepackage[normalem]{ulem}
+\useunder{\uline}{\ul}{}
+\usepackage{booktabs,caption}
+\usepackage[flushleft]{threeparttable}
+
+\usepackage{colortbl}
+\usepackage{tabu}
+\usepackage{makecell}
+\usepackage{xcolor}
+
+
+\usepackage{graphics}
+
+\usepackage{longtable}
+
+\usepackage{float}
+
+\usepackage{amsbsy} %boldsymbol
+
+%%in case of outdated TEX Live
+\usepackage{lmodern}
+
+\usepackage{appendixnumberbeamer}
+
+%\graphicspath{{figures/}{../figures/}{D:/Presentations\figures/}}
+\usepackage[normalem]{ulem}
+
+\usepackage{siunitx}
+\sisetup{
+	round-mode          = places, % Rounds numbers
+	round-precision     = 4, % to 2 places
+}
+
+
+\usepackage{graphicx} % Allows including images
+\usepackage{booktabs} % Allows the use of \toprule, \midrule and \bottomrule in tables
+
+\usepackage{arydshln} %can use hdashline
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={Essays on Measuring Credit and Property Prices Gaps},
+  pdfauthor={Nam Nguyen},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Essays on Measuring Credit and Property Prices Gaps}
+\author{Nam Nguyen}
+\date{August 11, 2022}
+\institute{UWM}
+
+\begin{document}
+\frame{\titlepage}
+
+\hypertarget{chapter-1-credit-and-house-prices-cycles}{%
+\section{Chapter 1: Credit and House Prices
+Cycles}\label{chapter-1-credit-and-house-prices-cycles}}
+
+\begin{frame}{Introduction}
+\protect\hypertarget{introduction}{}
+\begin{block}{Motivation}
+\protect\hypertarget{motivation}{}
+\begin{itemize}
+\item
+  The study of housing prices and excessive credit has become more
+  important in understanding financial market stability
+\item
+  We also observed increasing use of monetary policies, significant
+  growth in macro balance sheet size, including real estate values and
+  total credit lending to household
+\item
+  We study the dynamic relationship between housing prices and household
+  credit in this paper
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}{Contribution}
+\protect\hypertarget{contribution}{}
+\begin{enumerate}
+\tightlist
+\item
+  Relationship between housing prices and household credit
+\end{enumerate}
+
+\begin{itemize}
+\item
+  Apply Unobserved Component Model (Clark 1987) to extract information
+  about trends and cycles
+
+  \(\Rightarrow\) Jointly examine the two variables and their
+  interaction both in the long-run and short-run
+\item
+  Specify cycles to be VAR process (cross-cycle) rather than univariate
+  AR process
+
+  \(\Rightarrow\) Test if past movement of one cycle has predictive
+  power over another cycle
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Contribution}
+\protect\hypertarget{contribution-1}{}
+\begin{enumerate}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Technical contribution to the optimization process:
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  Novel numerical optimization / parameters constraint method to ensure
+  the cyclical components are in feasible stationary region
+\end{itemize}
+
+\begin{enumerate}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Overcome ``curse of dimensionality'' using Bayesian method:
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  Common problem in estimating complex unobserved component state space
+  model
+\item
+  We use random walk Metropolis-Hasting method to estimate posterior
+  distribution of parameters of interest
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Literature Review}
+\protect\hypertarget{literature-review}{}
+\begin{enumerate}
+\tightlist
+\item
+  Dynamics of credit changes:
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  Kiyotaki \& Moore (1997), Myerson (2012), Guerrieri \& Uhlig (2016),
+  Boissay et al (2016).
+\end{itemize}
+
+\begin{enumerate}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Dynamics of house prices changes:
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  Hong \& Stein (1999), Glaeser et al (2008) (2017), Kishor, Kumari, \&
+  Song (2015)
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Literature Review}
+\protect\hypertarget{literature-review-1}{}
+\begin{enumerate}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  House price cycles generates credit cycles:
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  Bernanke \& Gertler (1989), Bernanke et al (1999); Kiyotaki \& Moore
+  (1997) ``
+\item
+  Empirical Evidence: Fitzpatrick and McQuinn (2007), Berlinghieri
+  (2010), Gimeno and Martinez-Carrascal (2010), Anundsen and Jansen
+  (2013), for evidence from Ireland, USA, Spain and Norway, respectively
+\end{itemize}
+
+\begin{enumerate}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  Credit cycles genereates house price cycles:
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  Agnello \& Schuknecht (2011), Kermani (2012), Justiniano et al (2019),
+  Schularick et al (2012) (2016)
+\end{itemize}
+
+\(\Rightarrow\) However, the debate on which cycle causes changes on the
+other is still open
+\end{frame}
+
+\begin{frame}{Data}
+\protect\hypertarget{data}{}
+Bank of International Settlement (BIS)
+
+\begin{itemize}
+\tightlist
+\item
+  Household Credit to GDP: Total Credit to non-financial sector
+  (household)
+\item
+  House Price Index: Residential property prices: selected series (real
+  value). Index = 100 at full sample average for each country \bigskip
+\item
+  2 countries: US \& UK
+\item
+  Time frame: 1990:Q1 - 2021:Q3
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Model}
+\protect\hypertarget{model}{}
+\begin{block}{Unobserved Component Model}
+\protect\hypertarget{unobserved-component-model}{}
+\begin{align}
+    100*ln \frac{Credit}{GDP} &= y_t = \tau_{yt} + c_{yt}
+    \\
+    100*ln HPI &= h_t = \tau_{ht} + c_{ht}
+\end{align}
+
+\begin{itemize}
+\tightlist
+\item
+  Trends: \(\tau_{yt}\) \& \(\tau_{ht}\)
+\end{itemize}
+
+\begin{align*}
+        \tau_{yt} = &\mu_{yt-1} + \tau_{yt-1} +  \eta_{yt}, &\eta_{yt} \sim iidN(0,\sigma^2_{\eta y})
+\\
+&\mu_{yt} = \mu_{yt-1} + \eta_{\mu yt}, &\eta_{\mu yt} \sim iidN(0,0.01)
+\\
+\tau_{ht} = &\mu_{ht-1} + \tau_{ht-1} + \eta_{ht}, &\eta_{ht} \sim iidN(0,\sigma^2_{\eta h})
+\\
+&\mu_{ht} = \mu_{ht-1} + \eta_{\mu ht}, &\eta_{\mu ht} \sim iidN(0,0.01)  
+\end{align*}
+\end{block}
+\end{frame}
+
+\begin{frame}{Model}
+\protect\hypertarget{model-1}{}
+\begin{block}{Unobserved Component Model}
+\protect\hypertarget{unobserved-component-model-1}{}
+\begin{itemize}
+\tightlist
+\item
+  Cycles: \(c_{yt}\) \& \(c_{ht}\)
+\end{itemize}
+
+\begin{align}
+    c_{yt} = \phi^1_{y}c_{yt-1}  
+    + \phi^2_{y}c_{yt-2}  
+    + \phi^{x1}_{y}c_{ht-1} 
+    + &\phi^{x2}_{y}c_{ht-1} 
+    + \varepsilon_{yt}\\
+    &\varepsilon_{yt} \sim iidN(0,\sigma^2_{\varepsilon y})        
+    \\
+    c_{ht} = \phi^1_{h}c_{ht-1}  
+    + \phi^2_{h}c_{ht-2}
+    + \phi^{x1}_{h}c_{yt-1}  
+    + &\phi^{x2}_{h}c_{yt-1}  
+    + \varepsilon_{ht}\\
+    &\varepsilon_{ht} \sim iidN(0,\sigma^2_{\varepsilon h})
+\end{align}
+\end{block}
+\end{frame}
+
+\begin{frame}{Model}
+\protect\hypertarget{model-2}{}
+\begin{block}{Covariance Matrix}
+\protect\hypertarget{covariance-matrix}{}
+\begin{align}
+    Q = 
+    \begin{bmatrix}
+    \sigma^2_{\eta y} & 0  &0 & \sigma_{\eta y \eta h}  & 0 & 0 & 0 & 0 \\
+    0 & \sigma^2_{\varepsilon y}  & 0 & 0 & \sigma_{\varepsilon y \varepsilon h}  & 0 & 0 & 0 \\
+    0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+    \sigma_{\eta y \eta h}  & 0 & 0 & \sigma^2_{\eta h} & 0 & 0 & 0 & 0 \\
+    0 & \sigma_{\varepsilon y \varepsilon h}  & 0 & 0 & \sigma^2_{\varepsilon h} & 0  & 0 & 0 \\
+    0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+    0 & 0 & 0 & 0 & 0 & 0 & 0.01 & 0 \\
+    0 & 0 & 0 & 0 & 0 & 0 & 0 & 0.01
+    \end{bmatrix}
+\end{align}
+\end{block}
+\end{frame}
+
+\begin{frame}{Model}
+\protect\hypertarget{model-3}{}
+\begin{block}{Optimization process}
+\protect\hypertarget{optimization-process}{}
+\begin{itemize}
+\tightlist
+\item
+  Kalman filter with adjusted Likelihood function:
+\end{itemize}
+
+\begin{align*}
+l(\theta) = -0.5\sum_{t=1}^{T}ln\lbrack(2\pi)^2|f_{t|t-1}|\rbrack
+                -0.5\sum_{t=1}^{T}\eta'_{t|t-1}f^{-1}_{t|t-1}\eta_{t|t-1}
+                \\
+                - w1\sum_{t=1}^{T}(c_{yt}^2) - w2\sum_{t=1}^{T}(c_{ht}^2)
+\end{align*}
+\end{block}
+\end{frame}
+
+\hypertarget{empirical-results}{%
+\section{Empirical Results}\label{empirical-results}}
+
+\begin{frame}{VAR(2) - 1 Cross-lag Model Estimate - UK and US}
+\protect\hypertarget{var2---1-cross-lag-model-estimate---uk-and-us}{}
+\resizebox{\linewidth}{!}{
+\begin{tabular}[t]{>{}l>{}l>{}r>{}l>{}r>{}l}
+\toprule
+\multicolumn{2}{c}{ } & \multicolumn{2}{c}{UK VAR2 1-cross lag} & \multicolumn{2}{c}{US VAR2 1-cross lag} \\
+\cmidrule(l{3pt}r{3pt}){3-4} \cmidrule(l{3pt}r{3pt}){5-6}
+Description & Para. & Median & {}[10$\%$, 90$\%$] & Median & {}[10$\%$, 90$\%$]\\
+\midrule
+\cellcolor{gray!6}{Credit to household 1st AR parameter} & \cellcolor{gray!6}{$\phi^1_{y}$} & \cellcolor{gray!6}{1.4238} & \cellcolor{gray!6}{{}[1.3585, 1.4892]} & \cellcolor{gray!6}{1.2074} & \cellcolor{gray!6}{{}[1.1374, 1.2785]}\\
+Credit to household 2nd AR parameter & $\phi^2_{y}$ & -0.4698 & {}[-0.5305, -0.4090] & -0.2483 & {}[-0.3152, -0.1825]\\
+\textbf{\cellcolor{gray!6}{Credit to household 1st cross cycle AR parameter}} & \textbf{\cellcolor{gray!6}{$\phi^{x1}_{y}$}} & \textbf{\cellcolor{gray!6}{0.0238}} & \textbf{\cellcolor{gray!6}{{}[0.0154, 0.0319]}} & \textbf{\cellcolor{gray!6}{0.0318}} & \textbf{\cellcolor{gray!6}{{}[0.0228, 0.0407]}}\\
+Credit to household 2nd cross cycle AR parameter & $\phi^{x2}_{y}$ &  &  &  & \\
+\addlinespace
+\cellcolor{gray!6}{Housing Price Index 1st AR parameter} & \cellcolor{gray!6}{$\phi^1_{h}$} & \cellcolor{gray!6}{1.3173} & \cellcolor{gray!6}{{}[1.2647, 1.3701]} & \cellcolor{gray!6}{1.8038} & \cellcolor{gray!6}{{}[1.7700, 1.8363]}\\
+Housing Price Index 2nd AR parameter & $\phi^2_{h}$ & -0.3315 & {}[-0.3885, -0.2746] & -0.8261 & {}[-0.8605, -0.7903]\\
+\textbf{\cellcolor{gray!6}{Housing Price Index 1st cross cycle AR parameter}} & \textbf{\cellcolor{gray!6}{$\phi^{x1}_{h}$}} & \textbf{\cellcolor{gray!6}{-0.0173}} & \textbf{\cellcolor{gray!6}{{}[-0.0464, 0.0062]}} & \textbf{\cellcolor{gray!6}{0.0104}} & \textbf{\cellcolor{gray!6}{{}[0.0007, 0.0204]}}\\
+Housing Price Index 2nd cross cycle AR parameter & $\phi^{x2}_{h}$ &  &  &  & \\
+\addlinespace
+\cellcolor{gray!6}{S.D. of permanent shocks to Credit to household} & \cellcolor{gray!6}{$\sigma_{ny}$} & \cellcolor{gray!6}{0.2714} & \cellcolor{gray!6}{{}[0.2150, 0.3155]} & \cellcolor{gray!6}{0.2954} & \cellcolor{gray!6}{{}[0.2312, 0.3414]}\\
+S.D. of transitory shocks to Credit to household & $\sigma_{ey}$ & 0.8021 & {}[0.7699, 0.8376] & 0.8631 & {}[0.8287, 0.9012]\\
+\cellcolor{gray!6}{S.D. of permanent shocks to Housing Price Index} & \cellcolor{gray!6}{$\sigma_{nh}$} & \cellcolor{gray!6}{0.0789} & \cellcolor{gray!6}{{}[0.0742, 0.0845]} & \cellcolor{gray!6}{0.1390} & \cellcolor{gray!6}{{}[0.1222, 0.1618]}\\
+S.D. of transitory shocks to Housing Price Index & $\sigma_{eh}$ & 1.2242 & {}[1.1886, 1.2613] & 0.8988 & {}[0.8641, 0.9355]\\
+\addlinespace
+\cellcolor{gray!6}{Correlation: Permanent credit to household$\slash$Permanent HPI} & \cellcolor{gray!6}{$\rho_{nynh}$} & \cellcolor{gray!6}{0.0189} & \cellcolor{gray!6}{{}[-0.3049, 0.3393]} & \cellcolor{gray!6}{0.0082} & \cellcolor{gray!6}{{}[-0.3117, 0.3226]}\\
+Correlation: Transitory credit to household$\slash$Transitory HPI & $\rho_{eyeh}$ & 0.2536 & {}[0.1713, 0.3337] & 0.1537 & {}[0.0399, 0.2619]\\
+\cellcolor{gray!6}{Log-likelihood value} & \cellcolor{gray!6}{$llv$} & \cellcolor{gray!6}{578.6200} & \cellcolor{gray!6}{{}[576.1600, 582.1500]} & \cellcolor{gray!6}{204.9400} & \cellcolor{gray!6}{{}[202.4200, 208.4500]}\\
+\bottomrule
+\multicolumn{6}{l}{\rule{0pt}{1em}\textit{Note: }}\\
+\multicolumn{6}{l}{\rule{0pt}{1em}UK - US Bayesian method random walk  Metropolis-Hasting posterior distribution estimates}\\
+\end{tabular}}
+\end{frame}
+
+\begin{frame}{VAR(2) - 1 Cross-lag Model Estimate Summary}
+\protect\hypertarget{var2---1-cross-lag-model-estimate-summary}{}
+\begin{itemize}
+\item
+  The sum of AR parameters of the cyclical components in all three
+  models is smaller, although close to one
+\item
+  The standard deviation of the shocks in the cycles \(\sigma_{ei}\) is
+  much higher than the standard deviation of the shocks to the trend
+  \(\sigma_{ni}\) of both credit and housing prices
+\item
+  Variations in the housing price cyclical components \(\sigma_{eh}\) of
+  the UK are bigger than in the US
+\item
+  The correlation of the shocks to the cyclical components among the two
+  variables \(\rho_{eyeh}\) suggests that cyclical variation among
+  housing price and household credit is strongly positively correlated
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Cross-country Comparison of Causal Coefficients}
+\protect\hypertarget{cross-country-comparison-of-causal-coefficients}{}
+\begingroup\fontsize{7}{9}\selectfont
+
+\begin{tabular}[t]{lrlrl}
+\toprule
+\multicolumn{1}{c}{ } & \multicolumn{2}{c}{$\phi^{x1}_y$ HPI on Credit} & \multicolumn{2}{c}{$\phi^{x1}_h$ Credit on HPI} \\
+\cmidrule(l{3pt}r{3pt}){2-3} \cmidrule(l{3pt}r{3pt}){4-5}
+Country & Median & {}[10$\%$, 90$\%$] & Median & {}[10$\%$, 90$\%$]\\
+\midrule
+\cellcolor{gray!6}{Australia} & \cellcolor{gray!6}{0.0157} & \cellcolor{gray!6}{{}[-0.0093, 0.0412]} & \cellcolor{gray!6}{0.0521} & \cellcolor{gray!6}{{}[0.0014, 0.1060]}\\
+Belgium & 0.0279 & {}[0.0013, 0.0559] & -0.0656 & {}[-0.0980, -0.0339]\\
+\cellcolor{gray!6}{Canada} & \cellcolor{gray!6}{0.0191} & \cellcolor{gray!6}{{}[0.0032, 0.0332]} & \cellcolor{gray!6}{-0.0152} & \cellcolor{gray!6}{{}[-0.0343, 0.0025]}\\
+Finland & 0.0080 & {}[0.0017, 0.0156] & 0.0085 & {}[0.0021, 0.0156]\\
+\addlinespace
+\cellcolor{gray!6}{France} & \cellcolor{gray!6}{0.0298} & \cellcolor{gray!6}{{}[0.0185, 0.0411]} & \cellcolor{gray!6}{-0.0643} & \cellcolor{gray!6}{{}[-0.1098, -0.0241]}\\
+Germany & 0.0728 & {}[0.0500, 0.0917] & -0.0061 & {}[-0.0282, 0.0052]\\
+\cellcolor{gray!6}{Hong Kong} & \cellcolor{gray!6}{-0.0031} & \cellcolor{gray!6}{{}[-0.0079, 0.0019]} & \cellcolor{gray!6}{-0.0629} & \cellcolor{gray!6}{{}[-0.0836, -0.0453]}\\
+Italy & 0.1001 & {}[0.0895, 0.1063] & -0.0027 & {}[-0.0072, 0.0014]\\
+\addlinespace
+\cellcolor{gray!6}{Japan} & \cellcolor{gray!6}{-0.0088} & \cellcolor{gray!6}{{}[-0.0326, 0.0174]} & \cellcolor{gray!6}{0.1659} & \cellcolor{gray!6}{{}[0.1202, 0.2173]}\\
+Netherlands & 0.0058 & {}[-0.0039, 0.0166] & -0.0043 & {}[-0.0156, 0.0070]\\
+\cellcolor{gray!6}{New Zealand} & \cellcolor{gray!6}{0.0078} & \cellcolor{gray!6}{{}[-0.0035, 0.0199]} & \cellcolor{gray!6}{-0.0139} & \cellcolor{gray!6}{{}[-0.0249, -0.0036]}\\
+Norway & 0.0109 & {}[0.0097, 0.0116] & 0.0059 & {}[0.0047, 0.0066]\\
+\addlinespace
+\cellcolor{gray!6}{South Korea} & \cellcolor{gray!6}{0.0106} & \cellcolor{gray!6}{{}[-0.0033, 0.0308]} & \cellcolor{gray!6}{0.0027} & \cellcolor{gray!6}{{}[-0.0251, 0.0369]}\\
+Spain & 0.0144 & {}[0.0003, 0.0331] & 0.0051 & {}[-0.0023, 0.0146]\\
+\cellcolor{gray!6}{Sweden} & \cellcolor{gray!6}{0.0159} & \cellcolor{gray!6}{{}[0.0071, 0.0252]} & \cellcolor{gray!6}{0.0400} & \cellcolor{gray!6}{{}[0.0218, 0.0617]}\\
+United Kingdom & 0.0238 & {}[0.0154, 0.0319] & -0.0173 & {}[-0.0464, 0.0062]\\
+\addlinespace
+\cellcolor{gray!6}{United States} & \cellcolor{gray!6}{0.0318} & \cellcolor{gray!6}{{}[0.0228, 0.0407]} & \cellcolor{gray!6}{0.0104} & \cellcolor{gray!6}{{}[0.0007, 0.0204]}\\
+\bottomrule
+\end{tabular}
+\endgroup{}
+\end{frame}
+
+\begin{frame}{Cross-country Comparison of Causal Coefficients Summary}
+\protect\hypertarget{cross-country-comparison-of-causal-coefficients-summary}{}
+\begin{itemize}
+\item
+  In 11 out of 17 countries, the HPI on Credit causal coefficient
+  \(\phi^{x1}_y\) are positive and significant. All 11 countries are in
+  North America and Europe.
+\item
+  Only 6 countries have positive and significant Credit on HPI causal
+  coefficient \(\phi^{x1}_y\). Three of which have smaller magnitudes
+  than their \(\phi^{x1}_y\) counterpart
+\end{itemize}
+
+\(\rightarrow\) Overall, we found evidence that past transitory shocks
+to house price credit will cause a positive deviation in future
+transitory household credit. However, the effect in the opposite
+direction is much smaller and sometimes insignificant
+\end{frame}
+
+\begin{frame}{Unobserved Component Graphs: United States}
+\protect\hypertarget{unobserved-component-graphs-united-states}{}
+\includegraphics{../../HPCredit/Regression/Bayesian_UC_VAR2_drift_Crosscycle1lag/OutputData/graphs/HP_Credit_4graphs_US.pdf}
+\end{frame}
+
+\begin{frame}{Unobserved Component Graphs: United Kingdom}
+\protect\hypertarget{unobserved-component-graphs-united-kingdom}{}
+\includegraphics{../../HPCredit/Regression/Bayesian_UC_VAR2_drift_Crosscycle1lag/OutputData/graphs/HP_Credit_4graphs_UK.pdf}
+\end{frame}
+
+\begin{frame}{Conclusion}
+\protect\hypertarget{conclusion}{}
+\begin{itemize}
+\tightlist
+\item
+  Extracting temporary and permanent components information gave
+  insights on the dynamics of the two series housing and credit in both
+  short-run and long-run
+\item
+  Evidence showing that past movement of a cycle (HPI) has predictive
+  power over the other cycle (credit)
+\end{itemize}
+\end{frame}
+
+\hypertarget{chapter-2-measuring-credit-gaps}{%
+\section{Chapter 2: Measuring Credit
+Gaps}\label{chapter-2-measuring-credit-gaps}}
+
+\begin{frame}{Introduction}
+\protect\hypertarget{introduction-1}{}
+\begin{block}{Motivation}
+\protect\hypertarget{motivation-1}{}
+\begin{itemize}
+\item
+  No unanimity on how to measure excessive credit. Bank for
+  International Settlements uses HP filter to create a credit gap
+  measurement that performs well in predicting future financial crises.
+  However, there are other competing gap measurements.
+\item
+  Nelson (2008) that the deviation of a non-stationary variable from its
+  long-run trend should predict future changes of opposite sign in the
+  variable. We utilize this idea and forecast combination method to
+  propose a synthesized credit gap measurement.
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}{Contribution}
+\protect\hypertarget{contribution-2}{}
+Since different trend-cycle decomposition methods of credit-to-GDP ratio
+provide us different credit gap measures, we handle the model
+uncertainty by assigning weights on these different credit gap measures
+based on its relative out-of-sample predictive power based on Bates and
+Granger (1969) forecast combination method.
+
+\begin{itemize}
+\tightlist
+\item
+  Our proposed credit gap measure dominates the alternate credit gaps in
+  terms of its relative out-of-sample predictive power.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Methodology}
+\protect\hypertarget{methodology}{}
+\begin{block}{Data}
+\protect\hypertarget{data-1}{}
+The measure of credit is total credit to the private non-financial
+sector, as published in the BIS database, capturing total borrowing from
+all domestic and foreign sources.
+
+\begin{itemize}
+\tightlist
+\item
+  Quarterly data from 1983:Q1-2020:Q2
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}{Model}
+\protect\hypertarget{model-4}{}
+All these trend-cycle decomposition methods are based on the premise
+that a non-stationary series is the sum of a trend and a stationary
+cyclical component:
+
+\begin{equation}
+y_{t}=\tau _{t}+c_{t}
+\end{equation}
+\end{frame}
+
+\begin{frame}{Trend-cycle decomposition models}
+\protect\hypertarget{trend-cycle-decomposition-models}{}
+\begin{block}{HP filter}
+\protect\hypertarget{hp-filter}{}
+\begin{equation}
+min_{\tau}(\sum^T_{t=1}(y_t-\tau_t)^2+\lambda\sum^{T-1}_{t=2}[(\tau_{t-1}-\tau_t)-(\tau_t-\tau_{t-1})]^2)
+\end{equation}
+
+\begin{itemize}
+\tightlist
+\item
+  \(\lambda\) will be set at 1600, 3000, 400000 (BIS Basel Gap) in our
+  models
+\end{itemize}
+\end{block}
+
+\begin{block}{Unobserved-Component model: Clark(1987)}
+\protect\hypertarget{unobserved-component-model-clark1987}{}
+\begin{equation}
+\tau _{t}=\tau _{t-1}+\eta _{t},\eta _{t}\symbol{126}iid(0,\sigma _{\eta
+}^{2})
+\end{equation} \begin{equation*}
+c_{t}=\Phi (L)c_{t}+u_{t},u_{t}\symbol{126}iid(0,\sigma _{u}^{2})
+\end{equation*}
+\end{block}
+\end{frame}
+
+\begin{frame}{Trend-cycle decomposition models}
+\protect\hypertarget{trend-cycle-decomposition-models-1}{}
+\begin{block}{Beveridge-Nelson}
+\protect\hypertarget{beveridge-nelson}{}
+\begin{equation}
+y_{t}=y_{0}+\mu t+\Psi (1)\sum_{k=1}^{t}u_{t}+\overset{\backsim }{u_{t}}-%
+\overset{\backsim }{u_{0}}
+\end{equation}
+\end{block}
+
+\begin{block}{Hamilton filter (2018)}
+\protect\hypertarget{hamilton-filter-2018}{}
+\begin{equation}
+y_{t+h}=\alpha +\beta _{1}y_{t-1}+\beta _{2}y_{t-2}+....+\beta
+_{p}y_{t-p}+v_{t+h}
+\end{equation}
+\end{block}
+\end{frame}
+
+\begin{frame}{Forecasting model:}
+\protect\hypertarget{forecasting-model}{}
+\begin{equation}
+\Delta y_{t}=\alpha +\beta (L)\Delta y_{t-1}+\gamma (L)GAP_{t-1}+v_{t}
+\end{equation}
+
+\begin{block}{Baseline Model AR(1):}
+\protect\hypertarget{baseline-model-ar1}{}
+\begin{equation}
+\Delta y_{t}=\alpha +\beta (L)\Delta y_{t-1}+v_{t}
+\end{equation}
+\end{block}
+
+\begin{block}{Forecast combination}
+\protect\hypertarget{forecast-combination}{}
+\begin{equation}
+w_{m}=\frac{\widehat{\overline{\sigma }}_{m}^{2}}{\widehat{\overline{\sigma }%
+}_{1}^{2}+\widehat{\overline{\sigma }}_{2}^{2}+....\widehat{\overline{\sigma 
+}}_{M}^{2}}
+\end{equation}
+
+\begin{itemize}
+\tightlist
+\item
+  where \(\widehat{\overline{\sigma }}_{m}^{2}\)~is inverted
+  out-of-sample forecast error variance of forecast M based on the
+  cyclical component M.
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}{Empirical Results:}
+\protect\hypertarget{empirical-results-1}{}
+\begin{block}{Forecasting Performance of Credit Gap Models (U.S.)}
+\protect\hypertarget{forecasting-performance-of-credit-gap-models-u.s.}{}
+\resizebox{\linewidth}{!}{
+\begin{threeparttable}
+\begin{tabular}{lllllllllll}
+Horizon & HP & RU & BIS & Hamilton & \ Linear\  & Quadratic & BN & UC & 
+Average & Bates-Granger \\ \hline \hline
+\  \  \  \  \  \ 1 & 0.993 & 0.987 & 1.012 & 0.994 & 1.028 & 1.005 & 1.010 & 0.985
+& 0.962 & \textbf{0.959} \\ 
+\  \  \  \  \  \ 2 & 0.974 & 0.963 & 1.016 & 0.980 & 1.058 & 1.014 & 0.975 & 0.961
+& 0.924 & \textbf{0.917} \\ 
+\  \  \  \  \  \ 3 & 0.966 & 0.953 & 1.023 & 1.011 & 1.055 & 1.036 & 0.965 & 0.937
+& 0.906 & \textbf{0.896} \\ 
+\  \  \  \  \  \ 4 & 0.982 & 0.966 & 1.022 & 1.029 & 1.055 & 1.045 & 1.033 & 0.910
+& 0.922 & \textbf{0.910} \\ 
+\  \  \ 1 - 4 & 0.964 & 0.945 & 1.030 & 1.005 & 1.081 & 1.041 & 0.978 & 0.913
+& 0.882 & \textbf{0.872} \\ \hline \hline
+&  &  &  &  &  &  &  &  &  & 
+\end{tabular}
+\begin{tablenotes}
+            \footnotesize
+            \item {The table shows the ratio of RMSEPs of different models in comparison
+to the benchmark AR(1) model. The first set of forecasts is for
+1994:Q1-1994:Q4; the final set is for 2019:Q3-2020:Q2. Q=1-4 denotes
+averages over next 4-quarters. HP is Hodrick-Prescott, RU is Ravn-Uhlig, BIS
+is based on Borio and Lowe (2002), BN is Beveridge-Nelson, UC is Unobserved
+Component Model.}
+        \end{tablenotes}
+\end{threeparttable}}
+\end{block}
+\end{frame}
+
+\begin{frame}{Empirical Results:}
+\protect\hypertarget{empirical-results-2}{}
+\begin{block}{Forecasting Performance of Credit Gap Models (U.K.)}
+\protect\hypertarget{forecasting-performance-of-credit-gap-models-u.k.}{}
+\resizebox{\linewidth}{!}{
+\begin{threeparttable}
+\begin{tabular}{lllllllllll}
+Horizon & HP & RU & BIS & Hamilton & \ Linear\  & Quadratic & BN & UC & 
+Average & Bates-Granger \\ \hline \hline
+\  \  \  \  \  \ 1 & 1.001 & 0.990 & 1.001 & 0.992 & 1.010 & 0.979 & 1.028 & 1.009
+& \textbf{0.977} & 0.979 \\ 
+\  \  \  \  \  \ 2 & 0.979 & 0.970 & 1.007 & 0.969 & 1.016 & 0.962 & 1.028 & 0.999
+& 0.962 & \textbf{0.957} \\ 
+\  \  \  \  \  \ 3 & 0.979 & 0.971 & 1.018 & 0.969 & 1.055 & 0.966 & 1.009 & 0.989
+& 0.959 & \textbf{0.955} \\ 
+\  \  \  \  \  \ 4 & 0.990 & 0.987 & 1.028 & 1.005 & 1.055 & 0.981 & 1.019 & 0.981
+& 0.972 & \textbf{0.967} \\ 
+\  \  \ 1 - 4 & 0.972 & 0.952 & 1.034 & 0.960 & 1.081 & 0.929 & 1.054 & 0.985
+& 0.918 & \textbf{0.910} \\ \hline \hline
+&  &  &  &  &  &  &  &  &  & \\
+\end{tabular}
+\begin{tablenotes}
+            \footnotesize
+            \item {The table shows the ratio of RMSEPs of different models in comparison
+to the benchmark AR(1) model. The first set of forecasts is for
+1994:Q1-1994:Q4; the final set is for 2019:Q3-2020:Q2. Q=1-4 denotes
+averages over next 4-quarters. HP is Hodrick-Prescott, RU is Ravn-Uhlig, BIS
+is based on Borio and Lowe (2002), BN is Beveridge-Nelson, UC is Unobserved
+Component Model.}
+        \end{tablenotes}
+\end{threeparttable}}
+\end{block}
+\end{frame}
+
+\begin{frame}{Credit Gap Comparison (U.S.)}
+\protect\hypertarget{credit-gap-comparison-u.s.}{}
+\includegraphics[width=0.85\linewidth]{../../HPI-Credit-Trasitory-Forecast/plots/Credit-Gap-Comparison-US}
+\end{frame}
+
+\begin{frame}{Credit Gap Comparison (U.K.)}
+\protect\hypertarget{credit-gap-comparison-u.k.}{}
+\includegraphics[width=0.85\linewidth]{../../HPI-Credit-Trasitory-Forecast/plots/Credit-Gap-Comparison-UK}
+\end{frame}
+
+\begin{frame}{Conclusion}
+\protect\hypertarget{conclusion-1}{}
+Our results show that this method of combining credit gaps yield us a
+credit gap measure that dominates credit gaps from different trend-cycle
+decomposition methods in terms of superior out-of-sample forecasting of
+changes in credit-to-GDP ratio.
+\end{frame}
+
+\hypertarget{chapter-3-identifying-unsustainable-credit-gaps}{%
+\section{Chapter 3: Identifying Unsustainable Credit
+Gaps}\label{chapter-3-identifying-unsustainable-credit-gaps}}
+
+\begin{frame}{Motivation}
+\protect\hypertarget{motivation-2}{}
+\begin{itemize}
+\tightlist
+\item
+  To overcome model uncertainty in using credit gap as an early warning
+  indicator (EWI) of systemic financial crises, we propose using model
+  averaging of different credit gap measurements. The method is based on
+  Bayesian Model Average - Raftery (1995)
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Motivation from Literature}
+\protect\hypertarget{motivation-from-literature}{}
+\begin{itemize}
+\tightlist
+\item
+  Area under the curve of operating characteristic (AUROC or AUC) has
+  been widely used as a criterion to determine the performance of a EWI.
+  But it has recently received some criticism.
+\item
+  Borio and Drehmann (2009) and Beltran et al (2021) proposed a policy
+  loss function constraining the relevance of the curve measurement to
+  just a portion where Type II error rate is less than 1/3 or at least
+  2/3 of the crises are predicted.\\
+\item
+  Detken (2014) proposed using partial standardized area under the curve
+  (psAUC) as an alternative measurement of the performance of an EWI.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Contribution}
+\protect\hypertarget{contribution-3}{}
+\begin{itemize}
+\tightlist
+\item
+  Compare different credit gap measurements' performance as EWIs using a
+  new criterion - partial standarized AUC (psAUC) contraining Type II
+  error \textless{} 1/3.
+\item
+  Overcome model uncertainty by implementing model averaging. We
+  incoporated psAUC values in the model selection and weighting process,
+  instead of AUC values.
+\item
+  For ease of policy implication, we propose a single credit gap
+  measurement from weighted averaging other popularly studied credit gap
+  measurements. The gap has superior performance in model fit and
+  out-of-sample prediction.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{standardize psAUROC - Detken (2014)}
+\protect\hypertarget{standardize-psauroc---detken-2014}{}
+\begin{center}\includegraphics[width=0.7\linewidth]{../../3rdpaper/metadata/pAUC} \end{center}
+
+\begin{align}
+psAUROC = \frac{1}{2}\left[ 1+ \frac{pAUROC - min}{max - min}\right]
+\end{align}
+\end{frame}
+
+\begin{frame}{Data}
+\protect\hypertarget{data-2}{}
+Sample data periods:
+
+\begin{itemize}
+\tightlist
+\item
+  1970:Q4 - 2017:Q4 quarterly data across 43 countries.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    We omit periods for countries with shorter credit measurements.
+  \end{itemize}
+\end{itemize}
+
+Systemic crisis data:
+
+\begin{itemize}
+\tightlist
+\item
+  European Systemic Risk Board crisis data set (Lo Duca et al.~2017)
+\item
+  Laeven and Valencia (2018)
+\end{itemize}
+
+Credit/GDP ratio data:
+
+\begin{itemize}
+\tightlist
+\item
+  Bank of International Settlement (BIS)
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Latest credit data is available until 2021:Q3
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Emprical Model}
+\protect\hypertarget{emprical-model}{}
+\begin{block}{Credit gap decompositions}
+\protect\hypertarget{credit-gap-decompositions}{}
+\begin{align}
+    100*\frac{Credit}{GDP} &= y_t = \tau_{yt} + c_{yt}
+\end{align}
+
+\begin{itemize}
+\tightlist
+\item
+  We created 90 candidate one-sided credit gap measurements based on the
+  literature.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Once a country has more than 15 years of credit measurement
+    available, we start storing its one-sided credit gap values onward.
+  \end{itemize}
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}{Early Warning Indicator - Logistic regression:}
+\protect\hypertarget{early-warning-indicator---logistic-regression}{}
+\begin{align}
+  pre.crisis_{ti} \sim credit.gap_{tij}
+\end{align}
+
+\begin{itemize}
+\item
+  \(i\) is country indicator. \(j\) is credit gap filter type
+\item
+  where \(pre.crisis_{it}=\) 1 or 0
+\item
+  The pre-crisis indicator is set to 1 when t is between 5-12 quarters
+  before a systemic crisis.
+\item
+  We discard measurements between 1-4 quarters before a crisis, periods
+  during a crisis and post-crisis periods identified in Lo Duca et
+  al.~(2017) and Laeven and Valencia (2018).
+
+  \begin{itemize}
+  \tightlist
+  \item
+    The indicator is set to 0 at other periods.
+  \item
+    pre-crisis periods of imported crises identified in the dataset are
+    also set to 0. However, we still discard measurements of periods
+    during and post-crisis for imported crises.
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Plot of Credit gap, Threshold and Crisis periods}
+\protect\hypertarget{plot-of-credit-gap-threshold-and-crisis-periods}{}
+\begin{center}\includegraphics[width=1\linewidth]{../../3rdPaper/Data/Output/Graphs/Weighted_credit_gap_US} \end{center}
+\end{frame}
+
+\begin{frame}{Variable selection}
+\protect\hypertarget{variable-selection}{}
+\begin{block}{Comparing performance of individual credit gaps}
+\protect\hypertarget{comparing-performance-of-individual-credit-gaps}{}
+Using partial area under the curve (psAUC) values
+\end{block}
+
+\begin{block}{Test for gaps combination performance}
+\protect\hypertarget{test-for-gaps-combination-performance}{}
+Using Markov Chain Monte Carlo Model Comparison (\(MC^3\)) developed by
+Madigan and York (1995). The method assigns posterior probability for
+different credit gaps being selected in most likely models/combinations.
+Babecky (2014) used this \(MC^3\) method to identify potential variables
+in EWI models.
+
+\begin{align*}
+Model_k :  pre.crisis_{ti} \sim \sum\nolimits_j \beta_j * credit.gap_{tij}
+\end{align*}
+\end{block}
+
+\begin{block}{Variable selection}
+\protect\hypertarget{variable-selection-1}{}
+We selected 29 credit gap measurements based on these 2 criteria.
+\end{block}
+\end{frame}
+
+\hypertarget{model-averaging}{%
+\section{Model Averaging}\label{model-averaging}}
+
+\begin{frame}{Bayesian Model Averging}
+\protect\hypertarget{bayesian-model-averging}{}
+The Bayesian Model Average method is formalized in Raftery (1995) to
+account for model uncertainty.
+
+\begin{block}{Model posterior probability}
+\protect\hypertarget{model-posterior-probability}{}
+Model k posterior probability (weight): \begin{align}
+  P(M_k|D) = \frac{P(D|M_k)P(M_k)}{\sum\nolimits_{l=1}^K P(D|M_l)P(M_l)} 
+  \approx \frac{exp(-\frac{1}{2}BIC_k)}{\sum\nolimits_{l=1}^K exp(-\frac{1}{2}BIC_l)}
+\end{align}
+
+\begin{itemize}
+\item
+  Where \(P(M_k)\) is model prior probability and can be ignored if all
+  models are assumed equal prior weights.
+\item
+  \(P(D|M_k)\) is marginal likehood. And
+  \(P(D|M_k) \propto exp(-\frac{1}{2}BIC_k)\)
+\item
+  In which
+  \(BIC_k = 2log (Bayesfactor_{sk}) = \chi^2_{sk} - df_klog(n)\). s
+  indicates the saturated model.
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}{Weighted credit gap creation}
+\protect\hypertarget{weighted-credit-gap-creation}{}
+\begin{block}{Motivation}
+\protect\hypertarget{motivation-3}{}
+GLM binomial estimation: \begin{align*}
+\widehat{pre.crisis}_{ti} = \widehat{probability}_{ti} = \frac {1}{1+exp(-(a+\sum\nolimits_j \hat{\beta}_j c_{tij}))}
+\end{align*}
+
+\begin{itemize}
+\tightlist
+\item
+  With \(\hat{\beta}_j\) =
+  \(E[\beta_j|D, \beta_j\ne 0] = \sum\limits_{A_j} \hat{\beta}_j(k)p'(M_k|D)\)
+\end{itemize}
+
+\(\Rightarrow\) We propose a single weighted credit gap \(\hat{c}_{ti}\)
+that satisfies: \begin{align*}
+\frac {1}{1+exp(-(a+\hat{\beta} \hat{c}_{ti}))}= \frac {1}{1+exp(-(a+\sum\nolimits_j \hat{\beta}_j c_{tij}))} \\
+\end{align*} OR \begin{align}
+\sum\limits_j \hat{\beta}_j c_{tij} = \hat{\beta} \hat{c}_{ti}
+\end{align}
+\end{block}
+\end{frame}
+
+\begin{frame}{Weighted averaged credit gap - creation}
+\protect\hypertarget{weighted-averaged-credit-gap---creation}{}
+\begin{align*}
+\sum\limits_j \hat{\beta}_j c_{tij} = \hat{\beta} \hat{c}_{ti}
+\end{align*}
+
+We then propose \(\hat{\beta} = \sum\nolimits_j \hat{\beta}_j\)
+
+Therefore,
+
+\begin{align}
+\hat{c}_{ti} = \frac{\sum\nolimits_j (\hat{\beta}_j c_{tij})}{\sum\nolimits_j\hat{\beta}_j} = \sum\nolimits_j w_j c_{tij}
+\end{align}
+
+The weight of each candidate credit gap j is
+\(w_j = \frac{\hat{\beta}_j}{\sum\nolimits_j\hat{\beta}_j}\)
+\end{frame}
+
+\begin{frame}{One-sided crisis weighted averaged credit gap}
+\protect\hypertarget{one-sided-crisis-weighted-averaged-credit-gap}{}
+\begin{itemize}
+\item
+  The weight of each candidate credit gap j is
+  \(w_j = \frac{\hat{\beta}_j}{\sum\nolimits_j\hat{\beta}_j}\)
+\item
+  We save the weights \(w_j\) at every incremental period \(t\) of
+  available data to create a one-sided weight vector \(w_{tj}\).
+\end{itemize}
+
+\(\Rightarrow\) To create one-sided crisis weighted averaged credit gap
+for each country \(i\) (\(\hat{c}_{ti}\)), we compute: \begin{align}
+\hat{c}_{ti,one-sided} = \sum\nolimits_{j} w_{tj} * c_{tij}
+\end{align}
+\end{frame}
+
+\hypertarget{empirical-results-3}{%
+\section{Empirical Results}\label{empirical-results-3}}
+
+\begin{frame}{Weights stacked graph}
+\protect\hypertarget{weights-stacked-graph}{}
+Weights are restricted to be positive to ensure stability
+
+\begin{center}\includegraphics[width=1\linewidth]{../../3rdPaper/Data/Output/Graphs/Weights_stack} \end{center}
+\end{frame}
+
+\begin{frame}{Weights series graph}
+\protect\hypertarget{weights-series-graph}{}
+\begin{center}\includegraphics[width=1\linewidth]{../../3rdPaper/Data/Output/Graphs/Weights_series} \end{center}
+\end{frame}
+
+\begin{frame}{Comparing performance of weighted gap - Full Sample}
+\protect\hypertarget{comparing-performance-of-weighted-gap---full-sample}{}
+\resizebox{\linewidth}{!}{
+\begin{tabular}[t]{lrrr>{}rrrrr}
+\toprule
+Cycles & BIC & AIC & AUC & psAUC & c.Threshold & Type.I & Type.II & Policy.Loss.Function\\
+\midrule
+null & 0.0000 & 0.0000 & 0.5000 & \textbf{0.5000} &  & 1.0000 & 0.0000 & 1.0000\\
+\textbf{1.sided weighted.cycle} & \textbf{-127.5308} & \textbf{-133.9135} & \textbf{0.7182} & \textbf{\textbf{0.6454}} & \textbf{2.8892} & \textbf{0.3532} & \textbf{0.3255} & \textbf{0.2307}\\
+c.bn6.r20 & -108.0679 & -114.4506 & 0.7048 & \textbf{0.6379} & 0.6581 & 0.3962 & 0.3019 & 0.2481\\
+c.hamilton28.panel & -149.8518 & -156.2346 & 0.7107 & \textbf{0.6359} & 9.7674 & 0.3912 & 0.3066 & 0.2470\\
+c.ma & -120.8108 & -127.1936 & 0.6922 & \textbf{0.6313} & 5.7813 & 0.3989 & 0.3160 & 0.2590\\
+\addlinespace
+c.hamilton13.panelr15 & -126.2968 & -132.6796 & 0.6924 & \textbf{0.6311} & 6.5289 & 0.4297 & 0.2830 & 0.2647\\
+c.hamilton28.panelr20 & -164.6015 & -170.9842 & 0.7158 & \textbf{0.6302} & 10.8558 & 0.3948 & 0.2925 & 0.2414\\
+c.hamilton28.panelr15 & -154.4533 & -160.8361 & 0.7091 & \textbf{0.6270} & 11.5510 & 0.3854 & 0.2972 & 0.2369\\
+c.hamilton13.panel & -133.9347 & -140.3175 & 0.6922 & \textbf{0.6250} & 4.9769 & 0.4285 & 0.2877 & 0.2664\\
+c.bn2.r20 & -109.3128 & -115.6955 & 0.6963 & \textbf{0.6218} & 0.2776 & 0.4080 & 0.3255 & 0.2724\\
+\addlinespace
+c.linear & -135.4069 & -141.7896 & 0.6879 & \textbf{0.6204} & 3.9989 & 0.4616 & 0.2925 & 0.2986\\
+c.bn6 & -132.7915 & -139.1742 & 0.6835 & \textbf{0.6113} & 0.4710 & 0.4371 & 0.2830 & 0.2712\\
+c.bn2.r15 & -83.9469 & -90.3297 & 0.6749 & \textbf{0.6047} & 0.1349 & 0.4761 & 0.3302 & 0.3357\\
+c.poly4.r20 & 3.5738 & -2.8090 & 0.5772 & \textbf{0.6011} & 0.1651 & 0.4980 & 0.3302 & 0.3570\\
+\textbf{BIS Basel gap} & \textbf{-121.5910} & \textbf{-127.9738} & \textbf{0.6733} & \textbf{\textbf{0.5960}} & \textbf{3.0578} & \textbf{0.4441} & \textbf{0.3255} & \textbf{0.3032}\\
+\addlinespace
+c.bn4 & -169.1186 & -175.5014 & 0.6892 & \textbf{0.5943} & 1.2840 & 0.3837 & 0.3255 & 0.2532\\
+c.stm.r15 & -79.5531 & -85.9358 & 0.6575 & \textbf{0.5924} & 2.0027 & 0.4778 & 0.3160 & 0.3281\\
+c.hp125k & -92.2897 & -98.6725 & 0.6562 & \textbf{0.5924} & 2.5216 & 0.4547 & 0.3302 & 0.3158\\
+c.hp221k & -106.8842 & -113.2670 & 0.6656 & \textbf{0.5921} & 2.6641 & 0.4561 & 0.3160 & 0.3079\\
+c.hp400k.r15 & -67.1228 & -73.5055 & 0.6472 & \textbf{0.5912} & 2.6223 & 0.4592 & 0.3255 & 0.3168\\
+\addlinespace
+c.stm & -89.2228 & -95.6055 & 0.6523 & \textbf{0.5903} & 2.2064 & 0.4684 & 0.3302 & 0.3284\\
+c.bn3.r15 & -144.4817 & -150.8645 & 0.6687 & \textbf{0.5882} & 0.1862 & 0.4780 & 0.3302 & 0.3375\\
+c.hp400k.r20 & -88.8450 & -95.2277 & 0.6545 & \textbf{0.5871} & 2.8130 & 0.4494 & 0.3302 & 0.3110\\
+c.stm.r20 & -87.2179 & -93.6006 & 0.6482 & \textbf{0.5859} & 1.9362 & 0.4826 & 0.3302 & 0.3419\\
+c.hp25k.r15 & -55.8805 & -62.2632 & 0.6275 & \textbf{0.5812} & 1.1403 & 0.5032 & 0.3066 & 0.3473\\
+\addlinespace
+c.hp25k & -56.0388 & -62.4215 & 0.6274 & \textbf{0.5782} & 1.2839 & 0.4970 & 0.3160 & 0.3469\\
+\bottomrule
+\end{tabular}}
+\end{frame}
+
+\begin{frame}{Comparing performance of weighted gap - Full Sample}
+\protect\hypertarget{comparing-performance-of-weighted-gap---full-sample-1}{}
+\begin{block}{Out-of-sample prediction}
+\protect\hypertarget{out-of-sample-prediction}{}
+\resizebox{\linewidth}{!}{
+\begin{tabular}[t]{lll>{}lllll}
+\toprule
+Cycle & BIC & AUC & psAUC & c.Threshold & Type I & Type II & Policy Loss Function\\
+\midrule
+\cellcolor{gray!6}{c.null} & \cellcolor{gray!6}{0.0000} & \cellcolor{gray!6}{0.4767} & \textbf{\cellcolor{gray!6}{0.4907}} & \cellcolor{gray!6}{0.0000} & \cellcolor{gray!6}{1.0000} & \cellcolor{gray!6}{0.0000} & \cellcolor{gray!6}{1.0000}\\
+ & (1.8172) & (0.0128) & \textbf{(0.0049)} &  &  &  & \\
+\addlinespace
+\textbf{\cellcolor{gray!6}{1.sided weighted.cycle}} & \textbf{\cellcolor{gray!6}{-80.9638}} & \textbf{\cellcolor{gray!6}{0.7134}} & \textbf{\textbf{\cellcolor{gray!6}{0.6404}}} & \textbf{\cellcolor{gray!6}{2.9939}} & \textbf{\cellcolor{gray!6}{0.3707}} & \textbf{\cellcolor{gray!6}{0.3208}} & \textbf{\cellcolor{gray!6}{0.2411}}\\
+\textbf{} & \textbf{(5.0654)} & \textbf{(0.0033)} & \textbf{\textbf{(0.0037)}} & \textbf{(0.6513)} & \textbf{(0.0282)} & \textbf{(0.0092)} & \textbf{(0.0164)}\\
+\addlinespace
+\cellcolor{gray!6}{c.hamilton28.panel} & \cellcolor{gray!6}{-121.3928} & \cellcolor{gray!6}{0.7078} & \textbf{\cellcolor{gray!6}{0.6318}} & \cellcolor{gray!6}{9.6472} & \cellcolor{gray!6}{0.4043} & \cellcolor{gray!6}{0.3071} & \cellcolor{gray!6}{0.2583}\\
+ & (3.0642) & (0.0018) & \textbf{(0.0027)} & (1.1148) & (0.0119) & (0.0165) & (0.0070)\\
+\addlinespace
+\cellcolor{gray!6}{c.hamilton13.panel} & \cellcolor{gray!6}{-123.8627} & \cellcolor{gray!6}{0.6894} & \textbf{\cellcolor{gray!6}{0.6220}} & \cellcolor{gray!6}{5.1997} & \cellcolor{gray!6}{0.4206} & \cellcolor{gray!6}{0.3132} & \cellcolor{gray!6}{0.2757}\\
+ & (4.9205) & (0.0021) & \textbf{(0.0034)} & (0.6877) & (0.0194) & (0.0199) & (0.0092)\\
+\addlinespace
+\cellcolor{gray!6}{c.hamilton28.panelr15} & \cellcolor{gray!6}{-132.7462} & \cellcolor{gray!6}{0.7052} & \textbf{\cellcolor{gray!6}{0.6217}} & \cellcolor{gray!6}{11.6613} & \cellcolor{gray!6}{0.3874} & \cellcolor{gray!6}{0.3127} & \cellcolor{gray!6}{0.2486}\\
+ & (5.5529) & (0.0041) & \textbf{(0.0053)} & (0.5448) & (0.0245) & (0.0135) & (0.0141)\\
+\addlinespace
+\cellcolor{gray!6}{c.linear} & \cellcolor{gray!6}{-106.5647} & \cellcolor{gray!6}{0.6846} & \textbf{\cellcolor{gray!6}{0.6158}} & \cellcolor{gray!6}{4.0160} & \cellcolor{gray!6}{0.4621} & \cellcolor{gray!6}{0.3113} & \cellcolor{gray!6}{0.3108}\\
+ & (4.8347) & (0.0017) & \textbf{(0.0028)} & (1.5341) & (0.0110) & (0.0156) & (0.0080)\\
+\addlinespace
+\cellcolor{gray!6}{c.bn2.r20} & \cellcolor{gray!6}{-76.7863} & \cellcolor{gray!6}{0.6908} & \textbf{\cellcolor{gray!6}{0.6137}} & \cellcolor{gray!6}{0.2458} & \cellcolor{gray!6}{0.4327} & \cellcolor{gray!6}{0.3208} & \cellcolor{gray!6}{0.2907}\\
+ & (2.1205) & (0.0043) & \textbf{(0.0066)} & (0.2248) & (0.0239) & (0.0116) & (0.0149)\\
+\addlinespace
+\cellcolor{gray!6}{c.bn6.r20} & \cellcolor{gray!6}{-86.4636} & \cellcolor{gray!6}{0.6757} & \textbf{\cellcolor{gray!6}{0.5987}} & \cellcolor{gray!6}{0.2144} & \cellcolor{gray!6}{0.4713} & \cellcolor{gray!6}{0.3231} & \cellcolor{gray!6}{0.3286}\\
+ & (2.8925) & (0.0160) & \textbf{(0.0205)} & (1.1466) & (0.0471) & (0.0114) & (0.0445)\\
+\addlinespace
+\cellcolor{gray!6}{c.bn6} & \cellcolor{gray!6}{-101.2737} & \cellcolor{gray!6}{0.6693} & \textbf{\cellcolor{gray!6}{0.5935}} & \cellcolor{gray!6}{0.3956} & \cellcolor{gray!6}{0.4611} & \cellcolor{gray!6}{0.3250} & \cellcolor{gray!6}{0.3203}\\
+ & (4.0553) & (0.0130) & \textbf{(0.0176)} & (0.6125) & (0.0472) & (0.0061) & (0.0459)\\
+\addlinespace
+\textbf{\cellcolor{gray!6}{BIS Basel gap}} & \textbf{\cellcolor{gray!6}{-110.9026}} & \textbf{\cellcolor{gray!6}{0.6707}} & \textbf{\textbf{\cellcolor{gray!6}{0.5932}}} & \textbf{\cellcolor{gray!6}{3.3012}} & \textbf{\cellcolor{gray!6}{0.4490}} & \textbf{\cellcolor{gray!6}{0.3250}} & \textbf{\cellcolor{gray!6}{0.3073}}\\
+\textbf{} & \textbf{(4.6247)} & \textbf{(0.0018)} & \textbf{\textbf{(0.0025)}} & \textbf{(0.7148)} & \textbf{(0.0080)} & \textbf{(0.0052)} & \textbf{(0.0059)}\\
+\bottomrule
+\multicolumn{8}{l}{\rule{0pt}{1em}\textit{Note: }}\\
+\multicolumn{8}{l}{\rule{0pt}{1em}3-fold cross-validation results. Standard deviations are reported in parentheses.}\\
+\end{tabular}}
+\end{block}
+\end{frame}
+
+\begin{frame}{Comparing performance of weighted gap as an EWI - EME}
+\protect\hypertarget{comparing-performance-of-weighted-gap-as-an-ewi---eme}{}
+\resizebox{\linewidth}{!}{
+\begin{tabular}[t]{lrrr>{}rrrrr}
+\toprule
+Cycles & BIC & AIC & AUC & psAUC & c.Threshold & Type.I & Type.II & Policy.Loss.Function\\
+\midrule
+null & 0.0000 & 0.0000 & 0.5000 & \textbf{0.5000} &  & 1.0000 & 0.0000 & 1.0000\\
+c.bn3.r15 & -46.2774 & -51.3507 & 0.7365 & \textbf{0.6308} & 0.6244 & 0.3059 & 0.3333 & 0.2047\\
+c.poly3 & 5.3862 & 0.3129 & 0.5737 & \textbf{0.6046} & 1.8089 & 0.5280 & 0.3056 & 0.3721\\
+c.bn2.r15 & -13.2062 & -18.2795 & 0.6879 & \textbf{0.5879} & 0.2952 & 0.3566 & 0.3333 & 0.2383\\
+c.poly4.r20 & 7.0732 & 1.9999 & 0.5040 & \textbf{0.5816} & -0.9609 & 0.5962 & 0.3333 & 0.4665\\
+\addlinespace
+\textbf{1.sided weighted.cycle} & \textbf{6.2094} & \textbf{1.1361} & \textbf{0.5325} & \textbf{\textbf{0.5811}} & \textbf{-1.0639} & \textbf{0.6827} & \textbf{0.1111} & \textbf{0.4784}\\
+c.linear & -9.3676 & -14.4409 & 0.5787 & \textbf{0.5774} & -0.9783 & 0.6294 & 0.2222 & 0.4455\\
+c.bn2.r20 & -16.6411 & -21.7144 & 0.6760 & \textbf{0.5751} & 0.1470 & 0.4510 & 0.3056 & 0.2968\\
+c.hamilton13 & 6.5749 & 1.5016 & 0.5468 & \textbf{0.5710} & 3.6354 & 0.6206 & 0.3056 & 0.4785\\
+c.ma & -11.6401 & -16.7133 & 0.5572 & \textbf{0.5457} & -0.2250 & 0.7220 & 0.1667 & 0.5491\\
+\addlinespace
+c.hamilton28.panel & -7.8687 & -12.9420 & 0.5392 & \textbf{0.5384} & -1.7750 & 0.6958 & 0.2778 & 0.5613\\
+c.quad & 6.1997 & 1.1264 & 0.4654 & \textbf{0.5334} & -6.4882 & 0.7456 & 0.1944 & 0.5938\\
+c.hamilton13.panelr15 & -1.6660 & -6.7393 & 0.5087 & \textbf{0.5274} & -1.1064 & 0.7002 & 0.3333 & 0.6014\\
+c.hp25k.r15 & 3.6420 & -1.4313 & 0.5018 & \textbf{0.5265} & -3.5672 & 0.7850 & 0.1111 & 0.6285\\
+c.hp25k & 3.9466 & -1.1267 & 0.4975 & \textbf{0.5247} & -3.7339 & 0.7893 & 0.1111 & 0.6354\\
+\addlinespace
+c.hp3k & 3.3678 & -1.7054 & 0.5276 & \textbf{0.5235} & -1.1119 & 0.7019 & 0.3333 & 0.6038\\
+c.hp3k.r20 & 3.3703 & -1.7030 & 0.5276 & \textbf{0.5235} & -1.1125 & 0.7028 & 0.3333 & 0.6050\\
+c.hamilton13.panel & -1.6294 & -6.7027 & 0.5166 & \textbf{0.5222} & -2.9398 & 0.7500 & 0.2778 & 0.6397\\
+\textbf{BIS Basel gap} & \textbf{-0.7015} & \textbf{-5.7748} & \textbf{0.4928} & \textbf{\textbf{0.5217}} & \textbf{-5.3969} & \textbf{0.7920} & \textbf{0.1389} & \textbf{0.6465}\\
+c.hamilton28.panelr20 & -4.9986 & -10.0719 & 0.5123 & \textbf{0.5213} & -1.5578 & 0.6932 & 0.3333 & 0.5916\\
+\addlinespace
+c.hamilton28.panelr15 & -3.3914 & -8.4647 & 0.4987 & \textbf{0.5162} & -1.8326 & 0.7220 & 0.3333 & 0.6324\\
+c.hp400k.r15 & 5.0603 & -0.0129 & 0.4777 & \textbf{0.5147} & -5.7358 & 0.8121 & 0.1111 & 0.6718\\
+c.stm.r15 & 4.7567 & -0.3166 & 0.4780 & \textbf{0.5129} & -5.6472 & 0.8191 & 0.0833 & 0.6778\\
+c.hp221k & 1.5902 & -3.4831 & 0.4787 & \textbf{0.5123} & -5.6416 & 0.8121 & 0.1111 & 0.6718\\
+c.stm.r20 & 3.1397 & -1.9336 & 0.4768 & \textbf{0.5095} & -5.3727 & 0.8226 & 0.0833 & 0.6835\\
+\addlinespace
+c.hp125k & 3.0774 & -1.9958 & 0.4740 & \textbf{0.5094} & -5.8918 & 0.8226 & 0.0833 & 0.6835\\
+\bottomrule
+\end{tabular}}
+\end{frame}
+
+\begin{frame}{Plot weighted gap against BIS gap}
+\protect\hypertarget{plot-weighted-gap-against-bis-gap}{}
+\begin{center}\includegraphics[width=1\linewidth]{../../3rdPaper/Data/Output/Graphs/Weighted_credit_gap_US} \end{center}
+\end{frame}
+
+\begin{frame}{Plot weighted gap against BIS gap}
+\protect\hypertarget{plot-weighted-gap-against-bis-gap-1}{}
+\begin{center}\includegraphics[width=1\linewidth]{../../3rdPaper/Data/Output/Graphs/Weighted_credit_gap_UK} \end{center}
+\end{frame}
+
+\begin{frame}{Out-of-sample Prediction for Individual Countriess}
+\protect\hypertarget{out-of-sample-prediction-for-individual-countriess}{}
+We extrapolated our one-sided weight vector from 2017:Q4 to 2021:Q3, and
+analyzed the weighted gap as an EWI. Our model identified 9 countries
+that are experiencing pre-crisis periods:
+
+\begin{itemize}
+\tightlist
+\item
+  Canada, France, Hong Kong (SAR), Japan, South Korea, Saudi Arabia,
+  Switzerland, Sweden, and Thailand
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Thank You}
+\protect\hypertarget{thank-you}{}
+\begin{block}{I look forward to your questions and comments}
+\protect\hypertarget{i-look-forward-to-your-questions-and-comments}{}
+\end{block}
+\end{frame}
+
+\end{document}

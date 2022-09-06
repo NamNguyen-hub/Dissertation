@@ -1,0 +1,37 @@
+--- 
+bibliography: "/Users/namnguyen/syncthing/ZoteroSync/Library/My Library.bib"
+output:
+  bookdown::pdf_book:
+    toc: no
+    template: null
+    latex_engine: xelatex
+    keep_tex: yes
+    includes:
+      in_header: parameters/preamble.tex
+      before_body: parameters/doc_preface.tex
+  bookdown::gitbook: default
+  html_document:
+    toc: yes
+  bookdown::word_document2:
+    fig_caption: yes
+    md_extensions: +footnotes
+    reference_docx: parameters/uwo_thesis_template.docx
+    toc: yes
+documentclass: book
+classoption: openany
+# classoption: twoside
+fontsize: 12pt
+papersize: letter
+indent: true
+subparagraph: yes
+link-citations: yes
+biblio-style: apalike
+csl: "/Users/namnguyen/syncthing/ZoteroSync/Library/apa-no-doi-no-issue.csl"
+always_allow_html: yes
+---
+```{r setup-index, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
+options(digits = 3)
+```
+
+

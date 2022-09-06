@@ -1,0 +1,2522 @@
+--- 
+bibliography: "/Users/namnguyen/syncthing/ZoteroSync/Library/My Library.bib"
+output:
+  bookdown::pdf_book:
+    toc: no
+    template: null
+    latex_engine: xelatex
+    keep_tex: yes
+    includes:
+      in_header: parameters/preamble.tex
+      before_body: parameters/doc_preface.tex
+  bookdown::gitbook: default
+  html_document:
+    toc: yes
+  bookdown::word_document2:
+    fig_caption: yes
+    md_extensions: +footnotes
+    reference_docx: parameters/uwm_thesis_template.docx
+    toc: yes
+documentclass: book
+classoption: openany
+# classoption: twoside
+fontsize: 12pt
+papersize: letter
+indent: true
+subparagraph: yes
+link-citations: yes
+biblio-style: apalike
+csl: "/Users/namnguyen/syncthing/ZoteroSync/Library/apa-no-doi-no-issue.csl"
+always_allow_html: yes
+---
+```{r setup-index, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
+options(digits = 3)
+```
+
+
+
+<!--chapter:end:index.Rmd-->
+
+
+# Introduction
+
+&nbsp;
+
+Financial market stability has been an increasingly important topic in recent years, especially after the great recession. Among major determinants of financial market booms and busts, credit supply expansion and property prices are popularly cited and studied. In my dissertation, I try to explore different aspects of the cycle of credit supply (deviation of credit-to-GDP ratio from its long-run trend), such as its forecasting ability, its dynamic relationship with property prices, and financial stability. My analysis focuses on the US and UK economies in the first two chapters. While the third chapter uses a panel data setting with 40 countries.
+
+The first chapter of my dissertation exploits a model that allows for household credit and house prices to be jointly determined in both short run and long run. The methodology I use in this chapter allows for measuring the directions and magnitudes of the effects the two variables have on each other. More importantly, the timing of the effect can also be estimated using a state-space framework. The model empirical result suggests that, in the short run, a positive shock to house prices is associated with a future increase in household credit above its long-run trend. This result is robust in multiple structural specifications of the trend-cycle decomposition methods.
+
+The second chapter of my dissertation proposes a new method to measure the credit gap - (deviation of credit-to-GDP ratio from its long-run trend) based on its out-of-sample forecast performance. I decompose the total credit-GDP ratio series into short-run deviations and long-run trends using many relevant and popularly practiced methods. I then combine the cycles to construct a singular cyclical series with the highest predictive power on out-of-sample forecasts. The empirical results suggest that by using forecast error weighted average combination, we can produce a measurement of credit gaps that provides superior performance as an early indicator of turning points.
+
+The third chapter of my dissertation overcomes model uncertainty in using the credit gap as an early warning indicator (EWI) of systemic financial crises in a binary outcome setting. I propose using model averaging of different credit gap measurements to achieve better averaged model fit and out-of-sample prediction. I also propose a novel, superior criteria to judge the performance of an EWI than the one currently popularly used in the literature. The empirical results showed that the Bayesian averaged model I proposed could synthesize a single credit gap that out-performs any other popularly studied credit gap measurements in terms of an early warning indicator.
+
+
+<!--chapter:end:01_Intro.Rmd-->
+
+
+# Credit and House Prices Cycles {#Chapter-2}
+
+
+## Introduction
+
+The Great Recession caused researchers to shift their focus on the narrative of credit, housing market and financial stability. However, the debate on whether house prices have been the main driving source of the credit cycle, or financial conditions (credit) are the main determinants of the house price cycle is still open. One strand of literature has argued that increase in credit supply played a major role in the boom and the subsequent bust in the housing market in the US. Another strand of literature has argued that credit supply itself cannot explain the big swings in house prices and has attributed beliefs and other unobserved characteristics as a major source of house price variations. At the same time, some researchers have argued that credit booms are preceded and sometimes driven by housing booms. The increase in collateral and relaxation of banks' funding constraints leads to an increase in the willingness of the banking sector to provide funding not only to the residential sector but also to commercial real estate as well as overall funding to the businesses.
+
+Most of the work in the literature has considered the relationship between house prices and credit separately, that is, if house prices are affected by credit or changes in house prices affect credit. It is perfectly reasonable to assume that house prices and credit have a dynamic relationship, and the causality does not necessarily run from one variable to another. The novel contribution of this study is to develop a model to jointly examine the two variables of interest: household credit and house prices, and their interaction. In particular, I pay attention to the long-run and short-run movements in credit and house prices and model their joint dynamics. In doing so, I use data from the US and the UK. The methodology I use in this paper to extract transitory and permanent information from non-stationary time series is a decomposition method called Unobserved Components model pioneered by @beveridge_new_1981. The implementation details of the methodology are inspired by @morley_slow_2007 and @huang_rise_2019. This method allows the permanent component to be shown as a random walk with a local growth rate component and the transitory component to be a stationary process with a mean zero. The stationary transitory component configuration is essential to infer meaningful structural linkage between the two variables of interest: household credit and house prices, as non-stationary transitory components do not offer meaningful inferences. This brings up the paper's second novel contribution to the literature. Discovering causality in the structure of a dynamical system from observed time series is a traditional and important problem. By explicitly configuring cross-correlation coefficients on the cyclical components of the two variables, I will be able to examine the predictive ability of the cycles. This would produce a much desired inference for macro-prudential policy implications to stabilize the macroeconomy.
+
+  
+
+Using sample data from the US and the UK, I find interesting and meaningful results from the estimated multivariate correlated unobserved component model. The maximum-likelihood estimates of my proposed correlated multivariate UC model suggest that there is a strong positive correlation between the transitory shock to household credit and the transitory shock to the house prices index. This suggests that a temporary increase in household credit is associated with an increase in house prices above their long-run level. These results support the narrative evidence of the strong relationship between household credit and house prices. More importantly, I also find evidence that lags of the household credit cycle have the predictive ability in forecasting the magnitude of house prices gap above its long-run level by examining the cross-correlation coefficient on the cyclical components. I also find that the trend-cycle decomposition of the two variables of interest captures the recent boom and bust behavior and compares favorably to a univariate trend-cycle decomposition benchmark. In particular, I find that the house prices and household credit were significantly higher than their long-term trend before the financial crisis. Then there was an overreaction during the crisis leading the house price and credit cycle to negative territory, implying that house prices and credit were below their long-run trend. The magnitude of the model's cyclical components for both house price and credit during this time of crisis is significantly higher than that of other univariate decomposition models' such as the HP filter and the VAR unobserved component model.
+
+
+Finally, my sample data show that the correlation between house price and credit is much higher in the UK than in the US, as shown in Table 1. This help tests the robustness of my model. The plan of the paper is as follows. In section 2, I will discuss the relevant literature branches. In section 3, I will introduce the summary of data and their description. In section 4, I will describe the decomposition methodology using unobserved component model with vector auto-regression (VAR). Specifically, in subsection 4.2, I introduced my contribution to the numerical optimization process in the literature. In section 5, I will go over the model regression results and my interpretation. I will also show cross-countries evidence when using the data from other developed countries. In section 6, I will test the robustness of the model by comparing the results against some traditional methods of analyzing time series data. And lastly, in section 7, I will give my conclusion remark for the model.
+
+  
+
+## Literature Review
+
+There has been an increasing interest in the study of the interaction between credit, speculation, and house prices @mian_house_2011; @mian_credit_2018 , @kishor_forecasting_2020 , @guerrieri_housing_2016, and @davis_housing_2015 have detailed literature reviews on the dynamics between the housing market and credit conditions. I list the four literature branches that study the dynamics of the credit cycles, housing price cycles, and then the critical connection between boom-bust episodes in housing markets and boom-bust episodes in credit markets. There are two approaches to this interaction:(i) The house price cycles generates the credit cycles. (ii) The credit cycles generate the house price cycles.
+
+  
+
+One strand of the literature focuses on how credit cycles are generated. @kiyotaki_credit_1997 modeled the fluctuation of credit conditions due to credit limits and asset prices. The model shows how exogenous shocks can create cyclical fluctuation in credit, asset prices, and real output. @myerson_model_2012 proposed a model of credit cycles generated by moral hazard in dynamic interactions among different generations of financial agents. @guerrieri_housing_2016 used a catastrophe model for credit, in which multiple equilibria are possible due to adverse selection: as credit increases, the composition of borrowers worsens, this can generate a crash in the credit market. @boissay_booms_2016 studied the topic of endogenous boom and bust in the credit market using a dynamic stochastic general equilibrium (DSGE) model, in which moral hazard and asymmetric information may endogenously lead to sudden freezes and crises in the credit market. As for classifying periods of booms and bursts in credit conditions, @alessi_identifying_2018 used a random forest model to identify unsustainable credit growth periods.
+
+  
+
+The second branch of the literature focuses on the dynamics of house price changes. I first look at the generation of momentum in house price changes. Asset prices and valuations tend to vary when information about their performance is available. @thaler_chapter_2005 pointed out that securities with good performance records receive extremely high valuations, and those valuations will return to the mean on average. @hong_unified_1999 suggested a model with information diffuses gradually across the population, and if agents implement simple univariate strategies, their attempts at arbitrage will lead to overreaction at long horizons. @capozza_anatomy_2004 analyzed dynamic properties of markets exhibiting serial correlation and mean reversion. These properties allow prices to overshoot equilibrium (cycles) and permanently diverge from equilibrium. @glaeser_housing_2008 incorporated housing supply elasticity into the analysis of housing prices momentum and showed that the price run-ups of the 1980s were almost exclusively experienced in cities with more inelastic housing supply. @head_search_2014 showed that variation in the time it takes to sell houses induces transaction prices to exhibit serially correlated growth. @glaeser_extrapolative_2017 modeled the leads house prices expectation approximation to display missing features in rational models: momentum at short-run horizon, mean reversion in the long-run horizon, and excess longer-term volatility relative to fundamentals. @kishor_time_2015 studied the US housing market by using a combination of the Unobserved Component model and GARCH model to study the time-varying importance of permanent and transitory housing components in the US housing prices. @knoll_no_2017 constructed a house price index for 14 economies in over 140 years. They argue that real house prices have largely followed a "hockey stick" pattern: fairly consistent for an extended period, followed by a pronounced increase towards the second half of the century with substantial cross-country variation. Furthermore, they say that most of the price increase can be attributed to the increase in the price of land and that house prices have risen faster than income in recent decades. @knoll_return_2016 argued that a rise in house prices coincides with a rise in the price-rent ratio, a fundamental that shows the intrinsic value of housing.
+
+  
+
+Another branch of literature is the one that studies the hypothesis that house price cycles generate credit cycles. The dynamics of houses price on household credit can be viewed through the lens of the borrower balance sheet. @bernanke_agency_1989 developed a neoclassical model of the business cycle in which the condition of borrowers' balance sheets is a source of output dynamics. The mechanism is that higher borrower net worth reduces the agency costs of financing real capital investments. The financial acceleration effects imply that stronger balance sheets due to higher asset prices will lead to a lower cost of borrowing to invest, suggesting that a housing price boom will lead to a boom in credit. @kiyotaki_credit_1997 further incorporated this positive feedback through asset prices and the associated intertemporal multiplier process that affects borrowing capacity and output into their paper. An increase in home equity due to an increase in house prices will allow borrowers to borrow more to finance either personal consumption or more speculation housing investment. @mian_credit_2018 showed that the crash in the housing market and following credit crunch showed the importance of housing prices for household balance sheets and banking sector balance sheets.
+
+  
+
+Some papers have studied the hypothesis that credit cycles generate house price cycles. @agnello_booms_2011 , @agnello_economic_2018 examined different variables likely to create a bubble in housing markets. First is the effect of credit constraints on house prices. @stein_prices_1995 is the first paper to explore the effects of down-payment requirements on house price volatility. The paper highlighted the self-reinforcing effect from house prices to down payments and housing demand back to house prices. If house prices decline, the value of households' collateral declines, depressing housing demand and pushing house prices further down. This multiplier effect can generate multiple equilibria and accounts for the house price boom-bust episodes. The self-reinforcing effect has the same spirit as the transmission mechanism by @kiyotaki_credit_1997. In a recent related paper, @ortalo-magne_housing_2006 showed that income volatility of young households or relaxation of their credit constraints could explain excess volatility of house prices by identifying a powerful driver of the housing market: the ability of young households to afford the down payment on a starter home.
+
+  
+
+Another research branch has also explored the effect of financial innovation or financial liberalization on house prices. @kermani_cheap_2012 proposed a model to emphasize the importance of financial liberalization and its reversal to explain the housing boom and bust. @he_housing_2015 also proposed a model where housing collateralizes loans and house price boom and bust can be generated by financial innovation because the liquidity premium on housing is non-monotone in the loan-to-equity ratio. @huo_financial_2016 had a model with heterogenous households, housing, and credit constraints and also showed that financial shocks can generate large drops in housing prices. @favilukis_international_2012 studied the impact of systemic changes in housing finance: changes in housing collateral requirements and the change in borrowing costs (the spread of mortgage rates over risk-free security) on how these factors affect risk premiums in housing markets, and how those risk premiums, in turn, affect home prices. @favilukis_macroeconomic_2017 developed a quantitative general equilibrium model with housing and collateral constraints to explore what drives fluctuations in house prices to rent ratio. They propose that relaxation of financing constraints leads to a significant boom in house prices. Furthermore, the boom in house prices is entirely the result of a decline in the housing risk premium. @mian_credit_2018 showed that speculation is a critical channel through which credit supply expansion affects the housing cycle.
+
+  
+
+After the financial crisis, there has also been an explosion of interest in the effect of credit expansion on house prices. @justiniano_credit_2019 argued that loosening the collateral requirements alone cannot explain the recent housing boom in the US, but there must have been an expansion in the credit supply. The authors argued that house prices rose from 2000 to 2007 without an expansion of leverage. The cause of the housing boom before the recession was an increase in credit supply or available funds rather than an increase in leverage. The rates of mortgages to real estate remained constant. This contradicts the popular view that attributes the housing boom to looser borrowing constraints associated with lower collateral requirements, which would shift the demand for credit. In short, the increase in the supply of credit was the cause of the housing boom. Beyond 2007, the paper argues that there was an increase in collateralizing houses relative to available funds or that available funds for lending decreased, leading to a rise in mortgage rates and a collapse of house prices. More interestingly, in a series of papers, Jorda, Schularick, and Taylor have studied the interplay between credit, house price, and economic performance. @schularick_credit_2012 created new data sets for 14 developed countries over 140 years and showed how credit growth is a powerful predictor of financial crises. @jorda_great_2016 claimed that mortgage lending booms were loosely related to financial crises before WWII but have become a more important predictor of financial fragility. The share of mortgages on banks' balance sheets doubled in the later half of the twentieth century, driven by household mortgage lending. Household debt to asset ratios have risen substantially in the study's many countries. Financial stability risks have been linked to real estate lending booms. @jorda_betting_2015 claims that there has been an increase in the mentality of "bets on the house" in the past century. Mortgage credit has risen dramatically as a share of banks' balance sheets from about one-third at the beginning of the last century to about two-thirds nowadays. They use a novel IV local projection method to demonstrate that loose monetary conditions lead to booms in real estate and house price bubbles. These, in turn, lead to a higher risk of financial crises. Mortgage booms and house price bubbles have been closely associated with a higher likelihood of a financial crisis. @jorda_macrofinancial_2017 claimed that a century-long and stable ratio of credit to GDP gave way to rapid financialization and surging leverage in the last forty years. This coincides with a shift in foundational macroeconomic relationships. More financialized economies exhibit more tail risk and tighter real-real and real-financial correlations, including the credit and real estate correlation. The paper also shows that real house prices and mortgages in 17 sample countries display a "hockey stick" pattern. They both stay stable for a long time before ticking up drastically at the end of the sample. It can be shown that house price growth and mortgage growth generally co-move. @favara_credit_2015 showed an expansion in mortgage credit has significant effects on house prices using a spatial IV strategy with the US branching deregulation between 1994 and 2005 as an instrument for credit. The treated banks' credit expansion led to increases in housing demand. @di_maggio_credit-induced_2017 showed that a credit expansion could generate a boom and bust in house prices and real activity. The paper uses the exploitation of the same federal deregulation in preemption of local laws against predatory lending in 2004 to gauge the effectiveness of the supply of credit on the real economy.
+
+  
+
+However, the debate on whether house prices have been the main driving source of the credit cycle or financial conditions (credit) are the main driving force of the house price cycle is still open. In this paper, I will use a dynamic model to explain the relationship between these two variables in both the short-term and long-term.
+
+
+<!--chapter:end:21-2_Introduction.Rmd-->
+
+## Data Description
+
+The sample periods include quarterly data from 1990:Q4 to 2021:Q3. The sample periods were chosen based on the nature of the change in the regulation of credit and housing markets beginning early 1990s. Also, many developed countries started recording their housing price index at the same time.^[The 17 countries with both credit and house price data available: Australia, Belgium, Canada, Finland, France, Germany, Hong Kong, Italy, Japan, Netherlands, New Zealand, Norway, South Korea, Spain, Sweden, United Kingdom, United States] The main source of the data comes from the Bank of International Settlement (BIS). The real housing price index is based on the base index of 2010 as 100. The credit to household data is measured as a percentage of GDP. I take natural log of this series and use the log-transformed series in the model estimation.
+
+Despite their importance, comparable cross-country data on residential property prices are hard to gather. The complicated nature of property transactions and property types, lack of standardization, and short time span of data available further complicate the compilation of a housing price index. To address this data gap, the BIS published a data set on residential property price statistics across the globe.^[Housing price indices are available for 55 countries. https://www.bis.org/publ/qtrpdf/r_qt1409h.htm] Combining with actual transaction prices and sources from appraisal and advertised prices, a comparable index of house prices of quarterly frequency is created for each country.
+
+Even though there are other sources with the data regarding credit to households, such as the International Financial Statistics from IMF or the Federal Reserve Economic Data, I decided to use the credit to household data from the BIS for better compatibility and adjustments for breaks methodology in data collection.^[The BIS has constructed long series on credit to the private non-financial sector for 44 economies, both advanced and emerging. Credit is provided by domestic banks, all other sectors of the economy, and non-residents. https://www.bis.org/statistics/totcredit/credpriv_doc.pdf] To achieve as long a period as possible for time series data on credit, the construction of the series combined data from institutional sector financial accounts, balance sheets of domestic banks, and international banking institutions.
+  
+In this study, I selected the US and UK as two representative countries to use because of the longevity and reliability of the time series data available.^[For other countries' analysis, I summarized results in subsection \@ref(cross-countries).] Table \@ref(tab:desc-stat) describes the data used in this paper. House price data tends to fluctuate with greater magnitude than credit series. Furthermore, the housing prices in the UK increase at a faster rate than in the US. Table \@ref(tab:corr-matrix) shows the correlation of the series with its lag values of 1 and 2 quarters. The house price series in the UK is more closely correlated with its household credit series than in the US.
+
+\begin{center}
+
+\begin{threeparttable}
+
+\caption {\label{tab:desc-stat} Descriptive statistics}
+
+%\rowcolors{2}{gray!10}{white}
+
+\begin{tabular}{@{}llSSSll@{}}
+
+\toprule
+
+Country & Index & \multicolumn{1}{c}{Mean} & \multicolumn{1}{c}{Max} & \multicolumn{1}{c}{Min} & \multicolumn{1}{c}{Frequency} & Periods\\
+
+\midrule
+
+UK & $\Delta y_t$ & 0.3802268 & 2.698864 & -1.762632 & Quarterly & 1990:Q4-2021:Q3\\[2pt]
+
+& $\Delta h_t$ & 0.592557 & 7.232207 & -6.725045 & Quarterly & 1990:Q4-2021:Q3\\[2pt]
+
+US & $\Delta y_t$ & 0.1988737 & 3.508772 & -1.94274 & Quarterly & 1990:Q4-2021:Q3\\[2pt]
+
+& $\Delta h_t$ & 0.3004273 & 3.480857 & -6.716384 & Quarterly & 1990:Q4-2021:Q3\\[2pt]
+
+\bottomrule
+
+\end{tabular}
+
+\begin{tablenotes}
+
+\small
+
+\item $\Delta y_t$ is growth rate of credit to household series, $\Delta h_t$ is growth rate of house prices index series. The measurements are in percentage.\\
+
+\end{tablenotes}
+
+\end{threeparttable}
+
+\end{center}
+
+
+
+\begin{center}
+
+\begin{threeparttable}
+
+\caption {\label{tab:corr-matrix} Correlation matrix}
+
+% \rowcolors{2}{gray!10}{white}
+
+\begin{tabular}{@{}llSSSSSS@{}}
+
+\toprule
+
+Country & & $y_t$ & $y_{t-1}$ & $y_{t-2}$ & $h_t$ & $h_{t-1}$ & $h_{t-2}$ \\
+
+\midrule
+
+UK & $y_t$ & 1 & 0.9990921 & 0.9969423 & & 0.9441596 & 0.9490988 \\[2pt]
+
+& $h_t$ & 0.9391269 & 0.9313553& 0.9224964 & 1 & 0.9974943 & 0.9924997 \\[2pt]
+
+\midrule
+
+US & $y_t$ & 1 & 0.9982942 & 0.9947279 & & 0.7232386 & 0.7415248 \\[2pt]
+
+& $h_t$ & 0.7040654 & 0.6890949 & 0.6729709 & 1 & 0.9951329 & 0.9816735 \\[2pt]
+
+\bottomrule
+
+\end{tabular}
+
+\begin{tablenotes}
+
+\small
+
+\item $y_t$ is credit to household series, $h_t$ is housing price index series. Both are log transformed. \\
+
+\end{tablenotes}
+
+\end{threeparttable}
+
+\end{center}
+
+
+<!--chapter:end:23_Data_Description.Rmd-->
+
+
+## Empirical Model
+### Model Specification
+My proposed model is a multivariate extension of the model used in [@morley_slow_2007]. I use a bivariate unobserved component model to model the dynamics in credit to households as ratio to GDP ($y_t$) and house prices index ($h_t$). In my model, the credit and house prices series are log-transformed and are each sum of a trend and cycle components.
+
+I begin with the notations of two series: (Credit) as credit to households as ratio to GDP and (HPI) as Housing Price Index.
+\begin{align}
+ln \frac{Credit}{GDP} &= y_t = \tau_{yt} + c_{yt}
+\\
+ln HPI &= h_t = \tau_{ht} + c_{ht}
+\end{align}
+Where $\tau_{yt}$ is the trend component of the credit series. $c_{yt}$ is the cycle component of the credit series. Likewise, $\tau_{ht}$ and $c_{ht}$ are trend and cycle components of the house prices series.
+
+The trend components of the model have a random walk component and a time-varying local growth rate component $\mu_t$. This approach follows the structural time series model specification discussed in @beltran_optimizing_2021 and @campagnoli_dynamic_2009:
+\begin{align}
+\tau_{yt} = &\mu_{yt-1} + \tau_{yt-1} +  \eta_{yt}, &\eta_{yt} \sim iidN(0,\sigma^2_{\eta y})
+\\
+&\mu_{yt} = \mu_{yt-1} + \eta_{\mu yt}, &\eta_{\mu yt} \sim iidN(0,0.01)
+\\
+\tau_{ht} = &\mu_{ht-1} + \tau_{ht-1} + \eta_{ht}, &\eta_{ht} \sim iidN(0,\sigma^2_{\eta h})
+\\
+&\mu_{ht} = \mu_{ht-1} + \eta_{\mu ht}, &\eta_{\mu ht} \sim iidN(0,0.01)  
+\end{align}
+The cycle components of the model follow a VAR(2) process:
+\begin{align}
+c_{yt} &= \phi^1_{y}c_{yt-1}  
++ \phi^2_{y}c_{yt-2}  
++ \phi^{x1}_{y}c_{ht-1} + \phi^{x2}_{y}c_{ht-2}
++ \varepsilon_{yt},
+&\varepsilon_{yt} \sim iidN(0,\sigma^2_{\varepsilon y})      
+\\
+c_{ht} &= \phi^1_{h}c_{ht-1}  
++ \phi^2_{h}c_{ht-2}
++ \phi^{x1}_{h}c_{yt-1}  + \phi^{x2}_{h}c_{yt-2}
++ \varepsilon_{ht},
+&\varepsilon_{ht} \sim iidN(0,\sigma^2_{\varepsilon h})
+\end{align}
+
+Each series is decomposed into a stochastic trend with a local growth rate component ($\tau_{jt}, j = y, h$) and a cyclical component ($c_{jt}, j = y, h$) implying an $I(1)$ process for all the variables. The non-stationarity of these variables is confirmed by the unit root tests, where I do not reject the null hypothesis of unit root for all the variables.^[The detailed results are not reported here for brevity. They are available upon request] In contrast to [@morley_slow_2007], I do not impose a common trend restriction. The two variables have their own trend and cycle components, and these components are allowed to have a certain degree of correlation.
+
+Secondly, I specify the dynamics of trend and cycle components. The cyclical component in each series is assumed to follow an AR(2) process, and in additional configurations, lags of the other series. This assumption captures the autocorrelation structures and provides rich dynamics in the data series to enable us to identify all the parameters under the state-space model framework.^[The cyclical dynamics, in theory, can also be modeled as VAR processes. The presence of cross-correlation among shocks and cross-cycle coefficients in our framework captures the cross-variable dynamics.] The trend components are assumed to follow a random walk process with a time-varying local growth rate component. As mentioned above, I do not impose a common trend between the two variables.
+
+Thirdly, I assume the shocks to the trend and cyclical components follow a white noise process but allow for non-zero cross-correlation across series. The shocks to the trend components ($\eta_{jt}, j=y,h$) have a long-run effect on the trend because the trend is assumed to follow a random walk process. The shocks to the cyclical component ($\varepsilon_{jt}, j=y,h$) have a short-run effect on the cycles because the cycles follow a stationary autoregressive process with two lags. The shocks to each trend component are allowed to be correlated across each other, and so are the shocks to the cyclical components. However, I impose the zero correlation between the shocks to the trend components and the shocks to the cycle components within and between series. That is to say, I assume that the shocks that generate a long-run effect differ from those that generate a short-run effect. This assumption isolates the temporary shocks from permanent shocks. 
+
+```{=latex}
+    The above dynamic equations can be represented in a state space form where the measurement equation is: 
+    \begin{align}
+    \tilde{y}_t = A + H\beta_t
+    \end{align}
+    Where the measurement components are:
+    \begin{align*}
+    \begin{bmatrix}
+    y_t \\
+    h_t
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+    0 \\
+    0
+    \end{bmatrix}
+    +
+    \begin{bmatrix}
+    1 & 0 & 1 & 0 & 0 & 0 & 0 & 0\\
+    0 & 0 & 0 & 1 & 0 & 1 & 0 & 0
+    \end{bmatrix}
+    \begin{bmatrix}
+    \tau_{yt} \\
+    c_{yt}    \\
+    c_{yt-1}  \\
+    \tau_{ht} \\
+    c_{ht}    \\
+    c_{ht-1}  \\
+    \mu_{yt} \\
+    \mu_{ht} 
+    \end{bmatrix}
+    \end{align*}
+    And the transition equations are:
+    \begin{align}
+    \beta_t = F\beta_{t-1} + \tilde{v}_t
+    \end{align}
+    Where the transitory components are:
+    \begin{align*}
+    \begin{bmatrix}
+    \tau_{yt} \\
+    c_{yt}    \\
+    c_{yt-1}    \\
+    \tau_{ht} \\
+    c_{ht}    \\
+    c_{ht-1}  \\
+    \mu_{yt} \\
+    \mu_{ht}  
+    \end{bmatrix}
+    =
+    %F matrix
+    \begin{bmatrix}
+    1 & 0 & 0 & 0 & 0 & 0 & 1 & 0 \\
+    0 & \phi^1_y  & \phi^2_y  & 0 & \phi^{x1}_y & \phi^{x2}_y & 0 & 0\\
+    0 & 1 & 0 & 0 & 0 & 0 & 0 & 0\\
+    0 & 0 & 0 & 1 & 0 & 0 & 0 & 1\\
+    0 & \phi^{x1}_h & \phi^{x2}_h & 0 &\phi^1_h & \phi^2_h  & 0 & 0\\
+    0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 \\
+    0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 \\
+    0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 
+    \end{bmatrix}
+    %Bt-1 matrix
+    \begin{bmatrix}
+    \tau_{yt-1} \\
+    c_{yt-1}    \\
+    c_{yt-2}    \\
+    \tau_{ht-1} \\
+    c_{ht-1}    \\
+    c_{ht-2}    \\
+    \mu_{yt-1} \\
+    \mu_{ht-1} 
+    \end{bmatrix}
+    +
+    \begin{bmatrix}
+    \eta_{yt} \\
+    \varepsilon_{yt}    \\
+    0 \\
+    \eta_{ht} \\
+    \varepsilon_{ht}    \\
+    0 \\
+    \eta_{\mu yt} \\
+    \eta_{\mu ht}
+    \end{bmatrix}
+    \end{align*}
+    \bigskip
+    The covariance matrix for $\tilde{v}_t$, denoted Q, is:
+    \begin{align}
+    Q = 
+    \begin{bmatrix}
+    \sigma^2_{\eta y} & 0  &0 & \sigma_{\eta y \eta h}  & 0 & 0 & 0 & 0 \\
+    0 & \sigma^2_{\varepsilon y}  & 0 & 0 & \sigma_{\varepsilon y \varepsilon h}  & 0 & 0 & 0 \\
+    0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+    \sigma_{\eta y \eta h}  & 0 & 0 & \sigma^2_{\eta h} & 0 & 0 & 0 & 0 \\
+    0 & \sigma_{\varepsilon y \varepsilon h}  & 0 & 0 & \sigma^2_{\varepsilon h} & 0  & 0 & 0 \\
+    0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+    0 & 0 & 0 & 0 & 0 & 0 & 0.01 & 0 \\
+    0 & 0 & 0 & 0 & 0 & 0 & 0 & 0.01
+    \end{bmatrix}
+    \end{align}
+```
+
+Regarding variance and covariance estimates, it should be pointed out that, in the variance-covariance matrix of the shocks the the trend and cycle, $\sigma_{\eta y \eta h}$ is the covariance of the shocks to the trend of credit to household as percentage of GDP and house prices index, whereas $\sigma_{\varepsilon y \varepsilon h}$ is the covariance of the shocks to the cycles component of the two variables. The estimates of correlation coefficients, instead of covariances, will be reported in Table \@ref(tab:UK-results-3) - \@ref(tab:UK-US-results). Additionally, the variance of the local growth rate $\sigma^2_{\mu it}$ is fixed at 0.01 as I followed the steps in @campagnoli_dynamic_2009 and @beltran_optimizing_2021 of handling long cycle quarterly data and also for simplifying the computation problem.
+
+The model estimation methodology I used is based on the classical maximum likelihood via the Kalman Filter.^[See [@kim_state-space_1999] and [@durbin_time_2012] for the details of the estimation procedure.] Additionally, my novel contribution to the literature on estimating trend-cycle component models is to overcome the common "curse of dimensionality" problem in estimating a complex unobserved component model, which resulted in perfect multicollinearity and problematic estimation results. To solve this problem, I implemented a Bayesian inference technique called random-walk Metropolis-Hastings sampler and referred to its implementation in @blake_applied_2017 to obtain draws from the posterior distribution. I use the last 1 million draws from the 1.5 million (Markov chain Monte Carlo) MCMC iterations to analyze the posterior distribution. The Bayesian method is a full information-based approach that uses all moments of the observations. The details of the implementation steps of the model estimation using the random-walk Metropolis-Hastings sampler are shown in appendix \@ref(random-walk-MH).
+
+### Parameters Constraints {#numerical-optimization}
+Another minor novel contribution of the paper is introducing a technique to constraint model parameters in feasible stationary regions by imposing penalties on magnitudes of stationary components. Configuring a feasible estimation procedure for the Unobserved Component model has been a difficult challenge of using the model.
+
+The estimation of the unobserved component model uses a nonlinear log-likelihood function maximization in [@morley_slow_2007]. Estimating this function requires a stationary constraint using numerical optimization. This method is prone to produce corner solutions that are not meaningful.
+
+I did not put stationary constraints directly on the autoregressive parameters. Since such constraints on a VAR(2) system is complex to set up. However, to achieve feasible stationary transitory measurement, I implemented additional terms on the objective log-likelihood function:
+```{=latex}
+\begin{align}
+l(\theta) = -0.5\sum_{t=1}^{T}ln\lbrack(2\pi)^2|f_{t|t-1}|\rbrack
+-0.5\sum_{t=1}^{T}\eta'_{t|t-1}f^{-1}_{t|t-1}\eta_{t|t-1}
+- w_1*\sum_{t=1}^{T}(c_{yt}^2) - w_2*\sum_{t=1}^{T}(c_{ht}^2)
+\end{align}
+```
+The last two terms in the objective function act as a penalty against too much transitory deviation from zero. Without this penalty, the trend would be linear, or transitory movements would match all the movements in the measured series. This paper will impose the additional penalty terms' weight $w_i$ at 0.0005.
+
+Regarding constraints on the covariance matrix, I applied the same constraints as in [@morley_slow_2007] to imply the positive-definite covariance matrix.
+
+```{=latex}
+    \begin{table}[H]
+      \begin{threeparttable}
+        \caption {\label{tab:table1} Parameters description}
+        %\rowcolors{2}{gray!10}{white} 
+        \begin{tabular}{@{}ll@{}}
+          \toprule
+          Description & Parameter\\
+          \midrule
+          Log-likelihood value & $llv$ \\[2pt] 
+          Credit to household & \\
+          \quad Credit to household 1st AR parameter  & $\phi^1_{y}$ \\[2pt] 
+          \quad Credit to household 2nd AR parameter  & $\phi^2_{y}$ \\[2pt] 
+          \quad Credit to household 1st cross cycle AR parameter  & $\phi^{x1}_{y}$ \\[2pt] 
+          \quad Credit to household 2nd cross cycle AR parameter  & $\phi^{x2}_{y}$ \\[2pt] 
+          \quad S.D. of permanent shocks to Credit to household & $\sigma_{ny}$ \\[2pt] 
+          \quad S.D. of transitory shocks to Credit to household & $\sigma_{ey}$ \\[2pt]
+          Housing Price Index & \\
+          \quad Housing Price Index 1st AR parameter  & $\phi^1_{h}$ \\[2pt] 
+          \quad Housing Price Index 2nd AR parameter  & $\phi^2_{h}$ \\[2pt] 
+          \quad Housing Price Index 1st cross cycle AR parameter  & $\phi^{x1}_{h}$ \\[2pt] 
+          \quad Housing Price Index 2nd cross cycle AR parameter  & $\phi^{x2}_{h}$ \\[2pt] 
+          \quad S.D. of permanent shocks to Housing Price Index & $\sigma_{nh}$ \\[2pt] 
+          \quad S.D. of transitory shocks to Housing Price Index & $\sigma_{eh}$ \\[2pt]
+          Cross-series correlations & \\
+          \quad Correlation: Permanent credit to household/Permanent Housing Price Index  & $\rho_{nynh}$ \\[2pt] 
+          \quad Correlation: Transitory credit to household/Transitory Housing Price Index  & $\rho_{eyeh}$ \\[2pt] 
+                    
+          \bottomrule
+        \end{tabular}
+%       \begin{tablenotes}
+%         \small
+%         \item $y_t$ is credit to household series, $h_t$ is housing price index series. Both are log transformed. \\
+%       \end{tablenotes}
+      \end{threeparttable}
+    \end{table}
+```
+
+<!--chapter:end:24_Empirical_Model.Rmd-->
+
+## Empirical Results
+In this section, I will apply the unobserved components state-space model to data from 2 countries: the US and UK. Since I use a Bayesian inference technique, instead of reporting the estimated expected mean and standard deviation as in the frequentist approach, I will report the estimate of the parameters using the median of the posterior distribution and its 10th and 90th percentile value. An estimate of a parameter with a negative 10th percentile and positive 90th percentile values would mean that we do not have evidence to reject the null hypothesis of said parameter equals zero.
+
+\begin{landscape}
+
+```{r UK-results-3, echo=FALSE, message=FALSE}
+  options(kableExtra.latex.load_packages = FALSE)
+  options(knitr.table.format = "pandoc")
+  library('kableExtra')
+  library(dplyr)
+  library(knitr)
+
+  country='UK'
+  filepath=sprintf('../../../HPCredit/Regression/RegCombPercentile_%s.csv',country)
+  df<-read.csv(filepath, sep = ",", header=FALSE)
+
+  #rownames(df) <- df[,1]
+  #df<-df[,-1]
+
+  df<-df[,-1]
+  colnames(df) <- c("Parameters","Median", "[10$\\%$, 90$\\%$]", "Median", "[10$\\%$, 90$\\%$]", "Median", "[10$\\%$, 90$\\%$]")
+  options(knitr.kable.NA = '')
+
+  #df = df %>% mutate_if(is.numeric, format, digits=4)
+
+  #https://stackoverflow.com/questions/72388965/aesthetics-of-kable-extra-and-rmardown
+  kbl(df, "latex", booktabs = T, digits = c(4, 4, 4, 4, 4, 4, 4), caption ='UK Regression Results - All three models', escape=FALSE, linesep=c("", "", "", "\\addlinespace"), row.names=FALSE) %>%
+    add_header_above(c(" " = 1, "VAR2" = 2, "VAR2 1-cross lag" = 2, "VAR2 2-cross lags" = 2)) %>%
+    footnote(general="UK Bayesian method Metropolis-Hasting random walk posterior distribution estimates") %>%
+    kable_styling(latex_options=c("striped","scale_down")) %>%
+    kable_paper(c("striped")) %>%
+    column_spec(c(1,4:5), bold = c(0,0,1,0,0,0,1,0,0,0,0,0,0,0,0))
+```   
+
+```{r US-results-3, echo=FALSE, message=FALSE}
+  options(kableExtra.latex.load_packages = FALSE)
+  options(knitr.table.format = "pandoc")
+  library('kableExtra')
+  library(dplyr)
+  library(knitr)
+
+  country='US'
+  filepath=sprintf('../../../HPCredit/Regression/RegCombPercentile_%s.csv',country)
+  df<-read.csv(filepath, sep = ",", header=FALSE)
+
+  #rownames(df) <- df[,1]
+  #df<-df[,-1]
+
+  df<-df[,-1]
+  colnames(df) <- c("Parameters","Median", "[10$\\%$, 90$\\%$]", "Median", "[10$\\%$, 90$\\%$]", "Median", "[10$\\%$, 90$\\%$]")
+  options(knitr.kable.NA = '')
+
+  #df = df %>% mutate_if(is.numeric, format, digits=4)
+
+  #https://stackoverflow.com/questions/72388965/aesthetics-of-kable-extra-and-rmardown
+  kbl(df, "latex", booktabs = T, digits = c(4, 4, 4, 4, 4, 4, 4), caption ='US Regression Results - All three models', escape=FALSE, linesep=c("", "", "", "\\addlinespace"), row.names=FALSE) %>%
+    add_header_above(c(" " = 1, "VAR2" = 2, "VAR2 1-cross lag" = 2, "VAR2 2-cross lags" = 2)) %>%
+    footnote(general="US Bayesian method Metropolis-Hasting random walk posterior distribution estimates") %>%
+    kable_styling(latex_options=c("striped","scale_down")) %>%
+    kable_paper(c("striped")) %>%
+    column_spec(c(1,4:5), bold = c(0,0,1,0,0,0,1,0,0,0,0,0,0,0,0))
+```   
+
+
+```{r UK-US-results, echo=FALSE, message=FALSE}
+  options(kableExtra.latex.load_packages = FALSE)
+  options(knitr.table.format = "pandoc")
+  library('kableExtra')
+  library(dplyr)
+  library(knitr)
+
+  country='UK'
+  filepath=sprintf('../../../HPCredit/Regression/RegCombPercentile_%s.csv',country)
+  df<-read.csv(filepath, sep = ",", header=FALSE)
+  df<-df[,-c(3:4,7:8)]
+
+  country='US'
+  filepath=sprintf('../../../HPCredit/Regression/RegCombPercentile_%s.csv',country)
+  df1<-read.csv(filepath, sep = ",", header=FALSE)
+  df1<-df1[,-c(1:2,3:4,7:8)]
+  df<-cbind(df,df1)
+
+  #rownames(df) <- df[,1]
+  #df<-df[,-1]
+  colnames(df) <- c("Description","Para.","Median", "[10$\\%$, 90$\\%$]", "Median", "[10$\\%$, 90$\\%$]")
+  options(knitr.kable.NA = '')
+
+  #df = df %>% mutate_if(is.numeric, format, digits=4)
+
+  #https://stackoverflow.com/questions/72388965/aesthetics-of-kable-extra-and-rmardown
+  kbl(df, "latex", booktabs = T, digits = c(4, 4, 4, 4, 4, 4), caption ='VAR(2) 1 cross-lag : UK and US regression results', escape=FALSE, linesep=c("", "", "", "\\addlinespace"), row.names=FALSE) %>%
+    add_header_above(c(" " = 2, "UK VAR2 1-cross lag" = 2, "US VAR2 1-cross lag" = 2)) %>%
+    footnote(general="UK - US Bayesian method regression results") %>%
+    kable_styling(latex_options=c("striped","scale_down")) %>%
+    kable_paper(c("striped")) %>%
+    column_spec(c(1:6), bold = c(0,0,1,0,0,0,1,0,0,0,0,0,0,0,0))
+```   
+
+\end{landscape}
+
+    
+\clearpage
+    
+      
+The tables \@ref(tab:UK-results-3) and \@ref(tab:US-results-3) shows maximum-likelihood estimates of all three Unobserved Component VAR(2) models. The first model is a parsimonious UC VAR(2) model with no cross-cycle correlation terms ($\phi^x_y$ and $\phi^x_h$ are set to be zero). The next two models introduces one and two cross-cycle coefficients on the lags of cyclical component respectively. The model selection criteria, log-likelihood value, suggests that the best fit model is VAR(2) with 2 cross lags. But because this paper focuses on the estimate of the causal cross cycle correlation parameter, I select the second model - VAR(2) with only 1 cross lag in the cycle component as the one to limit the scope of analysis on.
+
+\subsection{Dynamic Relationship between Credit to Household and Housing Price}
+
+From Table \@ref(tab:UK-US-results), the VAR(2) - 1 cross lag model regression results suggest that transitory shocks dominate permanent shocks in terms of variation in both household credit and housing price variables. The standard deviation of the shocks in the cycle of credit $\sigma_{ey}$ is 0.8021 in the UK and 0.8631 in the US, much higher than the standard deviation of the shocks to the trend of credit $\sigma_{ny}$ in the UK of 0.2714 and the US of 0.2954. The same applies to housing prices, the standard deviation of the shocks in the cycle of housing price $\sigma_{eh}$ is 1.2242 in the UK and 0.8988 in the US, higher than the standard deviation of the shocks to the trend of housing price $\sigma_{nh}$ in the UK of 0.0789 and the US of 0.1390. This result also indicates that variations in the housing price cyclical components of the UK are bigger than in the US. In contrast, variations in other components of the UK do not differ from the US. Regarding the estimated parameters, the sum of AR parameters of the cyclical components in all three models is smaller, although close to one. This implies that shocks to the cycle are persistent but will eventually dissipate.
+    
+The correlation analysis of the shocks to the cyclical components among the two variables suggests that cyclical variation among housing price and household credit is strongly positively correlated. The estimate $\rho_{eyeh}$ at 0.2536 for the UK and 0.1537 for the US suggest that transitory shock to housing credit is closely positively correlated to transitory shock in housing price. This implies that a transitory increase in household credit is correlated with an appreciation in housing prices above their long-run trend.
+    
+The correlation analysis of the shocks to the trends $\rho_{nynh}$ among the two variables reveals no significant correlation between shocks to the trend components of household credit and housing price. The median estimate for the permanent component's correlation is much smaller than the correlation of the transitory components. 
+
+Lastly, I analyze the correlation value of the time-varying local growth rate components $\mu_{it}$ from both household credit and housing price index trends as specified in equations 2.3-2.6. After estimating the unobserved components, as in figures 2.2 and 2.5, we can calculate the correlation values between those two local growth rate components. The correlation value $\rho_{\mu yh}$ for the UK at 0.5603 is significantly higher than that for the US at -0.0574. This result supports the hypothesis that the underlying trend components of household credit and housing price index in the UK are more correlated than in the US.
+
+Overall, the above analyses' results suggest that the two variables' short-run and long-run dynamics are very different. Therefore, there is a benefit in decomposing the series into trend and cyclical components.
+
+\subsection{Trend-Cycle Decomposition}
+
+The following graphs show the UC forecast series against the actual data series. As discussed in the previous subsection, I focus our analysis on the VAR(2) 1 cross-lag model in Figures 2.2 and 2.5.
+
+\clearpage
+
+```{r, echo=FALSE, out.width='85%',  fig.align='center', fig.cap = 'UK VAR(2)'}
+knitr::include_graphics('../../../HPCredit/Regression/Bayesian_UC_VAR2_drift/OutputData/graphs/HP_Credit_4graphs_UK.pdf')
+```
+
+```{r, echo=FALSE, out.width='85%',  fig.align='center', fig.cap = 'UK VAR(2) 1 cross-lag'}
+knitr::include_graphics('../../../HPCredit/Regression/Bayesian_UC_VAR2_drift_Crosscycle1lag/OutputData/graphs/HP_Credit_4graphs_UK.pdf')
+```
+
+```{r, echo=FALSE, out.width='85%', fig.align='center', fig.cap = 'UK VAR(2) 2 cross-lags'}
+knitr::include_graphics('../../../HPCredit/Regression/Bayesian_UC_VAR2_drift_Crosscycle2lags/OutputData/graphs/HP_Credit_4graphs_UK.pdf')
+```
+
+```{r, echo=FALSE, out.width='85%',  fig.align='center', fig.cap = 'US VAR(2)'}
+knitr::include_graphics('../../../HPCredit/Regression/Bayesian_UC_VAR2_drift/OutputData/graphs/HP_Credit_4graphs_US.pdf')
+```
+
+```{r, echo=FALSE, out.width='85%',  fig.align='center', fig.cap = 'US VAR(2) 1 cross-lag'}
+knitr::include_graphics('../../../HPCredit/Regression/Bayesian_UC_VAR2_drift_Crosscycle1lag/OutputData/graphs/HP_Credit_4graphs_US.pdf')
+```
+
+```{r, echo=FALSE, out.width='85%', fig.align='center', fig.cap = 'US VAR(2) 2 cross-lags'}
+knitr::include_graphics('../../../HPCredit/Regression/Bayesian_UC_VAR2_drift_Crosscycle2lags/OutputData/graphs/HP_Credit_4graphs_US.pdf')
+```
+
+\clearpage
+
+
+
+In this subsection, I decompose the trend and cycle of household credit and housing price using the correlated unobserved component model. The stochastic trend in the multivariate UC model captures the long-run evolution in household credit, housing price, and the effect of the recent global  crisis. In the long run, there is an increasing trend in the housing price index. The household credit trend is also increasing, but since the series is credit to households as a ratio to GDP, the rate at which the household credit trend increases is lower than that of the housing price index. There was a downward movement of the trend components in both credit and housing prices after the  crisis. However, the housing price index trends made a quicker recovery than household credit. 
+
+The cyclical components of the model capture the evolution of household credit, housing price, and their dynamic relationship. In Figures 2.1-2.6, we can see an increase in the credit transitory component before the crisis of 2008-2009 happened, and there is a negative shock to the transitory component of housing price after the recession is captured in the model as well. Specifically, in Figures 2.2 and 2.5, the VAR(2) model with 1 cross-lag coefficients identified the timing of temporary gaps increase in both credit and housing price before the crisis more accurately than the one-sided HP filter could.
+
+It is also important to point out that our models capture a significantly bigger positive gap in transitory shock in both credit and house price than a Hodrick-Prescott (HP) filter would for the US in Figure 2.5. Our model utilizes additional information from decomposed long-run and short-run variables, which were extracted from a nonstochastic time series. Another approach in dealing with nonstochastic time series is to first-differencing the series, which loses much important information from a limited sample. Thus when dealing with a time series of low frequency and long-term assets such as housing prices, it is worthwhile to consider using the unobserved component model rather than simply applying an HP filter or first-differencing since it reveals more lower frequency information. The graphs indicate that the magnitude of transitory shocks the models capture is higher, and the movement frequency of the cycles is lower than that of other decomposition methods (HP filter). 
+
+
+### Predictive Ability of Cyclical Components {#predictive-para}
+A novel contribution of this paper is to introduce the cross-cycle parameter $\phi^{xt}_h$ and $\phi^{xt}_{y}$ in which it measures the effect of a change in previous periods' credit transitory component on the current housing price transitory component and vice versa. From Table \@ref(tab:UK-US-results), in both cross-cycle regressions in the UK and US, we can observe that there is a significant positive effect of last period house price cycle deviation on current household credit cycle component ($\phi^{x1}_{y}$). While the coefficients of transitory household credit deviation on housing price index ($\phi^{x1}_{h}$) are smaller, and even statistically insignificant in the case of the US. This holds true for the 2-crosscycle lags model also on the other regression results Tables \@ref(tab:UK-results-3) and \@ref(tab:US-results-3); when we take the sum of the 2-crosscycle lags coefficients, they show similar results. This showed evidence that past transitory shocks to house price credit will cause a positive deviation in future transitory household credit. On the contrary, the effect in the opposite direction is much smaller.
+
+### Cross Countries Analysis {#cross-countries}
+In this subsection, I will further discuss estimates of the causal coefficient $\phi^{xt}_y$ and $\phi^{xt}_h$ in cross-country settings. The window for sample data I selected starting from 1990:Q4 - 2021:Q3 coincides with the period when many developed countries started recording their housing price index. This created an opportunity for us to compare the estimates of the causal coefficient parameters. Specifically, I estimated our VAR(2) 1 cross-lag model using data from 17 developed countries, as shown in Table \@ref(tab:table-cross-countries). 
+
+
+```{r table-cross-countries, echo=FALSE, message=FALSE}
+options(kableExtra.latex.load_packages = FALSE)
+options(knitr.table.format = "pandoc")
+library('kableExtra')
+library(dplyr)
+library(knitr)
+library(tidyr)
+
+filepath <- "../../../HPCredit/Data Collection/1.Latest/Paper1/shortlistofCountries_full.csv"
+
+name1 <- read.table(filepath, header = TRUE, sep = ",")
+
+df = data.frame()
+
+for (i in seq_len(nrow(name1))) {
+country <- name1[i, 1]
+
+filepath <- sprintf("../../../HPCredit/Regression/Bayesian_UC_VAR2_drift_Crosscycle1lag/OutputData/Reg_%s.csv", country)
+df1 <- read.table(filepath, header = FALSE, sep = ",")
+df1 <- df1[c(1,3:4),3:4]
+df2 = data.frame(matrix(ncol = 7, nrow = 1))
+df2[1,2:4] <- t(df1[1:3,1])
+df2[1,5:7] <- t(df1[1:3,2])
+df3 = data.frame(matrix(ncol = 5, nrow = 1))
+df3[1,1] <- name1[i, 2]
+df3[1,2] <- df2[1,2]
+df3[1,4] <- df2[1,5]
+f <- function(x){ sprintf('%.4f',x)}
+df2<- data.frame(lapply(df2, f))
+df2[1,1] <- name1[i, 2]
+df3[1,3] <- df2[,3:4] %>% 
+   unite(combined1, X3, X4 , sep = ", ", remove = TRUE) %>%
+   mutate(combined1 = sprintf("[%s]", combined1))
+df3[1,5] <- df2[,6:7] %>% 
+   unite(combined1, X6, X7 , sep = ", ", remove = TRUE) %>%
+   mutate(combined1 = sprintf("[%s]", combined1))
+df <- rbind(df,df3)
+}
+
+colnames(df) <- c("Country","Median", "[10$\\%$, 90$\\%$]", "Median", "[10$\\%$, 90$\\%$]")
+
+options(knitr.kable.NA = '')
+
+#df = df %>% mutate_if(is.numeric, format, digits=4)
+
+kbl(df, "latex", booktabs = T, digits = c(4, 4, 4, 4, 4), caption ='VAR(2) 1 cross-lag : Cross countries estimates', escape=FALSE, linesep=c("", "", "", "\\addlinespace"), row.names=FALSE) %>%
+add_header_above(c(" " = 1, "$\\\\phi^{x1}_y$ HPI on Credit" = 2, "$\\\\phi^{x1}_h$ Credit on HPI" = 2), escape=FALSE) %>%
+footnote(general="Cross Countries causal coefficients") %>%
+kable_styling(latex_options=c("striped","scale_down")) %>%
+kable_paper(c("striped"))
+```
+
+The overall result shows that there is cross-countries evidence to further support the hypothesis established in the previous subsection \@ref(predictive-para) that past transitory shocks to house price credit will cause a positive deviation in future transitory household credit; or that the $\phi^{x1}_y$ coefficient parameter estimates are positive and statistically significant.
+
+Out of the 17 countries in our sample, 11 countries in Europe and North America, except for the Netherlands, have a positive and significant estimate for $\phi^{x1}_y$ (HPI on Credit causal coefficient). On the other hand, East Asian countries such as Japan, South Korea, and Hong Kong (SAR), along with Australia, and New Zealand, have insignificant estimates for $\phi^{x1}_y$.
+
+As for the other parameter, $\phi^{x1}_h$ (Credit on HPI causal coefficient), only six countries have positive and significant estimates: Australia, Finland, Japan, Norway, Sweden, and the US. Furthermore, three of those positive estimates are also smaller in magnitude compared to their counterpart $\phi^{x1}_y$, except for Australia, Japan, and Sweden. Interestingly, there are also countries with negative and significant estimates for $\phi^{x1}_h$, which are Belgium, France, Hong Kong, and New Zealand. Their negative values implied that a positive increase in transitory household credit would have a negative effect on future transitory household prices. Overall, from all 17 available countries' estimates, I found no strong evidence to support $\phi^{x1}_h$ (Credit on HPI causal effect) to be significant.
+
+The two outliers in this analysis are Japan and Italy. Italy has a much higher $\phi^{x1}_y$ (HPI on Credit causal coefficient) than other countries, this could be a result of the country experiencing a boom in house prices before the global crisis. And after its bust in 2009, house prices have not been able to recover since, see graphs in Figure \@ref(fig:IT-graphs). In contrast, Japan has a much higher $\phi^{x1}_h$ (Credit on HPI causal coefficient) than other countries. This could be due to Japan's economy's unique characteristics in which it has been experiencing three consecutive lost decades of stagnation trying to recover after the Japan Banking crisis in early 1990. Its household credit and house price index have declined ever since early 1990. However, there are signs of recovery in recent years for Japan, see graphs in Figure \@ref(fig:JP-graphs).
+
+\clearpage
+
+
+<!--chapter:end:25_Empirical_Results.Rmd-->
+
+## Comparison with other Decomposition Methods
+In this section, I check the robustness of the model results by comparing the estimated trend-cycle from my multivariate approach with univariate trend-cycle decomposition using different methods. In addition to estimating the correlation between shocks to the permanent and transitory component, the use of a multivariate model, in theory, should also provide us with a  superior measurement of trend and cycle components compared to the univariate models. To test this hypothesis, I also perform trend-cycle decomposition using the univariate models (Figure \@ref(fig:UKrobust) and \@ref(fig:USrobust)). The univariate models include an HP filter model and a univariate VAR(2) UC model. The HP filter method uses an algorithm to smooth the original data series to estimate the trend component and the difference between them, which is the cyclical component. The parameter value $\lambda$ is set at 125,000 as suggested by Hodrick and Prescott and @ravn_adjusting_2002 for the quarterly data corresponding to a cyclical period of 15-17 years. The univariate UC model only uses a single series of either credit to household or house prices index to decompose a stochastic trend component and a cyclical component with the same specification as the multivariate UC model. 
+```{r UKrobust, echo=FALSE, out.width='85%',  fig.align='center', fig.cap = 'Comparing Multivariate UC cycles with alternate decompositions: UK'}
+knitr::include_graphics('../../../HPCredit/Regression/AR_2/Output/graphs/HP_Credit_2graphs_UK.pdf')
+```
+```{r USrobust, echo=FALSE, out.width='85%',  fig.align='center', fig.cap = 'Comparing Multivariate UC cycles with alternate decompositions: US'}
+knitr::include_graphics('../../../HPCredit/Regression/AR_2/Output/graphs/HP_Credit_2graphs_US.pdf')
+```
+\newpage
+The results from Figure \@ref(fig:UKrobust) and Figure \@ref(fig:USrobust) suggest that the estimate of trends and cycles obtained from the multivariate UC model can capture the dynamics of the two variables during the sample period. The two univariate models fail to generate realistic trends and cycle series by ignoring the relationship between the two variables of interest. The HP cycle seems to do very well at remaining stationary, but by doing so, it missed out on capturing the boom of house prices in the US, leading to the Great Recession of 2009. The cycle from the univariate UC model is close to the multivariate counterpart but failed to fully indicate the magnitude of boom and bust in house prices in the UK before and after the crisis. Overall, it is clear from the analysis above that there is a valuable pay-off in utilizing information from extracting permanent and transitory components of credit to household and house prices index to study the dynamics of the two variables. 
+
+
+<!--chapter:end:26_Robustness_Check.Rmd-->
+
+## Conclusion
+My study is based on the idea that house prices and credit are jointly determined, affecting each other in the short and long run. I decompose the movements of the two variables of interest into a permanent and transitory component. The correlations among the cyclical components support the idea that the rise of house prices is associated with an increase in household credit above its long-run trend. My multivariate model captures the dynamic features of the household credit and house prices series and performs better than univariate benchmarks in capturing the boom and bust during the last two decades. Additionally, employing cross-correlation effects on the transitory components of the two series allows me to test the predictive ability of the cyclical components and find evidence to support that a house prices gap can positively predict a household credit gap. These findings suggest macroprudential policy implications since house prices are increasingly becoming a more important topic.
+
+Further development for this paper should include studying on policy implications of credit and house price gaps with high magnitudes. More robust optimal constraints on parameters to ensure stability and model robustness rather than an ad-hoc approach to selecting weights. Lastly, it would be meaningful to link the information from this paper's causal effect coefficients estimates to the bigger picture regarding macroprudential policy models that includes housing price and household credit, such as systemic financial stability model^[@alessi_identifying_2018] or house price growth-at-risk models^[@deghi_predicting_2020].
+
+<!--chapter:end:27_Conclusion.Rmd-->
+
+# Measuring Credit Gap {#Chapter-3}
+## Introduction
+There is a consensus in macroeconomics and finance literature about the role of credit in overall macroeconomic activity. Not surprisingly, policymakers
+and practitioners pay a significant amount of attention to examine if credit
+growth in the economy is excessive. The problem, however, is that there is
+no unanimity on how to measure excessive credit. Among different measures of
+excessive credit, the credit-to-GDP gap measure published by the Bank of
+International Settlements (BIS) and proposed by @borio_asset_2002 has
+received widespread attention. This measure is estimated by the deviations
+of the credit-to-GDP ratio from a one-sided @hodrick_postwar_1997 (HP) filter
+with a large smoothing parameter (400,000 for quarterly data). In subsequent
+work, @borio_assessing_2009, @drehmann_countercyclical_2010 , and @drehmann_anchoring_2011  show that the credit-to-GDP gap was the best
+single Early Warning Indicator across different measures that they examined.
+Based on this work at the Bank of International Settlements (BIS), the Basel
+Committee for Banking Supervision (BCBS)[-@committee_assessment_2010] has singled out the credit-to-GDP
+gap as a useful guide for setting countercyclical capital buffers (BCBS
+2010b).
+
+The credit gap ^[I use the credit gap and credit-to-GDP gap interchangeably throughout this
+paper.]  measure proposed by the BIS is a measure of the cycle based on the
+HP trend-cycle decomposition of credit-to-GDP ratio, wherein the trend is
+the best estimate of where the variable will be in the long-run and the
+cycle is temporary fluctuations around the trend. Since there is no unique
+method of decomposing a series into a trend and a cycle, it is worth asking
+if the HP cycle measure used by the BIS is an appropriate measure of the
+credit gap. In fact, in a recent work @drehmann_which_2021  make a
+similar argument and attempt to use the idea from Hamilton filter to use
+linear projections to get an estimate of the credit gap. They find that
+credit gaps based on linear projections in real time perform poorly when
+based on country-by-country estimation, and are subject to their own
+endpoint problems. But when they estimate as a panel, and impose the same
+coefficients on all economies, linear projections perform marginally better
+than the baseline credit-to-GDP gap, with somewhat larger improvements. This
+reinforces the argument that there is no unique method of decomposing a non-stationary series into a trend and a cycle, and that I need to take
+into account model uncertainty in estimating the credit gap.
+
+I propose to use the idea in @nelson_beveridgenelson_2008 , where he argues that if
+measured cycle component is temporary then it predicts future growth rates
+of the opposite sign. For example, if the credit-to-GDP ratio is below
+trend, then a recovery in the ratio will require future growth in the
+credit-to-GDP ratio at an above-average rate. Conversely, if it is above
+trend, I can reasonably expect tepid growth in the coming time period.
+According to @nelson_beveridgenelson_2008 , predictability is the essence of `transitory'
+variation, and is expected to be reversed in future periods. Predictability
+of the cycle provides us with a metric for measuring the effectiveness of
+alternative decompositions. This idea has also been emphasized by @cogley_effects_1995 , @hodrick_forecasting_2003 , @orphanides_unreliability_2002 ,
+@rotemberg_real-business-cycle_1996  and @wakerly_common_2006 . The idea of
+predictability implies that a credit gap measure that encompasses all the
+information from other measures about future movements of the credit-to-GDP
+ratio is the appropriate credit gap measure. However, in practice, I do not
+have a measure of the credit gap that possesses this property. This is
+further complicated by instability in the predictive ability of different
+credit gap measures that are ubiquitous in the macro forecasting literature.
+
+I combine the idea of predictability with model uncertainty in trend-cycle
+decomposition by combining credit gap measures obtained from different
+trend-cycle decomposition methods using weights obtained from the
+out-of-sample forecasting exercise ^[I use linear trend, quadratric trend, the HP filter, the @ravn_adjusting_2002 
+modification of the HP filter, @borio_asset_2002 modification of
+the HP filter, Clark's unobserved component model [-@clark_cyclical_1987], @beveridge_new_1981 Decomposition, @hamilton_why_2018 filter.]. The weights are based on
+the @bates_combination_1969  algorithm, where I perform a horse race among
+the most popular trend-cycle decomposition methods in an out-of-sample
+forecasting exercise ^[My forecasts are based on `quasi-real-time' data that uses revised data,
+but only the observations up to the historical date. When a decomposition
+requires estimation of parameters, they are re-estimated at each date before
+computing the cycle estimate.]. The relative weight on cycles from different
+trend-cycle decomposition methods is based on its forecast error variance in
+predicting out-of-sample credit-to-GDP ratio changes. In addition to taking
+into account model uncertainty by assigning weights on different models,
+this approach also handles the instability in the relative forecasting
+performance of different trend-cycle decomposition methods by assigning
+time-varying weights on different methods. These weights are time-varying
+since my method recalculates the weights based on the predictive ability of
+the model for each iteration in my recursive forecasting exercise.
+
+I apply this approach to the credit-to-GDP ratios of the U.K. and the U.S.
+and estimate a credit gap measure for the 1994:Q1-2020:Q2 sample period. My
+results show that the weighted credit gap measure based on my approach
+dominates credit gaps from other trend-cycle decomposition methods in
+out-of-sample forecasting of changes in the credit-to-GDP ratio. My
+combined gap measure leads to an improvement of 13 percent for the U.S. and
+9 percent for the U.K. for 1-4 quarter ahead forecast horizon over a
+benchmark AR(1) model. In contrast, the forecasting performance of the BIS
+gap is worse than the benchmark AR(1) model for both the U.S. and the U.K.
+In addition, the relative forecasting performance of different methods vary
+across two countries confirming model uncertainty in the estimation of
+credit gaps for different methods. My estimated combined credit gap measure
+for the U.S. and the U.K. exhibits smooth behavior with a smaller amplitude
+than the BIS gap. In addition, I observe a clear pattern in early detection
+of trough date by combined gap in both the countries in comparison to the
+BIS gap. Finally, the combined gap measure proposed in this paper does not
+suffer from the endpoint problem usually associated with HP filters.
+
+The remainder of the paper is organized as follows: Section 2 provides brief
+literature review; Section 3 discusses the data; Section 4 presents my
+empirical methodology; Section 3 provides a description of the data used in
+my empirical analysis; Section 5 presents the empirical results; and
+Section 6 concludes.
+
+## Related Literature
+The importance of the credit gap measured as proposed by @borio_asset_2002  can be gauged from the fact that Basel III suggests that policymakers
+use it as part of their countercyclical capital buffer frameworks. The
+baseline credit gap of @borio_asset_2002  is calculated as deviations of
+the credit-to-GDP ratio from a one-sided Hodrick-Prescott (HP) filter with large smoothing parameter-400,000 for quarterly data. The smoothing
+parameter is much larger than the one used for quarterly data in the
+business cycle literature. This choice of smoothing parameter is
+rationalized on the ground that credit cycles are on average about four
+times longer than standard business cycles and crises tend to occur once
+every 20--25 years [@drehmann_countercyclical_2010] . @drehmann_which_2021  use the
+critique of the HP filter outlined in @hamilton_why_2018 and examine different
+measures of the credit gap based on different horizons in local projection
+models. They find that credit gaps based on linear projections in real time
+perform poorly when based on country-by-country estimation, and are subject
+to their own endpoint problems. But when they estimate as a panel, and
+impose the same coefficients on all economies, linear projections perform
+marginally better than the baseline credit-to-GDP gap, with somewhat larger
+improvements concentrated in the post-2000 period and for emerging market
+economies. Several other papers have criticized the HP filter-based credit
+gap measure. These criticisms are based on the ground that HP filter-based
+cycle measures generate spurious dynamics and suffer from endpoint problems.
+
+Several papers have tried to resolve this problem. @aikman_curbing_2015  have used band-pass filters to derive a measure of the credit
+gap. @galati_measuring_2016  estimate a financial cycle using a multivariate
+unobserved-components model on the credit-to-GDP ratio, total credit, and
+house prices for six economies, and find that the resulting medium-term
+cycles vary in terms of length and amplitude across countries and over time.
+@schuler_characterising_2015  derive a financial cycle based on the
+common frequencies of credit and asset prices and find that this measure
+outperforms the credit-to-GDP gap in predicting systemic banking crises at
+horizons of one-to-three years. @aldasoro_early_2018  show
+that combining various indicators of excessive debt with property prices can
+help to improve financial crisis prediction.
+
+As is widely known, the HP filter is one measure of trend-cycle
+decomposition. Trend-cycle decomposition has a very rich history in business
+cycle literature. Yet there is no consensus on what constitutes appropriate
+decomposition methods. In this paper, I take an agnostic approach and
+utilize the idea that the cyclical component in the decomposition should
+have predictive power for future growth of the variable. This idea has been
+explored in @nelson_beveridgenelson_2008  to compare the forecasting performance of
+different trend-cycle decomposition methods for real GDP. I take the
+predictive ability argument for the cycle one step further and apply it in
+the context of the estimation of the credit gap. It is widely accepted that
+model uncertainty reigns supreme in applying a particular trend-cycle
+decomposition method. To take into account this model uncertainty, we
+weighted the cycles obtained from different decomposition methods using
+Bates and Granger forecast combination method.
+
+## The Data
+
+My sample periods include quarterly data from 1960:Q1-2020:Q2. My variable
+of interest is the credit-to-GDP ratio for the U.S. and the U.K. The data
+has been sourced from the Bank of International Settlements (BIS). The
+measure of credit is total credit to the private non-financial sector, as
+published in the BIS database, capturing total borrowing from all domestic
+and foreign sources. I do not include data for the recent pandemic period
+in my analysis. The credit-to-GDP ratios for these two countries are
+plotted in Figure \@ref(fig:Credit-to-GDP-Ratios). As can be seen from the figure, these two series are
+clearly non-stationary. Unit root tests confirm this, with the null of unit
+root not being rejected at all conventional levels. This is robust to the
+use of different unit root tests. 
+
+
+## Empirical Methodology
+### Trend-Cycle Decomposition
+
+My combined measure of the credit gap is based on different trend-cycle
+decomposition methods for the credit-to-GDP ratio. In the literature,
+several methods have been proposed to decompose a non-stationary series into
+a trend and a cycle. Since there is no consensus on the true model of
+trend-cycle decomposition, I take an agnostic view in this paper. For my
+purposes, I use seven different measures of trend inflation. All these
+trend-cycle decomposition methods are based on the premise that a
+non-stationary series is the sum of a trend and a stationary cyclical
+component:
+
+\begin{equation}
+y_{t}=\tau _{t}+c_{t}
+\end{equation}
+
+where $y_{t}$ is an I(1) process, and for my purposes, credit-to-GDP
+ratio. $\tau _{t}$ is trend component and $c_{t}$ is cyclical component, and
+is stationary. Trend is usually modeled as random walk and cycle is modeled
+as following some ARMA(p,q) process. In this paper, I use 8 different
+decomposition methods: linear trend, quadratic trend, the HP filter, the
+@ravn_adjusting_2002  modification of the HP filter, @borio_asset_2002 
+modification of the HP filter, Clark's unobserved component model (Clark's unobserved component model [-@clark_cyclical_1987] , @beveridge_new_1981 
+ Decomposition, @hamilton_why_2018  filter. I do not use
+frequency-based filters because my approach uses the forecasting property
+of the cycle. The observations at the end of the sample are either not
+available or highly volatile for frequency-based filters. The linear trend
+model is based on a deterministic time trend and assumes all variation in
+headline inflation is transitory, and hence due to cyclical components. The
+HP filter is an atheoretical smoothing method to obtain trend and cycle
+components of non-stationary series and is very popular in macroeconomics
+and finance literature. I follow the original prescription of @hodrick_postwar_1997  and use smoothing parameter $\lambda$=1600 for the
+quarterly credit-to-GDP ratio data. @ravn_adjusting_2002   have suggested
+modifying the smoothing parameter to account for the frequency of the data.
+Following their suggestion I use smoothing parameter $\lambda$=3000 for
+the other model. I call this model RU in my exercise. Higher $\lambda$
+yields a much smoother trend. My unobserved component model is based on the
+original @clark_cyclical_1987  model. In particular, trend follows a random walk
+and cycle has ARMA (p,q) representation. Both trend shocks and cyclical
+shocks have time-varying volatility.
+```{=latex}
+%
+\begin{equation}
+\tau _{t}=\tau _{t-1}+\eta _{t},\eta _{t}\symbol{126}iid(0,\sigma _{\eta
+}^{2})
+(\#eq:var-beta)
+\end{equation}%
+\begin{equation}
+c_{t}=\Phi (L)c_{t}+u_{t},u_{t}\symbol{126}iid(0,\sigma _{u}^{2})
+\end{equation}%
+```
+@beveridge_new_1981  methodology decomposes a non-stationary series into
+a random walk component and a stationary component which is the cycle of the
+non-stationary series. The BN decomposition of z$_{t}$ has the following
+representation:
+```{=latex}
+\begin{equation}
+y_{t}=y_{0}+\mu t+\Psi (1)\sum_{k=1}^{t}u_{t}+\overset{\backsim }{u_{t}}-%
+\overset{\backsim }{u_{0}}
+\end{equation}
+
+where $\Psi (1)\sum_{k=1}^{t}u_{t}$ is the stochastic trend and $\overset{%
+\backsim }{u_{t}}-\overset{\backsim }{u_{0}}$ represents the cycle. BN
+proposed that the long-run forecast is a measure of trend for time series
+such as GDP that do not follow a deterministic path in the long run. They
+showed that if the series is stationary in first differences, then the
+estimated trend is a random walk with drift that accounts for growth, and
+the cycle is stationary. In contrast to HP and UC decomposition, the BN
+decomposition attributes most variation in non-stationary series to trend
+shocks while the cycles are short and brief. 
+```
+In addition to these
+decomposition methods, I also use @hamilton_why_2018  approach to calculate
+credit gap. @hamilton_why_2018  argues that HP filter produces spurious dynamics
+that are not based on the underlying data-generating process and the
+dynamics at the ends of the sample differ from those in the middle. @hamilton_why_2018  proposes calculating cycle from the residual of the following linear projection model
+\begin{equation}
+y_{t+h}=\alpha +\beta _{1}y_{t-1}+\beta _{2}y_{t-2}+....+\beta
+_{p}y_{t-p}+v_{t+h}
+\end{equation}
+The estimated residual $\widehat{v}_{t+h}$\ is the cyclical component from
+this approach. Hamilton suggests using h=8 for quarterly data and that is
+what I follow in my estimation.
+\subsection{Forecasting Model}
+Once the credit gap measures are obtained from different trend-cycle
+decomposition methods, I regress growth rate of credit-to-GDP ratio on its
+own lags and lags of credit gap. In particular, I estimate the following
+model:
+\begin{equation}
+\Delta y_{t}=\alpha +\beta (L)\Delta y_{t-1}+\gamma (L)GAP_{t-1}+v_{t}
+\end{equation}
+The lags are chosen based on the Bayesian Information Criterion (BIC). We
+generate the forecasts from the above model for credit gaps generated from
+different trend-cycle decomposition approaches. My benchmark model is an
+AR(1) model. I compare the forecasts generated from the above model with
+this benchmark model to examine if the inclusion of lagged credit gap leads
+to an improvement in forecasting performance of growth rate of credit-to-GDP
+ratio.
+\subsection{Forecast Combination}
+Once I have different measures of cycle, I use Bates and @bates_combination_1969 
+method of forecast combination to assign weights to different cycles. The
+underlying idea is that the cyclical component should be able to predict
+changes in credit-to-GDP ratio. Bates-Granger weights are based on the
+following formula:
+\begin{equation}
+w_{m}=\frac{\widehat{\overline{\sigma }}_{m}^{2}}{\widehat{\overline{\sigma }%
+}_{1}^{2}+\widehat{\overline{\sigma }}_{2}^{2}+....\widehat{\overline{\sigma 
+}}_{M}^{2}}
+\end{equation}
+where $\widehat{\overline{\sigma }}_{m}^{2}$\ is inverted out-of-sample
+forecast error variance of forecast M based on the cyclical component M. M
+is the number of forecasts. Weights are normalized by sum of inverted
+forecast error variances. Here the weight is assigned based on the
+predictive ability of different cycles.
+
+## Empirical Results
+My analysis is performed in three steps: In the first step, I calculate
+the credit gap from 8 different trend cycle decomposition methods. These
+methods are: conventional HP filter [-@hodrick_postwar_1997], Ravn-Uhlig's [-@ravn_adjusting_2002] modification
+of the HP filter, HP filter with a high smoothing parameter (BIS gap),
+Beveridge-Nelson decomposition [-@beveridge_new_1981], Hamilton filter [-@hamilton_why_2018], Unobserved component model [@clark_cyclical_1987],
+linear trend, and quadratic trend. I perform these estimations recursively
+to preserve the 1-sided nature of the credit gap. My first estimation
+sample runs from 1960:Q1-1988:Q4 and saves the last estimate of the cycle.
+I keep adding one more observation to the estimation sample and keep saving
+the last observation of the cycle for different methods. This approach
+provides us with a 1-sided estimate of the credit gap from different
+methods. In the second step, I use these 1-sided credit gap measures to
+forecast changes in the credit-to-GDP ratio. The estimation sample for the
+first forecasts is 1989:Q2-1994:Q1. I then move ahead one quarter,
+re-estimate the forecasting model and forecast 1995:Q2-1996:Q1, etc. My
+final set of forecasts, for 2019:Q3 2020:Q2, would have been prepared in
+2019:Q2. I consider different quarterly horizon forecasts until Q=4. In
+addition to these quarterly forecasts, I also examine the average over the
+next four quarters. These averages are also used in the analysis to get
+around the noise associated with quarterly projections. 
+
+Tables \@ref(tab:table31) and \@ref(tab:table32) show the out-of-sample forecasting results for the above
+exercise for the U.K. and the U.S. The tables show the ratio of root mean
+squared errors in comparison to a benchmark AR(1) model. The ratio of less
+than unity implies that the model in question has a lower RMSEP (Root Mean Square Error of Prediction) than the
+benchmark AR (1) model. The results are reported for eight different methods
+of trend-cycle decomposition and two forecast combination methods. My
+preferred forecast combination method is Bates and Granger, though I also
+report the simple average of different forecasts. The results clearly
+suggest a significant improvement in forecasting performance using my
+combination approach. For the U.S., there is an improvement of around 13
+percent in the RMSEP over the benchmark AR(1) model if I combine the
+forecasts based on the BG approach. Interestingly, for the U.S., the
+inclusion of the BIS gap in the forecasting equation (6) leads to a
+deterioration in forecasting performance. The conventional HP filter does a
+better job than Ravn-Uhlig and the BIS measure. Deterministic trend models
+also do not perform well. The credit gap measures obtained from the BN and
+the UC models perform better than the benchmark AR(1) model implying that
+inclusion of the lagged credit gap measure improves forecasting performance.
+For the U.K., the BG method yields an improvement of 9 percent in RMSEP over
+the benchmark AR(1) model over h=1-4 forecasting horizon. Even for the U.K.,
+the BIS gap measure does not lead to an improvement in forecasting
+performance. The BN approach that improved the forecasting performance in
+the case of the U.S. performs poorly in the U.K. Overall, results for the
+forecasting exercise validate my argument that focusing on a single measure
+of trend-cycle decomposition to derive a measure of credit gap is fraught
+with severe limitations. The forecast combination that assigns weights based
+on the predictive performance not only takes into account this model
+uncertainty, but in doing so improves the metric-forecasting performance-
+that should be the evaluation criteria for different trend-cycle
+decomposition methods.
+
+
+
+Figures \@ref(fig:Credit-Gap-Comparison-UK) and \@ref(fig:Credit-Gap-Comparison-US) plot the credit gaps obtained from my forecast combination
+approach along with the BIS credit gaps for the U.K. and the U.S. The sample
+period for the credit gap is 1994:02-2020:02. There are several interesting
+features that emerge from these graphs. First, I find that both the gap
+measures do move together. This is not surprising since the combined gap
+measure is a weighted measure of different cycle measures. Both the measures
+suggest that the credit-to-GDP ratio was above its long-run trend before the
+crisis for the U.K. and the U.S. These two measures became negative in the
+aftermath of the financial crisis and stayed negative for a significant time
+period. Although these credit gap measures tend to move together broadly,
+there are also significant differences within different sub-samples. For the
+U.S., the combined credit gap became positive three years earlier than the
+BIS gap implying that the credit-to-GDP ratio was above its long-run trend
+starting in 1995:Q2. This was also the time period when the boom in the
+housing market started in the U.S. A similar pattern is observed in the
+U.K., where the combined gap became positive a year (in 1998:Q3) earlier
+than the BIS gap. Interestingly, there is no significant difference in the
+timeline when these gap measures turn negative.
+
+Secondly, I find that the combined credit gap measure is significantly less
+volatile than BIS gap. The standard deviation of the combined gap is 6.84,
+whereas it is 11.57 for the BIS gap for the U.K. The corresponding numbers
+are 5.16 and 8.66 for the U.S. This becomes particularly evident during the
+post-financial crisis period where the trough of the cycle is significantly
+lower for the BIS gap than the combined gap for both the countries. The
+lower volatility of the combined gap is expected since it is derived from a
+weighted combination of different gap measures. This difference is even more
+stark for the U.K. than the U.S. Not only is there a significant
+differential between these two different credit gap measures after the
+financial crisis, these differences have persisted for a long period of
+time. Thirdly, I observe a clear pattern in early detection of trough date
+by combined gap in both the countries. For the U.S., the trough of the cycle
+is 2012:Q3 according to the combined gap measure, whereas it occurred in
+2013:Q1 according to the BIS measure. For the U.K., the combined gap
+suggests that the gap reached its bottom in 2015:Q1, whereas the
+corresponding date was 2015:Q2 for the BIS gap. For the peak, I do not find
+significant differences in the detection of turning points. 
+
+The comparison of credit gap measures across these two countries provides
+interesting insights. The peak in the credit-to-GDP ratio was reached in the
+U.K. much earlier than the beginning of the financial crisis. The peak for
+the U.K. as measured by these credit gap measures took place at the end of
+2002 and the gap did not display any trend until the end of 2008. In the
+U.S., however, the peak occurred just before the financial crisis. Although
+both credit gap measures were positive before the crisis, the difference
+between them grew. Both the measures fell at a rapid pace for the U.S.
+during the crisis. In the U.K., however, the BIS gap measure fell at a much
+faster rate and the difference between these two measures started growing
+much earlier. The results from my forecasting exercise suggest that the
+rapid pace of fall in the credit gap for the BIS measure may have been
+overestimated. Finally, one of the
+criticisms of the HP filter is that it suffers from the endpoint problem.
+This can be observed in my figures where both BIS gap measures for the U.S.
+and the U.K. show a sudden shift at the end of the sample and display a
+ragged edge problem. My combined gap does not suffer from this problem.
+
+## Conclusions
+
+This paper proposes an alternate measure of credit gap-deviation of
+credit-to-GDP ratio from long-run trend. My credit gap estimation approach
+is based on the premise that the deviation of a non-stationary time series
+from its trend should have predictive power for subsequent movements in the
+changes in the variables as noted by Nelson (2008). In addition, I also
+take into account the model uncertainty by acknowledging that there is not a
+unique way to decompose a series into a trend and a cycle. For this purpose,
+I assign weights to different credit gaps derived from different
+trend-cycle decomposition methods. These weights are based on the
+out-of-sample forecast error variance as in Bates and Granger (1969). The model
+results show that this method of combining credit gaps yield a credit gap
+measure that dominates credit gaps from different trend-cycle decomposition
+methods including the one published by the BIS in terms of superior
+out-of-sample forecasting of changes in credit-to-GDP ratio. I apply this
+framework to the data from the U.S. for the recent time period. I also show
+that my proposed credit gap measure captures the trough in the credit cycle
+earlier than the BIS measure and also displays lower volatility. 
+
+```{=latex}
+\bigskip 
+
+\pagebreak 
+
+\allowbreak \pagebreak 
+
+\bigskip \FloatBarrier
+
+%\FRAME{ftbpFO}{5.7588in}{4.1485in}{0pt}{\Qct{Credit-to-GDP Ratios }}{}{%
+%graph_creditgapratio.wmf}{\special{language "Scientific Word";type
+%"GRAPHIC";maintain-aspect-ratio TRUE;display "USEDEF";valid_file "F";width
+%5.7588in;height 4.1485in;depth 0pt;original-width 5.7in;original-height
+%4.0992in;cropleft "0";croptop "1";cropright "1";cropbottom "0";filename
+%'graph_creditgapratio.wmf';file-properties "XNPEU";}}
+
+\bigskip 
+
+\pagebreak 
+
+\bigskip \FloatBarrier
+
+%\FRAME{ftbpFO}{5.7588in}{4.1485in}{0pt}{\Qct{Credit Gap Comparison (U.K.)}}{%
+%}{graph_gap_uk.wmf}{\special{language "Scientific Word";type
+%"GRAPHIC";maintain-aspect-ratio TRUE;display "USEDEF";valid_file "F";width
+%5.7588in;height 4.1485in;depth 0pt;original-width 5.7in;original-height
+%4.0992in;cropleft "0";croptop "1";cropright "1";cropbottom "0";filename
+%'graph_gap_uk.wmf';file-properties "XNPEU";}}
+
+\pagebreak 
+
+\bigskip \FloatBarrier
+
+
+%\FRAME{ftbpFO}{5.7588in}{4.1485in}{0pt}{\Qct{Credit Gap Comparison (U.S.)}}{%
+%}{graph_gap_us.wmf}{\special{language "Scientific Word";type
+%"GRAPHIC";maintain-aspect-ratio TRUE;display "USEDEF";valid_file "F";width
+%5.7588in;height 4.1485in;depth 0pt;original-width 5.7in;original-height
+%4.0992in;cropleft "0";croptop "1";cropright "1";cropbottom "0";filename
+%'graph_gap_us.wmf';file-properties "XNPEU";}}
+
+\pagebreak 
+
+\bigskip \FloatBarrier
+
+\begin{landscape}
+
+\begin{table}
+\begin{center}
+\caption {\label{tab:table31} Forecasting Performance of Credit Gap Models (U.K.)}
+
+\bigskip 
+\begin{equation*}
+\begin{tabular}{lllllllllll}
+Horizon & HP & RU & BIS & Hamilton & \ Linear\  & Quadratic & BN & UC & 
+Average & Bates-Granger \\ \hline \hline
+\  \  \  \  \  \ 1 & 1.001 & 0.990 & 1.001 & 0.992 & 1.010 & 0.979 & 1.028 & 1.009
+& \textbf{0.977} & 0.979 \\ 
+\  \  \  \  \  \ 2 & 0.979 & 0.970 & 1.007 & 0.969 & 1.016 & 0.962 & 1.028 & 0.999
+& 0.962 & \textbf{0.957} \\ 
+\  \  \  \  \  \ 3 & 0.979 & 0.971 & 1.018 & 0.969 & 1.055 & 0.966 & 1.009 & 0.989
+& 0.959 & \textbf{0.955} \\ 
+\  \  \  \  \  \ 4 & 0.990 & 0.987 & 1.028 & 1.005 & 1.055 & 0.981 & 1.019 & 0.981
+& 0.972 & \textbf{0.967} \\ 
+\  \  \ 1 - 4 & 0.972 & 0.952 & 1.034 & 0.960 & 1.081 & 0.929 & 1.054 & 0.985
+& 0.918 & \textbf{0.910} \\ \hline \hline
+&  &  &  &  &  &  &  &  &  & 
+\end{tabular}%
+\end{equation*}
+\end{center}
+
+\begin{flushleft}
+{\small Notes: }
+
+{\small The table shows the ratio of RMSEPs of different models in comparison
+to the benchmark AR(1) model. The first set of forecasts is for
+1994:Q1-1994:Q4; the final set is for 2019:Q3-2020:Q2. Q=1-4 denotes
+averages over next 4-quarters. HP is Hodrick-Prescott, RU is Ravn-Uhlig, BIS
+is based on Borio and Lowe (2002), BN is Beveridge-Nelson, UC is Unobserved
+Component Model. }
+{\small The smallest ratio in each row is bolded.}
+\end{flushleft}
+\end{table}
+
+\end{landscape}
+
+\pagebreak 
+
+\begin{landscape}
+
+\bigskip \FloatBarrier
+
+\begin{table}
+\begin{center}
+\caption {\label{tab:table32} Forecasting Performance of Credit Gap Models (U.S.)}
+
+\begin{equation*}
+\begin{tabular}{lllllllllll}
+Horizon & HP & RU & BIS & Hamilton & \ Linear\  & Quadratic & BN & UC & 
+Average & Bates-Granger \\ \hline \hline
+\  \  \  \  \  \ 1 & 0.993 & 0.987 & 1.012 & 0.994 & 1.028 & 1.005 & 1.010 & 0.985
+& 0.962 & \textbf{0.959} \\ 
+\  \  \  \  \  \ 2 & 0.974 & 0.963 & 1.016 & 0.980 & 1.058 & 1.014 & 0.975 & 0.961
+& 0.924 & \textbf{0.917} \\ 
+\  \  \  \  \  \ 3 & 0.966 & 0.953 & 1.023 & 1.011 & 1.055 & 1.036 & 0.965 & 0.937
+& 0.906 & \textbf{0.896} \\ 
+\  \  \  \  \  \ 4 & 0.982 & 0.966 & 1.022 & 1.029 & 1.055 & 1.045 & 1.033 & 0.910
+& 0.922 & \textbf{0.910} \\ 
+\  \  \ 1 - 4 & 0.964 & 0.945 & 1.030 & 1.005 & 1.081 & 1.041 & 0.978 & 0.913
+& 0.882 & \textbf{0.872} \\ \hline \hline
+&  &  &  &  &  &  &  &  &  & 
+\end{tabular}%
+\end{equation*}
+\end{center}
+
+\begin{flushleft}
+{\small Notes: }
+
+{\small The table shows the ratio of RMSEPs of different models in comparison
+to the benchmark AR(1) model. The first set of forecasts is for
+1994:Q1-1994:Q4; the final set is for 2019:Q3-2020:Q2. Q=1-4 denotes
+averages over next 4-quarters. HP is Hodrick-Prescott, RU is Ravn-Uhlig, BIS
+is based on Borio and Lowe (2002), BN is Beveridge-Nelson, UC is Unobserved
+Component Model. }
+{\small The smallest ratio in each row is bolded.}
+\end{flushleft}
+\end{table}
+
+\end{landscape}
+```
+
+<!--chapter:end:31_Introduction.Rmd-->
+
+# Identifying Unsustainable Credit Gap {#Chapter-3}
+
+
+## Introduction
+
+
+Credit-to-GDP gaps have been identified as the top candidate as an early warning indicator (EWI) for future financial crises. As the importance of the financial market to the real economy has increased, failing to predict a future systemic crisis and missing the correct timing to implement macroprudential instruments such as Countercyclical Capital Buffer (CCyB) can lead to significantly greater economic losses. As a result, there is a need to improve the performance of our early warning indicator models, specifically when using the credit gap in univariate EWI models. 
+
+In the EWI literature, The Bank of International Settlement (BIS) Basel credit gap using a quasi-real-time (one-sided) version of the Hodrick-Prescott filter (HP) has been established as a reference point for policymakers. The BIS Basel gap is easy to implement and communicate and has performed well as an early indicator. However, recent literature has found evidence that optimizing parameters of various decomposition filters can improve those filters' performance beyond the predictive power of the BIS Basel gap as an EWI. The details are discussed in @drehmann_which_2021 and @beltran_optimizing_2021.
+
+The development of embedding optimization of decomposition filter parameters into the process of building an EWI framework has significantly improved the performance of the credit gap filters. However, this also created another issue which is model uncertainty. Policymakers now face at least five decomposition methods, each with a different set of feature parameters to consider optimizing for, such as smoothing parameters, robustness, and rolling window. Furthermore, changes in the sample window would change the performance of those filters with optimized parameters. Selecting a robust and best-performing decomposition filter and optimizing its feature parameters can be a paradox of choice for policymakers.
+
+There is a need for a robust methodology to create a univariate EWI that adapts well to changes in dynamics of the underlying financial market but at the same time uses only the credit gap as an explanatory variable. This paper attempts to solve the model uncertainty issue by using Bayesian model selection and average methods. I first create a set of possible decomposition filters with rich features from the recent literature findings. Out of all possible initial credit gaps created, I then implement a series of model selection methods using an additional novel metric psAUC (partial standardized area under the curve of receiver operating characteristic), discussed in subsection \@ref(metrics). Subsequently, from a finalized subset of variables that passed the performance filters, I perform model averaging of all possible combinations of the variables. @raftery_bayesian_1995 proposed the Bayesian model average method that averages its estimated parameters of interest across all possible combinations of variables. The model that uses the average estimate has proven to be more robust and performs better in out-of-sample forecasts than any other individual model in the selected subset of model combinations. 
+
+Using data from 1970:Q4 to 2017:Q4 across 43 countries, I created 90 credit gaps with varying features found in the literature. I implemented the model selection and average methods described in the paragraph above. I then found evidence that the new EWI performance metric psAUC, which constraints analysis to the region where Type II error < 1/3, is a robust single value criterion. I also successfully incorporated the new metric into my model selection and averaging method. Lastly, to ease policy implications, I propose to create a single credit gap measurement from weighted-averaging other popularly studied credit gap measurements. The single weighted average credit gap is tested as more robust in resampling bootstrapping estimates. It also performs better in out-of-sample forecasts k-fold cross-validation than any other individual model in the filtered subset of model combinations. 
+
+The paper is structured as follows. In the next section, I discuss relevant branches of literature. In Section 3, I describe the data used in this paper. Section 4 outlines the methodology I use for model selection, model average, and a weighted combination of variables of interest, as well as a novel metric for testing the performance of the selected variable and averaged model. Section 5 describes the empirical results of the selected variables in the horse race. Section 6 analyzes time series graphs of individual countries. Section 7 summarizes the main conclusions.
+
+
+<!--(Reference for opening: one of the 6 reference papers)
+
+(Beltran:
+Credit gaps are good predictors for financial crises, and banking regulators recommend using them to inform countercyclical capital buffers for banks. Researchers typically create credit gap measures using trend-cycle decomposition methods, which require many modelling choices, such as the method used, and the smoothness of the underlying trend. Other choices hinge on the tradeoffs implicit in how gaps are used as early warning indicators (EWIs) for predicting crises, such as the preference over false positives and false negatives. We evaluate how the performance of credit-gap-based EWIs for predicting crises is influenced by these modelling choices. For the most common trend-cycle decomposition methods used to recover credit gaps, we find that optimally smoothing the trend enhances out-of-sample prediction. We also show that out-ofsample performance improves further when we consider a preference for robustness of the credit gap estimates to the arrival of new information, which is important as any EWI should work in real-time. We offer several practical implications.)
+
+(Drehmann:
+The credit gap, defined as the deviation of the credit-to-GPD ratio from a Hodrick-Prescott (HP) filtered trend, is a powerful early warning indicator for predicting crises . Basel III therefore suggests that policymakers should use it as part of their countercyclical capital buffer frameworks. Hamilton (2017), however, argues that you should never use an HP filter as it results in spurious dynamics, has end-point problems and its typical implementation is at odds with its statistical foundations. Instead he proposes the use of linear projection
+
+
+(Alessi: 
+Unsustainable credit developments lead to the build-up of systemic risks to financial stability. While this is an accepted truth, how to assess whether risks are getting out of hand remains a challenge. To identify excessive credit growth and aggregate leverage we propose an early warning system, which aims at predicting banking crises. In particular, we use a modern classification tree ensemble technique, the “Random Forest”, and include (global) credit as well as real estate variables as predictors.
+
+Drehmann Julius 2014: 
+Ideally, early warning indicators (EWI) of banking crises should be evaluated on the basis of their performance relative to the macroprudential policy maker’s decision problem. We translate several practical aspects of this problem — such as difficulties in assessing the costs and benefits of various policy measures, as well as requirements for the timing and stability of EWIs — into statistical evaluation criteria. Applying the criteria to a set of potential EWIs, we find that the credit-to-GDP gap and a new indicator, the debt service ratio (DSR), consistently outperform other measures. The credit-to-GDP gap is the best indicator at longer horizons, whereas the DSR dominates at shorter horizons.
+
+
+Begin writing:
+(Unsustainable credit developments lead to the build-up of systemic risks to financial stability. While this is an accepted truth, how to assess whether risks are getting out of hand remains a challenge.)
+
+(Motivation)-->
+
+<!-- - Compare different credit gap measurements' performance as EWIs using a new robust metric - partial standarized AUC (psAUC) contraining Type II error < 1/3.
+- Overcome model uncertainty by implementing model averaging. We incoporated psAUC values in the model selection and weighting process, instead of AUC or BIC values.
+- For ease of policy implication, we propose a single credit gap measurement from weighted averaging other popularly studied credit gap measurements.
+
+(summary structure) -->
+
+
+
+
+<!--(Motivation and importance: 
+- Increased importance of financial market on the real economy
+- However, the BIS received some criticism: 
+  - Length of cycle
+  - Other countries have adapted counter cyclycal measurements, making the problem more complicated for using the gap as a predictor since it is already being used as a signal 
+
+- Central planner do not like sharing the decision making tool details, since a low predictive power of the tool being public would make it lose confidence and further policies communication would be be effective in the future. 
+
+- This tool helps central planner over come two problems. 
+1 is selection of right credit gaps measurement for certain demographic (AE and EME in this case). 
+
+- To overcome model uncertainty in using credit gap as an early warning indicator (EWI) of systemic financial crises, we propose using model averaging of different credit gap measurements. The method is based on Bayesian Model Average - Raftery (1995)
+
+relevant literature in the model
+- Area under the curve of operating characteristic (AUROC or AUC) has been widely used as a criterion to determine the performance of a EWI. But it has received some criticism regarding the lower left area of the curve representing low predictive ability of the indicator.
+- Borio and Drehmann (2009) and Beltran et al (2021) proposed a policy loss function constraining the relevance of the curve measurement to just a portion where Type II error rate is less than 1/3 or at least 2/3 of the crises are predicted.    
+- Detken (2014) proposed using partial standardized area under the curve (psAUC) as an alternative measurement of the performance of an EWI.
+
+Our contribution: 
+- Compare different credit gap measurements' performance as EWIs using a new criterion - partial standarized AUC (psAUC) contraining Type II error < 1/3.
+- Overcome model uncertainty by implementing model averaging. We incoporated psAUC values in the model selection and weighting process, instead of AUC or BIC values.
+- For ease of policy implication, we propose a single credit gap measurement from weighted averaging other popularly studied credit gap measurements.
+
+<!--(Brief introduction of the methodologies, its roots)
+(pAUC)
+(model average)
+(forecast combination - from previous chapter)
+(robustness check: resampler bootstrapping and cross-validation)-->
+
+<!--(Plan of the paper)-->
+
+<!--Branches of literatures-->
+
+## Literature Review
+
+In this section, I discuss the branches of literature that my study is relevant and contributes to. @borio_assessing_2002 first documented credit gaps' property as a useful early warning indicator (EWI) for banking crises. Earlier literature on excessive credit leading to crises includes @minsky_financial_1977, @manias_panics_1978, and @kaminsky_twin_1999. @borio_assessing_2009 assessed different smoothing parameters for the one-sided HP filter and later determined $\lambda=400,000$ to be the ideal value for measuring credit gap based on its long smooth trend property and performance as an early warning indicator. @basel_guidance_2010 later established this particular HP filter as the Basel credit gap (I call it BIS Basel gap in this paper), and it became the reference for all EWI models using credit gap filters. @drehmann_credit_2014 defended the Basel gap's performance as an EWI against criticism it received, such as its failure to perform well in emerging market economies.
+
+@drehmann_evaluating_2014 set out a list of criteria for an EWI. It needs to have the "right timing" of being able to detect future financial crises from 20-6 quarters ahead of a future systemic crisis; a "stable signal" that does not decrease as the periods approach the actual crises date; "robustness" that fits well with different data set; and "interpretability" which is ideal for a univariate model such as the credit gap to determine an optimized threshold of classifying excessive credit. Lastly, EWI $S_i$ outperforms EWI $S_j$ for horizon h if $AUC(S_{i,h}) > AUC(S_{j,h})$. This last criterion, however, receives criticism regarding the lower left region of the ROC curve that represents low predictive power (True Positive Rate) of a model, which the AUC metric also measures.^[the details are discussed in subsection \@ref(metrics)]. Additionally, @borio_financial_2014 reported stylized features of the credit cycles. These cycles have a much lower frequency than business cycles. It also pointed out that credit cycle peaks are closely associated with the onset of financial crises. Because of that property, they can detect crises in real-time within the macroprudential policies implementation window.
+
+@hamilton_why_2018 argues against using HP filter for macroeconomics series as it introduces spurious dynamics. @drehmann_why_2018 defended the HP filter again but will later admit other filters with additional features, such as a Hamilton filter estimated in a panel setting, outperformed the Basel gap in @drehmann_which_2021. Furthermore, features for the decomposition methods include rolling sample windows of 15 and 20 years as proposed by @galan_measuring_2019 to help improve the performance of the decomposition filter. @beltran_optimizing_2021 embedded the optimization of features parameters into the construction of an EWI model and constraint the search range for the loss function to the region where True Positive rates $\ge$ 2/3 or Type II error rates < 2/3 following suggestions in @borio_assessing_2009, the paper also introduced using Structural Time Series model (STM) gap, Moving average (MA) gap as possible candidates for the EWI model.
+
+@galan_measuring_2019 also proposed adding other features to the Basel gap that individual countries implement which are out of the scope of this paper's implementation. Such adjustments include adjusting for GDP decrease, combining one and two-sided filters for robustness, adjusting by projection as in @gerdrup_key_2013, and adjusting for currency fluctuations. 
+
+However, there is no consensus on which decomposition with which features would be the best performing and most robust EWI. In this paper, I aim to construct a methodology to find the best combination of decomposition filters and features to be used as an EWI and propose an average model that performs as well as the best combination, if not better. The methodology I use for the model selection, and average steps are discussed in the literature branch below.
+
+@babecky_banking_2014 used a model selection method called Markov Chain Monte Carlo Model Comparison ($MC^3$) developed by @madigan_bayesian_1995. This method allows for a feasible search for best-fitted combinations out of a large set of variables with similar features, which would not be efficiently estimated using other model selection methods such as RIDGE, LASSO, and Elastic Net. Moreover, @furnival_regressions_2000 proposed a "leap and bound" algorithm to find the best-fitted subsets without examining all possible subsets of variables. 
+
+The Bayesian model averaging method is formally described in @raftery_bayesian_1995. It aims to overcome model uncertainty by averaging the performance of a set of models. The averaged model performs better than any selected individual models on out-of-sample forecasts. The model average method could be applied to multivariate settings, but that will cost us the ability to synthesize a combined weighted credit gap. Following the motivation from Chapter 3, I also attempt to create a combined weighted credit gap in this chapter that performs well in a horse race with other credit gap measurements.
+
+
+Multivariate early warning system (EWS) is also a significant branch of early warning literature and is worth mentioning. The variables selected in @babecky_banking_2014 that perform well in EWS are then used in the following papers. @drehmann_evaluating_2014 established that with the credit gap, the Debt-to-Service ratio is another EWI that performs well within 1-4 quarters of the future systemic financial crisis. @aldasoro_early_2018 is an extension of @drehmann_evaluating_2014. Furthermore, @alessi_identifying_2018 used a Random Forest model to achieve a higher EWI performance metric than traditional generalized linear regression. Recently, @holopainen_toward_2017 implemented ensemble methods to combine various machine learning model predictions and found significant improvement in the ensembled multivariate early warning system performance. Even though multivariate models can achieve superior model fit and prediction accuracy than univariate models, they also require richer data availability and limit the scope of the model implementation. Certain emerging market economies with insufficient data would benefit more from a well-performing univariate model.
+
+
+Lastly, I touch on the literature on partially estimating the Area Under the Curve of Receiver Operating Characteristic (psAUC). @detken_operationalising_2014 first introduced the use of partial standardized AUC in the EWI setting. The partial standardized AUC is popularly studied in the medical statistics literature, e.g., @mcclish_analyzing_1989, but is relatively new in the EWI literature. I will use this novel (psAUC) metric, inspired by both @detken_operationalising_2014 and the policy function restriction in @beltran_optimizing_2021, to improve my model selection and averaging process in terms of satisfying policy implication requirements (e.g. TPR $\ge$ 2/3). The method for partial estimation of the ROC curve is documented in @robin_proc_2011.
+
+
+
+
+<!--( Literature history 
+- Early 1990 papers
+
+Minsky, 1982; Kindleberger, 2000
+
+  - @kaminsky_twin_1999
+  - @chang_model_2001
+
+  Studies such as Lowe and Borio (2002b), Borio and Drehmann (2009), and Drehmann and Juselius (2014) show that credit growth and credit gaps –deviations of aggregate credit to GDP ratio from its long-run trend–are good predictors of systemic banking crises, often referred to as financial crises. They thus support the view that such financial crises are often “credit booms gone bust” (Minsky, 1977; Kindleberger, 1978; Schularick and Taylor, 2012).
+
+- Borio and Lowe (2002a,b) argue that focusing on the behaviour of credit and asset prices is a promising line of enquiry to develop simple and transparent leading indicators of banking system distress.
+
+The credit-to-GDP gap (“credit gap”) is defined as the difference between the credit-to-GDP ratio and its long-term trend. 
+-->
+<!-- 
+( Model averaging and selection literature: 
+- @raftery_bayesian_1995
+- Bebecky @babecky_banking_2014
+- ensemble techniques @holopainen_toward_2017
+- @madigan_bayesian_1995
+- @furnival_regressions_2000
+- We contributed to this literature by further apply the averaging method to a set of different credit gap decomposition methods.
+- The model average method could be applied to multivariate setting but that will cost us the ability to synthesize a combined weighted credit gap.
+- For ease of policy implication and visualization, we also proposed a single credit gap measurement from weighted averaging other popularly studied credit gap measurements.
+-->
+
+<!--
+- Borio and Drehmann (2009) @borio_assessing_2009
+- Basel gap 2010 @basel_guidance_2010
+  - Basel gap paper: became the reference for all EWI 
+- @drehmann_credit--gdp_2014
+- @drehmann_evaluating_2014
+- Drehmann 2014 set out criteria for an EWI, has the "right timing" if 20-6, "stable" meaning the signal does not decrease as the periods approach the actual crises date, "robustness" and "interpretability". Lastly, EWI Si outperforms EWI Sj for horizon h if AUC(Si,h) > AUC(Sj,h). This last criteria however, receives criticism in @beltran_optimizing_2021, the details are discussed in section ...(insert ref here) . 
+
+- @borio_financial_2014
+Borio (2014) reports salient stylized features of credit cycles. First, these cycles are most parsimoniously characterized in terms of credit (loans and bonds) extended to the nonfinancial private sector (households and corporations). Second, credit cycles have a much lower frequency than business cycles (see Borio, 2014; Drehmann et al., 2012). Borio (2014) additionally points out that credit cycle peaks are closely associated with the onset of the financial crises, and that they help detect crises with a good lead in real time.
+
+
+- @hamilton_why_2018 argues against using HP filter for macroeconomics series as it introduces suprious dynamics. @drehmann_why_2018 defended the HP filter. However, there has not been a consensus on which decomposition method has the superiority.
+- Garlan 2019 @galan_measuring_2019
+- Drehmann 2021 @drehmann_which_2021
+- Beltran 2021 @beltran_optimizing_2021)
+
+
+Galán (2019) proposed rolling sample of 15 and 20 years when creating one sided cycle.
+
+Drehmann (2021) created Hamilton filter in a panel setting with fixed coefficients on independent variables across countries.
+
+Mention other papers: norwegian, 
+Other univariate methods in Garlan 2019
+(Paper that Groups countries in different regions: brings better results too.)
+Should multivariate early warning systems for banking crises pool across regions?
+@davis_should_2011
+
+-->
+
+<!--
+Multivariate EWI:
+- @aldasoro_early_2018
+- Alessi 2018 
+- @alessi_identifying_2018
+- @detken_operationalising_2014 
+
+- Composite index
+  - Deducted from PCA of other variables
+- Machine learning, ensemble using multivariate models
+-> Distinguish our contribution: we only use 1 variable to measure credit gap ( the credit series it self) using a combination of other popular credit gap measurements in the literature. 
+ Pros: ease of implementation, richer data set, inclusion or extrapolating results to countries outside of the data set would also be easier. )
+ Cons: lower model fitness than other multivariate models.
+ 
+Composite index:
+- Afanasyeva (2020) develops a Bayesian vector autoregression (BVAR) method to detect credit booms using monetary aggregates, asset prices, and measures of real economic activity, which provides a useful cross-check to the credit gaps derived from trend-cycle decomposition methods. 
+- Sarlin and von Schweinitz (forthcoming) use 14 observable macroeconomic and asset price measures to predict the probability of a crisis, defined as periods when the Financial Stress Index of Lo Duca and Peltonen (2013) exceeds its 90th percentile.
+-->
+
+
+
+<!--
+( partial standardized AUC literature: )
+- Contribution: Detken 2014 together with Borio 2009 and Beltral 2021 criteria
+- @robin_proc_2011
+
+
+Beltran (2021) - measured and the performance of BIS Basel credit gap, Structural Time Series model (STM) gap, Moving average (MA) gap, Hamilton filter gap, and optimized the smoothing parameters $\rho$ in those filters to minimize policy loss function. 
+
+\begin{align*}
+L_{\theta,\rho}=\alpha TypeI(\theta)+(1-\alpha)TypeII(\theta)|TPR\ge2/3
+\end{align*}
+
+- $\theta$ is the optimized threshold that minizes loss function.
+
+-->
+
+
+<!--chapter:end:41_Introduction.Rmd-->
+
+## Data Description
+
+The model sample periods include quarterly data from 1970:Q4 to 2017:Q4 across 43 countries.^[The list of countries with data available are: Argentina, Austria, Australia, Belgium, Brazil, Canada, Switzerland, Chile, China, Colombia, Czech Republic, Germany, Denmark, Spain, Finland, France, United Kingdom, Greece, Hong Kong SAR, Hungary, Indonesia, Ireland, Israel, India, Italy, Japan, Korea, Luxembourg, Mexico, Malaysia, Netherlands, Norway, New Zealand, Poland, Portugal, Russia, Saudi Arabia, Sweden, Singapore, Thailand, Turkey, United States, and South Africa.] The sample periods were chosen based on the availability of systemic crisis data and total credit to GDP ratio data. The primary source of the credit data comes from the Bank of International Settlement (BIS). The credit variable is measured as total credit to the private non-financial sector as a percentage of GDP.^[Source of the data could be accessed here: https://www.bis.org/statistics/totcredit/credpriv_doc.pdf] 
+
+Regarding data for dating systemic crises, there is no single consensus source of database. I follow the literature and use the crisis dates reported in the European Systemic Risk Board crisis data set [@lo_duca_new_2017] for countries in the EU and [@laeven_systemic_2013] for the rest of the world. The systemic crisis dates are available from after WWII. However, the first systemic crisis did not happen until the early 1970s. 
+
+There are three types of crises: banking, currency, and debt crises, all of which could lead to a systemic crisis. A crisis can be labeled as systemic when certain conditions are met, such as significant signs of financial distress in the banking system, bank runs, and significant policy intervention measurements are imposed. The authors also consulted with subject matter experts in each country to determine the dates and details of the systemic crises.
+
+While the credit data is available until 2021:Q3, my systemic crisis data stopped at 2017:Q4. Therefore, I will limit my analysis till 2017:Q4. I will also omit periods of countries with shorter measurements of credit.
+
+<!--**Insert descriptive statistics table here** -->
+
+
+<!--chapter:end:42_Data_Description.Rmd-->
+
+## Empirical Methodology {#model}
+### Overview
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+# Load libraries
+library('kableExtra')
+library(dplyr)
+library(knitr)
+options(kableExtra.latex.load_packages = FALSE)
+options(knitr.table.format = "pandoc")
+options(knitr.kable.NA = '')
+```
+
+The total credit series is nonstationary. In order to extract a useful stationary credit signal to use as an early warning indicator for future financial crises, I first decompose the series into a nonstationary trend and a stationary cycle using various popularly studied filters in subsection \@ref(decomp). 
+
+The idea behind using the credit gap as an early warning indicator is that a prolonged period of excessive credit growth could be linked to future financial crises. Therefore, I can use logistic regression to identify pre-crisis periods with unsustainable high credit gap values over a certain threshold.
+
+In subsection \@ref(logistic-regression), I discuss strategies for identifying the dependent variable (pre-crisis periods) and the logistic regression empirical method. In subsection \@ref(metrics) I then discuss the metrics to determine the performance of a credit gap as an early warning indicator EWI model such as BIC, AIC values, Area Under Curve (AUC) of receiver operating characteristic, how I determine a policy loss function, optimize credit gap threshold and estimate the minimized Type I and Type II error rates. I will then propose a novel metric - partial standardized AUC (psAUC) that, when used in conjunction with other metrics, will provide more desirable properties for policy implication and overcome some of the criticism that the traditional AUC metric receives.
+
+This paper aims to overcome model uncertainty when using credit gap filters as an early warning indicator for future financial crises. Since each decomposition filter of the total credit series provides a stationary series that performs qualitatively differently from other filters as an EWI, I propose selecting the best gap candidates and performing model averaging to achieve model stability and improved out-of-sample prediction as proposed in [@raftery_bayesian_1995].
+
+In subsection \@ref(modelselection), I will use the metrics discussed in subsection \@ref(logistic-regression) to select credit gap filters that perform well individually and in combination with other credit gaps. Then in subsection \@ref(model-average), I discuss the theory behind the Bayesian model average method, my model customization to fit the policy implication need, and the new metric (psAUC). 
+
+Lastly, in subsection \@ref(weighted-gap-creation), for ease of policy implication, I propose the creation of a crisis-weighted credit gap that would inherit the information and features from the averaged model of 30 other credit gaps, and would perform as well as the averaged model prediction does.
+
+
+<!--[Briefly discuss AUC section here]\
+[Variable selection here]\
+[Model Averaging here]\
+[Weighted credit gap creation here]\-->
+
+### Credit Gap Decompositions {#decomp}
+
+\begin{align}
+	100*\frac{Credit}{GDP} &= y_it = \tau_{itj} + c_{itj}
+\end{align}
+
+
+I started my variable selection process by creating 90 candidate one-sided credit gap measurements based on the literature.^[List of filters created is can be viewed in Appendix \@ref(filterslist)] The nonstationary Credit to GDP ratio series is decomposed into a nonstationary trend $\tau_{yit}$ and a stationary cycle credit gap $c_{itj}$ components. Once a country has more than 15 years of credit measurement available, I start storing its one-sided credit gap values onward. My decomposition filter methods include one-sided Hodrick-Prescott, Hamilton (panel and non-panel setting), Moving Average, Structural Time-series model, Beveridge-Nelson, linear, quadratic, and polynomial decompositions. All are decomposed with full sample, rolling 15 years and 20 years rolling window features when possible.
+
+Apart from the filters that I already introduced in Chapter 3 - "Measuring Credit Gap" (Equations 3.1 - 3.5), the two additional filters I will use in this chapter are Moving Average, Structural Time-Series model filters that @beltran_optimizing_2021 introduced.^[Refer to their equation representations here in Appendix \@ref(ma-stm-eq)]
+
+<!--Todo:
+[List formula references for each decomposition method]\
+[Full list of credit cycle created in appendix]\
+[strength and weakness of each decomposition method if possible]\-->
+
+### Early Warning Indicator - GLM Logistic Regression {#logistic-regression}
+
+I begin testing the fitness of the EWI model using credit gap measurements by implementing binary logistic regression. I identify the dependent variable as the periods of 5-12 quarters ahead of a systemic financial crisis. The underlying classification model assumes that the credit to GDP ratio gap will increase sharply as a response to an excessive credit increase due to expansionary monetary policy or a sharp decline in GDP, which is the ratio's denominator. When the credit gap is above a certain threshold for a prolonged period, it signals that the economy is at risk of a future financial crisis. The periods with excessive credit before financial crises will be labeled "pre-crisis" periods. 
+
+It is also worth pointing out that there is no consensus on setting the periods to label as pre-crisis. The literature labeled pre-crisis periods with various ranges from 1-16 quarters before a crisis. I decided to use a labeling strategy with ideal policy implication properties. It is recommended that macroprudential policy takes more than four quarters to be effective because of policy implementation lag. As a result, a signal telling that the economy will experience a financial crisis in 1-4 quarters has little policy implication. Therefore, I start labeling the pre-crisis periods in the 5th quarter before a systemic crisis. I stop labeling in the 12th quarter before a crisis because implementing counter-cyclical policy too early will be ineffective in lowering the risk of a future crisis and would only exacerbate economic conditions by unnecessary credit tightening.
+
+Equation \@ref(eq:logit) represents the logistic regression:
+
+\begin{align} (\#eq:logit)
+  pre.crisis_{it} \sim c_{itj} 
+\end{align}
+
+In which $i$ is the country indicator, and $j$ is the credit gap filter type. The binary dependent variable $pre.crisis_{it}$ takes values of 1 when the economy is between 5-12 quarters before a systemic financial crisis, labeling the periods as "pre-crisis" positive. I discard measurements between 1-4 quarters before a crisis, during, and post-crisis management periods identified in Lo Duca et al. (2017) and Laeven and Valencia (2018). The credit measurements in these periods are discarded to avoid biased estimation as credit gaps behave erratically during a crisis. 
+
+The indicator is set to 0 at other periods. Additionally, pre-crisis periods of imported crises identified in the dataset are also set to 0 since the model aims to capture pre-crisis periods created by a country's excess credit growth, not from exogenous shocks. However, for labeling conformity, I still discard measurements of periods during and post-crisis of these imported crises, as countries experiencing imported crises could also implement reactionary monetary policies.
+
+<!--Todo:
+[elaborate on why the strategy of identifying pre-crisis periods is used this way]\
+[pros and cons]\
+[alternatives]\ (not worth elaborating) (- individual quarters instead of 5-12)
+[easy of use: choice]-->
+
+### EWI Performance Metrics {#metrics}
+
+#### Likelihood Values and BIC {-}
+
+The logistic regression model parameters are estimated by maximizing the cross-entropy log-likelihood values. The relationship between the BIC (Bayesian Information Criterion) and likelihood value is expressed in Equation \@ref(eq:BIC-lik). The model selection criterion here is to choose the filter method with a lower BIC value associated with a higher likelihood value and fitness of the general linearized model or a higher degree of freedom by using fewer explanatory variables.
+
+#### Area Under the Curve (AUC) of Receiver Operating Characteristic (ROC) {-}
+
+A receiver operating characteristic (ROC) curve in the EWI literature setting represents True Positive Rate (TPR) and False Positive Rate (FPR) Cartesian coordinates of different credit gap thresholds, which are used as indicators for identifying pre-crisis periods.^[Refer to Figure \@ref(fig:psAUCfig) for illustration] The credit gap thresholds are determined by the logistic regression model predicted response values which range from (0,1) and map increasingly with the credit gap magnitude values.
+
+A logistic model is strictly preferred over another comparable model if all of the coordinates of its ROC curve are closer to the top-left region of the graph, which minimizes FPR and maximizes TPR. However, it is not always the case when I have such a clear-cut difference. Models can have overlapping ROC curves. To simplify the process of model selection in such cases, the area under the curve (AUC) of ROC metric is used.
+
+\begin{align*}
+AUC = \int_0^1 TPR d(FPR)
+\end{align*}
+
+Each logistic regression with a different gap measurement yields a value of Area Under the Curve (AUC) of receiver operating characteristic. There is an underlying assumption that the higher the AUC value is, the better the overall performance of a credit gap is as an EWI; on average, its ROC curve has coordinates with higher TPR and lower FPR. 
+
+True Positive Rate represents a model's predictive power (P) to identify pre-crisis periods correctly (positive case). $TPR = TP / (TP + FN)$. True Negative Rate represents a model's predictive power to identify normal periods correctly (negative case). $TNR = TN / (TN + FP)$. False Positive Rate represents the Type I error rate that a model misidentifies a calm, normal period (negative case) as a pre-crisis period (positive case). $FPR = 1 - TNR = FP / (FP + TN)$. Lastly, I discuss the False Negative Rate or the Type II error rate at which a model misidentifies a pre-crisis period (positive case) as a normal calm period (negative case). $FNR = 1 - TPR = FN / (TP + FN)$.^[Our notation of Type I and Type II error follows Beltran (2021) which deviated from previous literature.]
+
+Central planners working with classification problems have dual objectives to minimize Type I and Type II errors. To simplify this problem, a policy loss function with the input of the two error types are used: 
+
+\begin{align} (\#eq:policylossold)
+L_{\theta}=\alpha TypeI(\theta)+(1-\alpha)TypeII(\theta)
+\end{align}
+
+With $\alpha = 0.5$ by default if policymakers are indifferent about the two types of errors. Here, the model selection criteria would be to select minimized policy loss function with the smallest combination of Type I and Type II error rates. 
+
+A binary logistic regression model with a substantially higher AUC value will have smaller sets of Type I and Type II metrics values. Therefore, its optimized credit gap threshold value that minimizes the policy loss function would represent superior Type I and Type II error rates.
+
+<!--[Talk about Policy Loss Function and TPR, FPR]-->
+However, because the AUC value is an aggregate value representing information of the whole ROC curve, the area on its lower left corner, where the predictive power of the threshold (TPR) is low, and type II error rates are high, is not relevant for policy implications discussion. Before the Great Financial Crisis of 2008, central planners tended to weigh Type I errors more than Type II errors since the cost of misspecifying a financial crisis was not apparent, and a Type I error meant costing the economy unnecessary credit constraints by implementing reactionary policies. But since 2009, there has been a shift in weighing Type II errors more as the cost of misspecifying a systemic financial crisis became significantly heavier than a Type I error. 
+
+#### Partial Standardised AUC {-}
+
+To overcome the issue of unnecessary information included in the full AUC, an approach to estimate only a partial relevant area under the ROC was proposed in @mcclish_analyzing_1989 and later implemented in the EWI setting by @detken_operationalising_2014. I will also discuss the standardization of the partial AUC metric (psAUC) in Equation \@ref(eq:psAUCeq).
+
+@detken_operationalising_2014 gave their remarks on the usage of partial standardized AUC (AUROC and AUC terms are used interchangeably in the literature):
+
+>"Instead of considering only the full AUROC (e.g. Drehmann and Juselius, 2014), this paper also presents a partial standardized AUROC (psAUROC) that cuts off the area associated with a preference parameter of $\theta<0.5$"
+
+>"While the psAUROC has been used extensively in the area of medical statistics to assess the performance of a classifier only in specific regions of the ROC curve (e.g., McClish, 1989 and Jiang et al., 1996), it is a new approach in the literature evaluating EWMs."
+
+>"The results reported in this paper show that the psAUROC can reveal useful additional information as long as the partial area does not become too restricted."
+
+@detken_operationalising_2014 proposed cutting off the area representing the low values of preference response parameter in a multivariate regression setting. However, this application does not directly translate to a univariate credit gap model. Using a univariate credit gap EWI model, [@beltran_optimizing_2021] constrained the policy loss function to regions where TPR $\ge 2/3$ or Type II error rate $< 1/3$. They then estimated the policy loss function value at different points on the partial ROC curve by assigning different policy preference parameter values $\alpha$.
+
+To merge these two ideas above and to solve the uncertainty issue of having to estimate policy loss function at different policy preference parameter values to determine model performance, I propose to restrict the consideration of the ROC curve to TPR $\ge 2/3$, then estimate the partial standardize psAUC of the restricted ROC curve region instead. Note in Equation \@ref(eq:pAUC), I estimated the partial area under the curve that represents TPR and TNR (instead of TPR and FNR) and took integral along the TPR axis. 
+
+\begin{align} (\#eq:pAUC)
+pAUC = \int_{\frac{2}{3}}^1 TNR \, d(TPR) = \int_{\frac{2}{3}}^1 specificity \, d(sensitivity)
+\end{align}
+
+Because I am limiting my analysis only to the portion of the ROC curve that satisfies TPR $\ge 2/3$, the policy loss function \@ref(eq:policylossold) used in previous literature tends to have a corner solution of optimized thresholds where TPR = 2/3. I propose using an alternative policy loss function that priorities points on the ROC closest to the top left regions where both Type I and II errors are the lowest:
+
+\begin{align*}
+L_{\theta}= TypeI(\theta)^2 + TypeII(\theta)^2 = (1 - sensitivity)^2 + (1 - specificity)^2
+\end{align*}
+
+The last step is to standardize the partial AUC value:
+
+```{r psAUCfig, echo=FALSE, out.width='70%', fig.align="center", fig.cap="Procedure to standardize partial AUC"}
+knitr::include_graphics('../../../3rdPaper/metadata/pAUC.png')
+```
+
+\begin{align} (\#eq:psAUCeq)
+psAUC = \frac{1}{2}\left[ 1+ \frac{pAUC - min}{max - min}\right]
+\end{align}
+
+The standardization step helps with the comparison of EWI models' performance. Traditional AUC values range from 0 to 1, with 0.5 being the value for a null hypothesis model or an information-less guess. When only estimated partially, the partial AUC value will not retain the same range making it harder to interpret their meaning. Standardizing the partial AUC values restores the ranges of possible values to 0 and 1.
+
+<!--(Discuss how standardization helps compare the performance of different EWI methods)-->
+
+In section \@ref(empirical-results), I will discuss the relevance and performance of the psAUC as an EWI metric and the other metrics introduced in this subsection. 
+
+
+
+### Variable Selection {#modelselection}
+
+Our overall methodology goal is to implement model averaging of top candidate variables. In order to achieve that, I need to select top EWI candidates using the EWI performance criteria discussed in the previous section. I also search for models with combinations of variables that, when combined using positive weights, would have a better model fit than a univariate model would. I aim to select 29 credit gap measurements based on these two criteria.
+
+Firstly, I compared performances of individual credit gaps using partial area under the curve (psAUC) values. Table \@ref(tab:varselect) ranked decomposition filters by psAUC. 
+
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+# Load libraries
+library('kableExtra')
+library(dplyr)
+library(knitr)
+options(kableExtra.latex.load_packages = FALSE)
+options(knitr.table.format = "pandoc")
+options(knitr.kable.NA = '')
+```
+
+```{r varselect, echo=FALSE, warning=FALSE, message=FALSE}
+options(kableExtra.latex.load_packages = FALSE)
+options(knitr.table.format = "pandoc")
+library('kableExtra')
+library(dplyr)
+library(knitr)
+options(knitr.kable.NA = '')
+
+filepath='../../../3rdPaper/Data/Output/Modelselection_512.csv'
+df<-read.csv(filepath, sep = ",", header=TRUE)
+
+#rownames(df) <- df[,1]
+name1<- df[,1]
+name1<- gsub("_", ".", name1)
+name1[which(name1=="c.hp400k")]<-"BIS Basel gap"
+df[,1]<-name1
+
+#df<-df[,-1]
+df<-df[-c(32:nrow(df)),-c(10:ncol(df))]
+#df<-df[-2,]
+
+#colnames(df) <- c("Median", "10pct", "90pct", "Median", "10pct", "90pct", "Median", "10pct", "90pct")
+
+#options(knitr.kable.NA = '')
+
+#df = df %>% mutate_if(is.numeric, format, digits=4)
+
+#kbl(data.frame(x=rnorm(10), y=rnorm(10), x= rnorm(10)), digits = c(1, 4, 4))
+
+kbl(df, "latex", booktabs = T, digits = c(4, 4, 4, 4, 4, 4, 4, 4), escape=FALSE, linesep=c("","", "", "", "\\addlinespace"), caption ='Top 30 credit gap measurements ranked by psAUC',
+       row.names = FALSE) %>%
+  kable_styling(latex_options=c("striped","scale_down")) %>%
+  kable_paper(c("striped")) %>%   
+  #kable_styling(latex_options=c("striped","scale_down", "HOLD_position")) %>%
+  #add_header_above(c("Parameters" = 1, "VAR2" = 3, "VAR2 1-cross lag" = 3, "VAR2 2-cross lags" = 3)) %>%
+  #footnote(general="UK Bayesian regression results") %>%
+  column_spec(5, bold = TRUE) #%>% #c(0,0,1,0,0,0,1,0,0,0,0,0,0,0,0))
+  #gsub(".(begin|end){table.*}", "", ., perl = TRUE)%>%
+  #gsub(".centering", "", ., perl = TRUE)
+```
+
+<!--[Discuss data shown on table]\
+[- estimated and compute values BIC, AIC, AUC, psAUC]\
+[- BIC, AIC : overall fitness of linearized binary logistic regression model]\
+[- AUC: Area Under Curve of receiver operating characteristic (ROC) curve]\
+
+[- we then detected the optimized threshold of credit gap that minimize the policy loss function]\
+[- Policy loss function: details here]\
+- [- Deviated from previous loss function in the literature (closest to top left)]\
+- [- Loss function: if not corner solution at TPR = 2/3, discussion would be trivial]\-->
+
+
+Secondly, I test for performances of multivariate models with combinations of different credit gaps.
+
+\begin{align*}
+Model_k :  pre.crisis_{ti} \sim \sum\nolimits_j \beta_j * credit.gap_{tij}
+\end{align*}
+
+I implement the gaps combination model selection using Markov Chain Monte Carlo Model Comparison ($MC^3$) method developed by @madigan_bayesian_1995. The method assigns a posterior probability for different credit gaps being selected in the most likely models/combinations with the lowest BIC values. With 90 variables, there are $2^{90} = 10^{26}$ possible subsets of combinations to choose from.  @babecky_banking_2014 used this $MC^3$ method to identify potential variables in multivariate EWS models. For more efficient search implementation, each variable is given increasing prior weights depending on their univariate EWI performance. I then estimated the posterior probability of each variable included in the most likely models using 4,000,000 MCMC iterations. The results are reported in Table \@ref(tab:varselectMC3).
+
+
+\tiny
+```{r varselectMC3, echo=FALSE, warning=FALSE, message=FALSE}
+options(kableExtra.latex.load_packages = FALSE)
+options(knitr.table.format = "pandoc")
+library('kableExtra')
+library(dplyr)
+library(knitr)
+#library(rstudioapi)
+#setwd(dirname(getActiveDocumentContext()$path))
+#getwd()
+
+filepath='../../../3rdPaper/Data/Output/MC3.csv'
+df<-read.csv(filepath, sep = ",", header=TRUE)
+
+#rownames(df) <- df[,1]
+name1<- df[,2]
+name1<- gsub("_", ".", name1)
+name1[which(name1=="c.hp400k")]<-"BIS Basel gap"
+df[,2]<-name1
+colnames(df)<-c("Variable","Pr(B!=0)","Variable","Pr(B!=0)")
+
+#df<-df[,-1]
+df<-df[-c(27:nrow(df)),]
+#df<-df[-2,]
+
+#colnames(df) <- c("Median", "10pct", "90pct", "Median", "10pct", "90pct", "Median", "10pct", "90pct")
+
+
+
+#df = df %>% mutate_if(is.numeric, format, digits=4)
+
+#kbl(data.frame(x=rnorm(10), y=rnorm(10), x= rnorm(10)), digits = c(1, 4, 4))
+
+kbl(df, "latex", booktabs = T, digits = c(4, 4,4,4), escape=TRUE, linesep=c("","", "", "", "\\addlinespace"), caption = 'Top 25 credit gap measurements ranked by MC3 probability',
+       row.names = FALSE) %>%
+  kable_styling(latex_options=c("striped")) %>%
+  kable_paper(c("striped")) %>%
+  #add_header_above(c("Parameters" = 1, "VAR2" = 3, "VAR2 1-cross lag" = 3, "VAR2 2-cross lags" = 3)) %>%
+  footnote(general="Pr(B!=0) is the posterior probability of the variable being selected")
+  #column_spec(5, bold = TRUE) %>% #c(0,0,1,0,0,0,1,0,0,0,0,0,0,0,0))
+  #gsub(".(begin|end){table.*}", "", ., perl = TRUE)%>%
+  #gsub(".centering", "", ., perl = TRUE)
+```
+\normalsize
+
+Using the two results table above, I selected the candidate gaps not only by their psAUC values but also by their other metrics and types of decomposition methods and features to ensure the robustness of the model averaging method. The 29 selected decomposition filters are reported in Figure \@ref(fig:weightgraph). 29 is also the number of recommended variables to start the Model Averaging method in the following subsection.
+
+
+### Model Averaging {#model-average}
+
+The Bayesian Model Average method is formalized in @raftery_bayesian_1995 to account for model uncertainty and achieve better prediction results in out-of-sample forecasts. Equation \@ref(eq:posteriorprobweight) represents a Model k's posterior probability or weight in the averaging process:
+\begin{align} (\#eq:posteriorprobweight)
+  P(M_k|D) = \frac{P(D|M_k)P(M_k)}{\sum\nolimits_{l=1}^K P(D|M_l)P(M_l)} 
+  \approx \frac{exp(-\frac{1}{2}BIC_k)}{\sum\nolimits_{l=1}^K exp(-\frac{1}{2}BIC_l)}
+\end{align}
+
+Where $P(M_k)$ is model prior probability and can be ignored if all models are assumed to have equal prior weights. $P(D|M_k)$ is the marginal likelihood. And $P(D|M_k) \propto exp(-\frac{1}{2}BIC_k)$.
+
+In which: 
+\begin{align} (\#eq:BIC-lik)
+BIC_k = 2log (Bayesfactor_{sk}) = \chi^2_{sk} - df_klog(n)
+\end{align}
+
+The subscript s indicates the saturated model. $\chi^2_{sk}$ is the deviance of model K from the saturated model.  $\chi^2_{sk} = 2(ll(Ms) - ll(Mk))$ . And $ll(Mk)$ is the log-likelihood of model Mk given data D. A model with better fitness will have a higher log-likelihood value, hence smaller deviance and smaller BIC value. $df_k$ is the degree of freedom of model K, and n is the number of observations.
+
+#### Alternative BIC Measurement {-}
+
+I propose using psAUC in addition to the log-likelihood in the measurement of deviance. Hence, an alternative BIC value can be estimated at:
+
+\begin{align} (\#eq:altBIC)
+BIC_{alt,k} &= 2log (Bayesfactor_{alt,sk}) \\
+&= 2(1000*(psAUC_s-psAUC_k)) - df_klog(n)
+\end{align}
+
+I scaled the psAUC value by 1000 since $0<psAUC<1$. Also, by design, the saturated model has $psAUC_s=1$.
+
+#### Final Real-time Search for Best Models Combinations {-}
+
+All of the following search steps described below are done in quasi-real time. As additional quarterly data are added, I will perform the search steps again to find the best possible combinations of models that fit the updated data.
+
+From the set of 29 candidate filter gaps selected in the previous subsection, I add an intercept parameter to make a list of 30 possible variables from which to choose a subset of combinations. The number of possible subsets of combinations is still significantly high at $2^{30} = 10^9$ possible combinations subset, which will cost us computation time and resources. I still need to limit the number of possible subsets further to consider. @furnival_regressions_2000 proposed an algorithm for computing the residual sums of squares for all possible regressions with minimum computing power requirement. With a "leap and bound" technique, the paper found it possible to find the best subsets without examining all possible subsets. This feature reduced the number of operations required to find the best subsets by several orders of magnitude. 
+
+From the list of reduced subsets using "leap and bound" algorithm, I further filter the number of possible gaps combinations using a method called Occam's razor window described in @raftery_bayesian_1995. The Bayesian Model Average (BMA) R package, which incorporated "leap and bound" algorithm, also has an inbuilt function to filter out less likely models using Occam's razor window method. The package also allowed for a multiple-pass filter through a custom function. 
+
+In this variable selection step using Occam's Razor, I will first select the models with BIC values within an Occam's Razor window of the best-fitted model with the lowest BIC value. Secondly, I repeat the same step above but regarding the alternative BIC value derived from psAUC as in Equation \@ref(eq:altBIC).
+
+Lastly, I filter out models with negative weight combinations for model averaging stability. In order to reach feasible results in these three-pass filter steps, I relax the Occam's razor (OC) value from the default value of 20 to 2000, corresponding to a change in the actual search window ( $2*ln(OC)$ ) that searches for models with 6 times less likelihood value to 15 times.
+
+
+#### Posterior Distribution of Coefficients of Interest {-}
+
+With all possible candidate models of credit gap combinations selected, I can start implementing the model averaging steps. First, I estimate each model k separately, then store their maximum likelihood estimated parameters $\beta_j(k)$ and their standard deviations. I use the notation $\beta_j(k)$ as the coefficient of credit gap j ($c_j$) in a logistic regression model k against pre-crisis indicator.
+
+I am interested in the averaged estimate of the parameter $\beta_j(K)$ across all models Ks, this is the estimate of the parameter of interest $\beta_j$ in an averaged model. When considering a particular $\beta_1$, the parameter has this probability distribution in a Bayesian averaged model setting:
+
+\begin{align} (\#eq:postprob)
+p(\beta_1|D, \beta_1\ne 0) = \sum\nolimits_{A_1} p(\beta_1|D,M_k)p'(M_k|D)
+\end{align}
+
+Where $p'(M_k|D)=p(M_k|D)/ pr[\beta_1 \ne 0|D]$. And $pr[\beta_1 \ne 0|D] = \sum\limits_{A_1} p(M_k|D)$. 
+
+$p(M_k|D)$ is the posterior probability discussed in Equation \@ref(eq:posteriorprobweight). While $pr[\beta_1 \ne 0|D]$ is the probability that $\beta_1$ is in the averaged model; and $A_1= \{M_k: k=1,...,K; \beta_1 \ne 0\}$ is the set of models that includes $\beta_1$.
+
+
+#### Estimation of Coefficients of Interest {-}
+
+From Equation \@ref(eq:postprob), an expected value of the parameter of interest $\beta_1$ could be estimated at:
+
+\begin{align}
+\hat{\beta}_1 &= E[\beta_1|D, \beta_1\ne 0] = \sum\limits_{A_1} \hat{\beta}_1(k)p'(M_k|D)
+\\
+SD^2[\beta_1|D, \beta_1\ne 0] &=[\sum\limits_{A_1}[se_1^2(k)+]+\hat{\beta_1}(k)]p'(M_k|D)
+- E[\beta_1|D, \beta_1\ne 0]^2
+\end{align}
+
+
+Where $\hat{\beta}_1(k)$ and $se_1^2(k)$ are respectively the MLE and standard error of $\beta_1$ under the model $M_k$.
+
+So far, I have established averaging estimated parameters using the Bayesian Model Average framework. The response values predicted by the generalized linear model regression can perform better than any individual model in out-of-sample prediction. However, this approach only solves half of the model uncertainty problem. Since I use a multivariate model, deducting an optimized credit gap threshold is still impossible through minimizing the policy loss function. I propose a solution to this issue in the following subsection.
+
+### Weighted Credit Gap Creation {#weighted-gap-creation}
+
+Our motivation to create an averaged weighted gap is to find a solution to the issue of not being able to determine an optimized credit threshold discussed above. Since all credit gap variables measure one set of information: how much in absolute value the total credit series deviated from its long-run trend, I can strategically assign weights to them to create a weighted credit gap.
+
+Our objective is to assign weights to the credit gaps to combine them and create a single credit gap that performs as well as the multivariate Bayesian averaged model in the previous subsection \@ref(model-average). After creating the weighted cycle, I can perform an optimized credit gap threshold analysis, assign a policy loss function value, and compare its EWI performance with other credit gap filters.
+
+Multivariate GLM binary logistic predicted response values: 
+\begin{align} (\#eq:glmpredicteq)
+\widehat{pre.crisis}_{ti} = \widehat{probability}_{ti} = \frac {1}{1+exp(-(a+\sum\nolimits_j \hat{\beta}_j c_{tij}))}
+\end{align}
+
+From the previous subsection \@ref(model-average), in a Bayesian averaged model: $\hat{\beta}_j$ = $E[\beta_j|D, \beta_j\ne 0] = \sum\limits_{A_j} \hat{\beta}_j(k)p'(M_k|D)$. 
+
+Using the information in Equation \@ref(eq:glmpredicteq), I propose creating a single weighted credit gap $\hat{c}_{ti}$ that satisfies:
+\begin{align*}
+\frac {1}{1+exp(-(a+\hat{\beta} \hat{c}_{ti}))}= \frac {1}{1+exp(-(a+\sum\nolimits_j \hat{\beta}_j c_{tij}))} \\
+\end{align*}
+Or
+\begin{align}
+\hat{\beta} \hat{c}_{ti} = \sum\limits_j \hat{\beta}_j c_{tij}
+\end{align}
+
+This condition allows us to create a weighted gap $\hat{c}_{ti}$ that will have similar predicted response values and averaged characteristics of the averaged decomposition filters selected. Additionally, to further simplify construction of the weighted gap, I then propose $\hat{\beta} = \sum\nolimits_j \hat{\beta}_j$.
+
+Therefore, 
+
+\begin{align}
+\hat{c}_{ti} = \frac{\sum\nolimits_j (\hat{\beta}_j c_{tij})}{\hat{\beta}} = \frac{\sum\nolimits_j (\hat{\beta}_j c_{tij})}{\sum\nolimits_j\hat{\beta}_j} = \sum\nolimits_j w_j c_{tij}
+\end{align}
+
+The weight of each candidate credit gap j is $w_j = \frac{\hat{\beta}_j}{\sum\nolimits_j\hat{\beta}_j}$, which is the fraction of the estimate of coefficient $\beta_j$ in the averaged model over the sum of the estimated coefficients of all selected credit gaps.
+
+#### One-sided Crisis-weighted Averaged Credit Gap {-}
+
+I save the weights $w_j$ at every incremental period $t$ of available data to create a one-sided weight vector $w_{tj}$. In the next section, Figure \@ref(fig:weightgraph) illustrates time series of changes in the weights of credit gaps. I estimate the first 15 years of data available for stable model implementation as a full sample regression and assign the weights as constant during that period.
+
+To create one-sided crisis weighted averaged credit gap for each country $i$ ($\hat{c}_{ti}$), I compute:
+
+\begin{align}
+\hat{c}_{ti,one-sided} = \sum\nolimits_{j} w_{tj} * c_{tij}
+\end{align}
+
+At this point, I have established a framework to create a one-sided crisis weighted averaged credit gap. In the next section, Empirical Results, I will compare the performance as an EWI of this one-sided crisis weighted credit gap (one-sided weighted gap) with other top candidate credit gaps.
+
+
+<!--chapter:end:43_Empirical_Model.Rmd-->
+
+
+```{r weightgraph, echo=FALSE, out.width='100%', fig.align="center", fig.cap="One sided weights graph"}
+knitr::include_graphics('../../../3rdPaper/Data/Output/Graphs/Weights_combined.pdf')
+```
+
+## Empirical Results {#empirical-results}
+
+### One-sided Weights Time Series Graph {#weight-graphs}
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+# Load libraries
+library('kableExtra')
+library(dplyr)
+library(knitr)
+options(kableExtra.latex.load_packages = FALSE)
+options(knitr.table.format = "pandoc")
+options(knitr.kable.NA = '')
+opts_chunk$set(fig.pos="H")
+```
+
+
+In Figure \@ref(fig:weightgraph), we see that for the first 15-18 years of the data sample, the parsimony (c.poly3) 3rd degree polynomial filter's weight dominated all the other filters. However, after about 20 years, the (c.poly3) filter lost all of its weight. This could be explained by the lack of initial data, leading to poorer performance of other credit gap measurements.
+
+However, as more data were updated, the dynamics of the weights changed significantly. During the early 1990s, Hodrick-Prescott filters' weights overshadowed others, then the Beveridge-Nelson, and the Structural Time-Series model did. As the Great Financial Crisis happened, the Hamilton filter in a panel setting gained weight. And lastly, at the end of the crisis data period 2017:Q4, we have 3 Beveridge-Nelson filters (c.bn2_r20, c.bn2_r15 and c.bn3_r15) and 1 Hamilton filter (c.hamiolton28_panelr20) sharing nearly equal weights. To apply the findings in the limited sample and make predictions using latest available credit data, I fixed the weights for 2017:Q4 at constant and extrapolated the weights to 2021:Q3, the end period of this paper's credit data availability.
+
+
+<!--[Talk about weight changes over the years below]
+[How we extrapolated from 2018:Q1 to 2021:Q3]-->
+
+
+### Model Fitness Results {#model-fit}
+
+
+<!--[Discuss bootstrapping method details, and other methodological details here.]-->
+
+The standard deviation for each estimate is deducted from a 95% confidence interval of the bootstrapping results using 2000 stratified bootstrap replicates.^[I estimate partial ROC and confidence interval using the R package "pROC" by @robin_proc_2011 whose methodology is based on @carpenter_bootstrap_2000]
+
+```{r varcompAE, echo=FALSE, warning=FALSE, message=FALSE}
+
+filepath='../../../3rdPaper/Data/Output/Modelcomparison_512_weighted_countrylist_AE.csv'
+df<-read.csv(filepath, sep = ",", header=TRUE)
+
+name1<- df[,1]
+name1<- gsub("_", ".", name1)
+name1[which(name1=="c.hp400k")]<-"BIS Basel gap"
+df[,1]<-name1
+
+df<-df[,-c(15:ncol(df))]
+df2<- as.data.frame(matrix(NA,2*nrow(df),9))
+for (i in 1:nrow(df)){
+  df2[2*(i-1)+1,c(1:9)]<-df[i,c(1:9)]
+  df2[2*(i-1)+2,c(4,5,7,8,9)]<-df[i,c(10:14)]
+}
+
+colnames(df2)<-c("Cycle","BIC","AIC","AUC","psAUC",
+                "c.Threshold","Type I","Type II","Policy Loss Function")
+
+f <- function(x){ sprintf('%.4f',x)}
+fs <- function(x){ sprintf("(%s)",x)}
+
+df2[,-1]<- data.frame(lapply(df2[,-1], f))
+
+for (i in 1:nrow(df)){
+df2[2*(i-1)+2,] <- df2[2*(i-1)+2,] %>% 
+   lapply(. , fs) %>% data.frame()
+}
+
+df2[ df2 == "(NA)" ] <- NA
+df2[ df2 == "(0.0000)" ] <- NA
+
+
+df2 <- df2[-c(41:nrow(df2)),]
+
+kbl(df2, "latex", booktabs = T, digits = c(4, 4, 4, 4, 4, 4, 4, 4, 4), escape=FALSE, linesep=c("", "\\addlinespace"), caption = "Credit gaps performance as EWIs - Advanced Economies"
+      , row.names = FALSE) %>%
+  #add_header_above(c("Parameters" = 1, "VAR2" = 3)) %>%
+  add_footnote("The standard deviation for each estimates are deducted from 95% confidence interval of the bootstrapping results using 2000 stratified bootstrap replicates.", notation="none") %>%
+  kable_styling(latex_options=c("striped","scale_down")) %>%
+  kable_paper(c("striped")) %>%   
+  column_spec(5, bold = TRUE) %>% #c(0,0,1,0,0,0,1,0,0,0,0,0,0,0,0))
+  row_spec(c(which(df2$Cycle=="1.sided weighted.cycle"),which(df2$Cycle=="1.sided weighted.cycle")+1,which(df2$Cycle=="BIS Basel gap"),which(df2$Cycle=="BIS Basel gap")+1),  bold=TRUE)#%>%
+  #gsub(".(begin|end){table.*}", "", ., perl = TRUE)%>%
+  #gsub(".centering", "", ., perl = TRUE)
+```
+
+```{r varcompEME, echo=FALSE, warning=FALSE, message=FALSE}
+
+filepath='../../../3rdPaper/Data/Output/Modelcomparison_512_weighted_countrylist_EME.csv'
+df<-read.csv(filepath, sep = ",", header=TRUE)
+
+name1<- df[,1]
+name1<- gsub("_", ".", name1)
+name1[which(name1=="c.hp400k")]<-"BIS Basel gap"
+df[,1]<-name1
+
+df<-df[,-c(15:ncol(df))]
+df2<- as.data.frame(matrix(NA,2*nrow(df),9))
+for (i in 1:nrow(df)){
+  df2[2*(i-1)+1,c(1:9)]<-df[i,c(1:9)]
+  df2[2*(i-1)+2,c(4,5,7,8,9)]<-df[i,c(10:14)]
+}
+
+colnames(df2)<-c("Cycle","BIC","AIC","AUC","psAUC",
+                "c.Threshold","Type I","Type II","Policy Loss Function")
+
+f <- function(x){ sprintf('%.4f',x)}
+fs <- function(x){ sprintf("(%s)",x)}
+
+df2[,-1]<- data.frame(lapply(df2[,-1], f))
+
+for (i in 1:nrow(df)){
+df2[2*(i-1)+2,] <- df2[2*(i-1)+2,] %>% 
+   lapply(. , fs) %>% data.frame()
+}
+
+df2[ df2 == "(NA)" ] <- NA
+df2[ df2 == "(0.0000)" ] <- NA
+
+df2 <- df2[-c(41:nrow(df2)),]
+
+options(knitr.kable.NA = '')
+
+kbl(df2, "latex", booktabs = T, digits = c(4, 4, 4, 4, 4, 4, 4, 4, 4), escape=FALSE, linesep=c("", "\\addlinespace"), caption = "Credit gaps performance as EWIs - Emerging Market Economies"
+      , row.names = FALSE) %>%
+  #add_header_above(c("Parameters" = 1, "VAR2" = 3)) %>%
+  add_footnote("The standard deviation for each estimates are deducted from 95% confidence interval of the bootstrapping results using 2000 stratified bootstrap replicates.", notation="none") %>%
+  kable_styling(latex_options=c("striped","scale_down")) %>%
+  kable_paper(c("striped")) %>%   
+  column_spec(5, bold = TRUE) %>% #c(0,0,1,0,0,0,1,0,0,0,0,0,0,0,0))
+  row_spec(c(which(df2$Cycle=="1.sided weighted.cycle"),which(df2$Cycle=="1.sided weighted.cycle")+1,which(df2$Cycle=="BIS Basel gap"),which(df2$Cycle=="BIS Basel gap")+1),  bold=TRUE)#%>%
+  #gsub(".(begin|end){table.*}", "", ., perl = TRUE)%>%
+  #gsub(".centering", "", ., perl = TRUE)
+```
+
+```{r varcompfull, echo=FALSE, warning=FALSE, message=FALSE}
+
+filepath='../../../3rdPaper/Data/Output/Modelcomparison_512_weighted_countrylist_full.csv'
+df<-read.csv(filepath, sep = ",", header=TRUE)
+
+name1<- df[,1]
+name1<- gsub("_", ".", name1)
+name1[which(name1=="c.hp400k")]<-"BIS Basel gap"
+df[,1]<-name1
+
+df<-df[,-c(15:ncol(df))]
+df2<- as.data.frame(matrix(NA,2*nrow(df),9))
+for (i in 1:nrow(df)){
+  df2[2*(i-1)+1,c(1:9)]<-df[i,c(1:9)]
+  df2[2*(i-1)+2,c(4,5,7,8,9)]<-df[i,c(10:14)]
+}
+
+colnames(df2)<-c("Cycle","BIC","AIC","AUC","psAUC",
+                "c.Threshold","Type I","Type II","Policy Loss Function")
+
+f <- function(x){ sprintf('%.4f',x)}
+fs <- function(x){ sprintf("(%s)",x)}
+
+df2[,-1]<- data.frame(lapply(df2[,-1], f))
+
+for (i in 1:nrow(df)){
+df2[2*(i-1)+2,] <- df2[2*(i-1)+2,] %>% 
+   lapply(. , fs) %>% data.frame()
+}
+
+df2[ df2 == "(NA)" ] <- NA
+df2[ df2 == "(0.0000)" ] <- NA
+
+df2 <- df2[-c(41:nrow(df2)),]
+
+kbl(df2, "latex", booktabs = T, digits = c(4, 4, 4, 4, 4, 4, 4, 4, 4), escape=FALSE, linesep=c("", "\\addlinespace"), caption="Credit gaps performance as EWIs - Full sample"
+      , row.names = FALSE) %>%
+  #add_header_above(c("Parameters" = 1, "VAR2" = 3)) %>%
+  add_footnote("The standard deviation for each estimates are deducted from 95% confidence interval of the bootstrapping results using 2000 stratified bootstrap replicates.", notation="none") %>%
+  kable_styling(latex_options=c("striped","scale_down")) %>%
+  kable_paper(c("striped")) %>%   
+  column_spec(5, bold = TRUE) %>% #c(0,0,1,0,0,0,1,0,0,0,0,0,0,0,0))
+  row_spec(c(which(df2$Cycle=="1.sided weighted.cycle"),which(df2$Cycle=="1.sided weighted.cycle")+1,which(df2$Cycle=="BIS Basel gap"),which(df2$Cycle=="BIS Basel gap")+1),  bold=TRUE)#%>%
+  #gsub(".(begin|end){table.*}", "", ., perl = TRUE)%>%
+  #gsub(".centering", "", ., perl = TRUE)
+```
+
+#### Performance Metrics {-}
+Along with the results from Table \@ref(tab:varcompAE) - \@ref(tab:varcompfull), I discuss psAUC as a performance measurement criteria of a credit gap series as an EWI. Firstly, the psAUC metric overall gives a consistent signal about the quality of the credit gap decomposition filters. A filter with a higher psAUC value, in general, will have a higher quality set of possible policy loss function values to optimize. The standard deviation values of the weighted cycle metrics are also comparable to the other gap measurements.
+
+In some scenarios, psAUC can be a deciding factor if policymakers are indifferent about the AUC value of a filter. In Table \@ref(tab:varcompfull), the Moving Average (c.ma) and Hamilton 13th lag using panel setting (c.hamilton13.panel) filters have the same AUC values. While the BIC and AIC values, the overall linearized binary logistic regression fitness criteria, would favor (c.hamilton13.panel) filter. The psAUC indicates otherwise. If we only focus on the region where FPR or the optimized threshold's predictive power is at least 2/3, the minimized policy loss function would favor c.ma. 
+
+However, there are also instances where psAUC failed to be a single criterion for determining the performance of a filter. In Table \@ref(tab:varcompfull), the 4th-degree polynomial filter with a rolling sample of 20 years (c.poly4.r20) have a higher psAUC value than the BIS Basel gap. However, all of (c.poly4.r20) filter's other metrics have less preferred values than the BIS Basel gap. As a result, we deem (c.poly4.r20) less preferred than the BIS Basel gap. 
+
+In conclusion, even though psAUC is an overall good measurement for a specific case of binary regression model, where Type II errors are costlier than Type I errors, and we focus the optimized threshold on the region where Type II errors are less than 1/3; We still have to use it in conjunction with other criteria such as BIC, AUC, and loss function to determine the performance of a filter. Using it alone will give biased results of the model performance.
+
+
+#### Weighted Gap and other Gaps Performance Comparison {-}
+
+In this part, I will discuss the performance of the weighted credit gap series as an EWI and compare it with other selected series.
+
+From Table \@ref(tab:varcompAE) and Table \@ref(tab:varcompfull) regarding Advanced Economies and full sample results, the weighted credit cycle outperformed other cycles in AUC, psAUC, and Policy Loss function values. Specifically, while maintaining approximately the same optimized threshold as the BIS Basel gap, the weighted credit cycle can achieve lower Type I and II error rates than the BIS Basel gap in all samples.
+
+The findings in Advanced Economies and full sample results also align with the literature findings. Hamilton and Moving Average filters with optimized parameters perform well, which agrees with the findings in @beltran_optimizing_2021. The findings also agree with @drehmann_which_2021 proposal of using Hamilton filter in a panel setting with fixed sloping coefficients across countries, and with @galan_measuring_2019 who found rolling sample with 15 and 20 years window helps with improvement of the early indicator performance.
+
+On the other hand, across the three tables, optimizing and changing parameters on the one-sided HP filter does not improve its performance over the BIS Basel gap. This is contrary to the finding in @beltran_optimizing_2021 and @galan_measuring_2019. In [@galan_measuring_2019], the author did not use a full sample analysis but by individual countries. The structural time series filter proposed in @beltran_optimizing_2021 also did not perform better than the BIS Basel gap. 
+
+Unsurprisingly, parsimony filters such as linear and polynomial does not perform well in AE and full sample. However, they can outperform other well-studied gaps in EMEs. This confirmed my finding in the previous section \@ref(weight-graphs) that when data are limited, and the market economies are not well established, parsimony filters outperformed other complex filters.
+
+I want to reiterate the importance of avoiding the pitfall of using a single criterion for selecting models, even for the psAUC metric. In Table \@ref(tab:varcompEME). The (c.poly3) filter has a higher psAUC value than its next filter on the table (c.bn2.r15). However, (c.poly3)'s other metrics have lower quality than its counterpart. The policy loss function, Type I and II errors rates are higher for (c.poly3). Therefore, c.bn2.r15 is preferred over c.poly3.
+
+Last but not least, the emerging market economies (EMEs) have proven challenging to predict crises using the credit gap as an EWI because of their more limited sample sizes and less established financial systems. Both @beltran_optimizing_2021 and @drehmann_which_2021 found that credit gap-based EWIs do not perform well in emerging market economies. In this paper, I found evidence that adding Beveridge-Nelson decomposition filters to the model selection process improved the model performance for the EMEs, specifically the (c.bn3.r15) Beveridge-Nelson filter with a smoothing parameter of 3 lags and 15 years rolling sample. Later graphical analysis in this paper on EMEs will include (c.bn3.r15) filter as another reference. Another Beveridge-Nelson filter with specific features such as (c.bn6.r20) also performs well in both AE and full samples.
+
+<!--
+(Reconfirm findings in other papers)
+  (Compare results of certain papers and also compare the results of the three regions)
+  (Compare results of hybrid (rolling and panel) and how that creates an even better indicator)
+  (However, changing parameter for the one sided hp filter does not seem to prove helpful)
+(Discuss outliers and pitfall of using a single criterion for selecting models)
+(Establish superiority of the weighted gap)
+(Establish superiority of the new EWI criteria)
+(BN gap works better than other gaps for EME)
+-->
+
+
+### Out-of-Sample Forecast {#cross-validation}
+
+<!--(Discuss cross validation methods)-->
+I followed @alessi_identifying_2018 in implementing k-fold leave-one-out cross-validation to perform an out-of-sample forecast analysis. To assess the out-of-sample predictive power of the credit gaps, I perform a 3-fold cross-validation, in which the data is randomly split into three partitions. For each partition, the model is estimated using the other two groups. The resulting estimated parameter is then used to predict the dependent variable in the unused group. I then compute psAUCs and other metrics values and obtain the average metrics and their standard deviations from 10 repeats.
+
+```{r cvvarcompAE, echo=FALSE, warning=FALSE, message=FALSE}
+
+filepath='../../../3rdPaper/Data/Output/CV_Modelcomparison_512_weighted_countrylist_AE.csv'
+df<-read.csv(filepath, sep = ",", header=TRUE)
+
+name1<- df[,1]
+name1<- gsub("_", ".", name1)
+name1[which(name1=="c.hp400k")]<-"BIS Basel gap"
+df[,1]<-name1
+
+df<-df[,-c(3,10:13,15,22:25)]
+df2<- as.data.frame(matrix(NA,2*nrow(df),8))
+for (i in 1:nrow(df)){
+  df2[2*(i-1)+1,c(1:8)]<-df[i,c(1:8)]
+  df2[2*(i-1)+2,c(2:8)]<-df[i,c(9:15)]
+}
+
+colnames(df2)<-c("Cycle","BIC","AUC","psAUC",
+                "c.Threshold","Type I","Type II","Policy Loss Function")
+
+
+f <- function(x){ sprintf('%.4f',x)}
+fs <- function(x){ sprintf("(%s)",x)}
+
+
+df2[,-1]<- data.frame(lapply(df2[,-1], f))
+
+for (i in 1:nrow(df)){
+df2[2*(i-1)+2,] <- df2[2*(i-1)+2,] %>% 
+   lapply(. , fs) %>% data.frame()
+}
+
+df2[ df2 == "(NA)" ] <- NA
+df2[ df2 == "(0.0000)" ] <- NA
+
+df2 <- df2[-c(41:nrow(df2)),]
+
+kbl(df2, "latex", booktabs = T, digits = c(4, 4, 4, 4, 4, 4, 4, 4), escape=FALSE, linesep=c("", "\\addlinespace"), caption = "Credit gaps performance as EWIs - Out of sample prediction - AE"
+      , row.names = FALSE) %>%
+  #add_header_above(c("Parameters" = 1, "VAR2" = 3)) %>%
+  footnote(general="3-fold cross-validation results. Standard errors are reported in parentheses.") %>%
+  kable_styling(latex_options=c("striped","scale_down")) %>%
+  kable_paper(c("striped")) %>%   
+  column_spec(4, bold = TRUE) %>% #c(0,0,1,0,0,0,1,0,0,0,0,0,0,0,0))
+  row_spec(c(which(df2$Cycle=="1.sided weighted.cycle"),which(df2$Cycle=="1.sided weighted.cycle")+1,which(df2$Cycle=="BIS Basel gap"),which(df2$Cycle=="BIS Basel gap")+1),  bold=TRUE)#%>%
+  #gsub(".(begin|end){table.*}", "", ., perl = TRUE)%>%
+  #gsub(".centering", "", ., perl = TRUE)
+```
+
+
+```{r cvvarcompEME, echo=FALSE, warning=FALSE, message=FALSE}
+
+filepath='../../../3rdPaper/Data/Output/CV_Modelcomparison_512_weighted_countrylist_EME.csv'
+df<-read.csv(filepath, sep = ",", header=TRUE)
+
+name1<- df[,1]
+name1<- gsub("_", ".", name1)
+name1[which(name1=="c.hp400k")]<-"BIS Basel gap"
+df[,1]<-name1
+
+df<-df[,-c(3,10:13,15,22:25)]
+df2<- as.data.frame(matrix(NA,2*nrow(df),8))
+for (i in 1:nrow(df)){
+  df2[2*(i-1)+1,c(1:8)]<-df[i,c(1:8)]
+  df2[2*(i-1)+2,c(2:8)]<-df[i,c(9:15)]
+}
+
+colnames(df2)<-c("Cycle","BIC","AUC","psAUC",
+                "c.Threshold","Type I","Type II","Policy Loss Function")
+
+
+f <- function(x){ sprintf('%.4f',x)}
+fs <- function(x){ sprintf("(%s)",x)}
+
+df2[,-1]<- data.frame(lapply(df2[,-1], f))
+
+for (i in 1:nrow(df)){
+df2[2*(i-1)+2,] <- df2[2*(i-1)+2,] %>% 
+   lapply(. , fs) %>% data.frame()
+}
+
+df2[ df2 == "(NA)" ] <- NA
+df2[ df2 == "(0.0000)" ] <- NA
+
+df2 <- df2[-c(41:nrow(df2)),]
+
+kbl(df2, "latex", booktabs = T, digits = c(4, 4, 4, 4, 4, 4, 4, 4), escape=FALSE, linesep=c("", "\\addlinespace"), caption = "Credit gaps performance as EWIs - Out of sample prediction - EME" 
+      , row.names = FALSE) %>%
+  #add_header_above(c("Parameters" = 1, "VAR2" = 3)) %>%
+  footnote(general="3-fold cross-validation results. Standard errors are reported in parentheses.") %>%
+  kable_styling(latex_options=c("striped","scale_down")) %>%
+  kable_paper(c("striped")) %>%   
+  column_spec(4, bold = TRUE) %>% #c(0,0,1,0,0,0,1,0,0,0,0,0,0,0,0))
+  row_spec(c(which(df2$Cycle=="1.sided weighted.cycle"),which(df2$Cycle=="1.sided weighted.cycle")+1,which(df2$Cycle=="BIS Basel gap"),which(df2$Cycle=="BIS Basel gap")+1),  bold=TRUE)#%>%
+  #gsub(".(begin|end){table.*}", "", ., perl = TRUE)%>%
+  #gsub(".centering", "", ., perl = TRUE)
+```
+
+
+```{r cvvarcompfull, echo=FALSE, warning=FALSE, message=FALSE}
+
+filepath='../../../3rdPaper/Data/Output/CV_Modelcomparison_512_weighted_countrylist_full.csv'
+df<-read.csv(filepath, sep = ",", header=TRUE)
+
+name1<- df[,1]
+name1<- gsub("_", ".", name1)
+name1[which(name1=="c.hp400k")]<-"BIS Basel gap"
+df[,1]<-name1
+
+df<-df[,-c(3,10:13,15,22:25)]
+df2<- as.data.frame(matrix(NA,2*nrow(df),8))
+for (i in 1:nrow(df)){
+  df2[2*(i-1)+1,c(1:8)]<-df[i,c(1:8)]
+  df2[2*(i-1)+2,c(2:8)]<-df[i,c(9:15)]
+}
+
+colnames(df2)<-c("Cycle","BIC","AUC","psAUC",
+                "c.Threshold","Type I","Type II","Policy Loss Function")
+
+
+f <- function(x){ sprintf('%.4f',x)}
+fs <- function(x){ sprintf("(%s)",x)}
+
+
+df2[,-1]<- data.frame(lapply(df2[,-1], f))
+
+for (i in 1:nrow(df)){
+df2[2*(i-1)+2,] <- df2[2*(i-1)+2,] %>% 
+   lapply(. , fs) %>% data.frame()
+}
+
+df2[ df2 == "(NA)" ] <- NA
+df2[ df2 == "(0.0000)" ] <- NA
+
+
+df2 <- df2[-c(41:nrow(df2)),]
+
+kbl(df2, "latex", booktabs = T, digits = c(4, 4, 4, 4, 4, 4, 4, 4), escape=FALSE, linesep=c("", "\\addlinespace"), caption = "Credit gaps performance as EWIs - Out of sample prediction - Full sample"
+      , row.names = FALSE) %>%
+  #add_header_above(c("Parameters" = 1, "VAR2" = 3)) %>%
+  footnote(general="3-fold cross-validation results. Standard errors are reported in parentheses.") %>%
+  kable_styling(latex_options=c("striped","scale_down")) %>%
+  kable_paper(c("striped")) %>%   
+  column_spec(4, bold = TRUE) %>% #c(0,0,1,0,0,0,1,0,0,0,0,0,0,0,0))
+  row_spec(c(which(df2$Cycle=="1.sided weighted.cycle"),which(df2$Cycle=="1.sided weighted.cycle")+1,which(df2$Cycle=="BIS Basel gap"),which(df2$Cycle=="BIS Basel gap")+1),  bold=TRUE)#%>%
+  #gsub(".(begin|end){table.*}", "", ., perl = TRUE)%>%
+  #gsub(".centering", "", ., perl = TRUE)
+```
+
+The overall results of the out-of-sample prediction exercise show similar findings as in the previous subsection \@ref(model-fit) that used bootstrapping method. The ranking of the filters does not change significantly. These results overall affirm the robustness of using credit gaps as EWI models. 
+
+On Table \@ref(tab:cvvarcompAE) regarding the AEs, the weighted cycle has a lower value than the (c.hamilton.panelr15) filter. However, the weighted cycle has a lower loss function value and lower overall Type I and Type II error rates.
+
+Expectedly, for EMEs, on Table \@ref(tab:cvvarcompEME) the parsimony (c.poly3) 3th power polynomial filter dropped its psAUC in out-of-sample prediction context compared to its bootstrapped value on Table \@ref(tab:varcompEME). This could be predicted by its poor metrics such as BIC and Loss Function on the model fitness results in the previous subsection.
+
+Through the two subsections \@ref(model-fit) and \@ref(cross-validation), the model proved to perform well in identifying at-risk periods before a crisis and normal periods of countries in the sample, especially regarding its criteria for selecting robust EWI early warning indicators and its method of weighted-averaging the top candidates for improved model certainty and out-of-sample forecast. With this evidence, I will move our discussion to specific individual countries' analysis in the next section.
+
+<!--
+(Discuss results in the three regions, variance difference too)
+(Reconfirm findings in previous section with the bootstrapping method)
+(Reconfirm findings in other papers)
+
+- (Compare results of certain papers and also compare the results of the three regions)
+
+- (Compare results of hybrid (rolling and panel) and how that creates an even better indicator)
+
+(Establish superiority of the weighted gap)
+
+(Establish superiority of the new EWI criteria)
+
+(BN gap works better than other gaps for EME)-->
+
+<!--chapter:end:44_Empirical_Results.Rmd-->
+
+
+## Analyzing Time Series Graphs of Individual Countries
+
+This section will discuss the BIS Basel gap and weighted gap as EWIs for the US and UK. Based on the estimated optimized gap threshold values for the weighted gap and BIS Basel gap reported in Table \@ref(tab:varcompfull) and \@ref(tab:cvvarcompfull) for full sample results, I will use an optimized credit gap threshold of 3.00 for ease of comparison. The black shaded area on Figures \@ref(fig:wUS) and \@ref(fig:wUK) ranges from 2018:Q1 to 2021:Q3, representing periods where we do not have sufficient crisis data, but credit data are available.
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+# Load libraries
+library(knitr)
+options(knitr.table.format = "pandoc")
+opts_chunk$set(fig.pos="h")
+```
+
+
+```{r wUS, echo=FALSE, out.width='100%', fig.align="center", fig.cap = 'US time series graph'}
+knitr::include_graphics('../../../3rdPaper/Data/Output/Graphs/Weighted_credit_gap_US.pdf')
+```
+
+```{r wUK, echo=FALSE, out.width='100%', fig.align="center", fig.cap = 'UK time series graph'}
+knitr::include_graphics('../../../3rdPaper/Data/Output/Graphs/Weighted_credit_gap_UK.pdf')
+```
+
+For the US, the weighted gap and BIS Basel gap performed similarly. They were able to predict the late 80s - early 90s financial crisis. They raised above the threshold starting early 2000s, which would result in misclassification of pre-crisis periods (Type I error) since my model aims to only identify periods of 5-12 months before a systemic financial crisis that would not happen until 2008. Nevertheless, the two gap series showed a build-up of an unsustainable credit gap for a prolonged period before the Great Financial Crisis (GFC) in the US. It is also worth pointing out that the weighted gap dipped below the threshold again before climbing again to identify the pre-crisis period of the GFC correctly. 
+
+The graph for the UK tells quite a similar story to the US. Both the credit gaps were able to detect the pre-crisis periods in the early 1990s and the GFC on 2008 for the UK. However, regarding the 90s crisis, the BIS Basel gap went above its threshold too early, for about five years. This could trigger unnecessary counter-cyclical buffer measurements from the central bank and cause the economy to slow its growth rate because of credit constraints. The weighted gap performed much better than the BIS Basel gap as it only sent out the signal during the pre-crisis period of the early 1990s for the UK.   
+
+From the graphical features of the weighted gap, the magnitude and length of the weighted gaps are comparable to that of the BIS Basel gap, which has a long smooth trend generating a large credit gap. Additionally, the weighted gap also retains the more volatile features and short spikes of sudden credit growth that the Beveridge-Nelson and other shorter-term cycle decomposition methods have. These averaged features help explain the averaged method's improved performance as an EWI over other traditional decomposition filters.
+
+From here, to continue my analysis beyond 2017:Q4, I extrapolated the weights on one-sided credit gaps as constants to create a weighted credit gap outside of the crisis data range. This allows me to extrapolate my prediction until 2021:Q3. In response to COVID-19, most countries increased their total credit through multiple stimulus policies, or their GDP growth slowed down, both scenarios created a significant upswing in the magnitude of the credit gap measurement above its optimized pre-crisis detection threshold. Per @drehmann_which_2021, a good EWI signal would have the ideal characteristic of a stable signal meaning the credit gap need to be above the threshold and remain stable above the threshold during the pre-crisis period. I assume from my model finding that an economy with a credit gap above its optimized threshold for 8 consecutive quarters has a 2/3rd chance of having a financial crisis after the next 4 quarters.
+
+As for the US, even though its credit gap was above the threshold for a few quarters, the gap eventually dropped below the threshold. This does not give us enough evidence to suggest that the country is at risk of a systemic financial crisis in the short future. However, there was an increase in the risk of crisis as the credit gap went beyond the threshold substantially during COVID-19 period. For the UK, the credit gaps did not exceed its threshold. Therefore, there is no evidence to show that the UK is at risk of a future financial crisis.
+
+Moreover, I performed a graphical analysis of all the countries in the sample and identified countries with significant credit gaps above the optimized 3.00 credit gap threshold beyond the 2017:Q4 crisis data limit window. I selected nine countries with signs of being at pre-crisis risk and should have performed pre-emptive macroprudential measures. They are Canada, France, Hong Kong (SAR), Japan, South Korea, Saudi Arabia, Switzerland, Sweden, and Thailand.^[graphs of those countries are included in Appendix \@ref(graphs-other)]
+
+There are three outliers in those nine countries: Canada, Hong Kong (SAR), and Switzerland. Since the end of the GFC, the credit gaps in these four countries have been substantially above their optimized threshold. Additionally, those three countries and Saudi Arabia never experienced systemic financial crises. Therefore, the EWI model performance for those three countries is not robust, and the evidence only comes from abroad. The other countries: France, Sweden, Japan, South Korea, and Thailand have evidence to show pre-emptive macroprudential measures need to be implemented to reduce the risk of future systemic financial crises.
+
+<!--(Discuss how different gap capture the pre-crisis periods differently)
+
+(How the weighted gap performs better than the BIS gap based on the evidence of the graph)
+
+(From the discussion on the out-of-sample forecast analysis, 
+extrapolate the prediction on the end of crisis data period (2018:Q1 - 2021:Q3)
+
+(Mention the countries that have substantial credit gap above it's long run trend)
+
+(- Include graphs of those countries (with crises periods) on Appendix and link reference here)
+
+(- Discuss certain countries, criteria for identifying (unsustainable gap above threshold), we can say with certain degree of certainty that the risk of systemic crisis given our model is ... % percent, from fpr and fnr values out of sample forecast )
+
+( - Discuss outliers : HK and CH, how they have been having a long periods of positive credit gaps above their long-run trends even before the end of crisis data )-->
+
+<!--chapter:end:45_Graphical_Analysis.Rmd-->
+
+
+## Conclusion
+
+Our study is based on the idea that excessive credit growth measured by the total credit to GDP deviation could be used as an early warning indicator for future systemic financial crises. I build a novel framework to select relevant credit gap decomposition filters, average their combinations, and create a crisis-weighted credit gap that inherits the combined features of the selected filters. I also proposed a novel performance metric for early warning indicator psAUC with a specific constraint that has appealing policy implication properties.
+
+Our findings in this paper provide robust evidence to show the superior predictive performance of our proposed weighted credit gap over other univariate early warning indicator models that use individual credit gap filters. The novel proposed metric psAUC also showed that it has appealing properties for policy maker. It simplifies the steps to search for a decomposition filter with minimum loss function in the range of credit gap thresholds that have Type II error rates smaller than 1/3. Therefore, the weighted gap and novel metric can be regarded as useful additional reference points for policy implications.
+
+\clearpage
+
+
+<!--(References for closing: one of the 6 reference papers)
+We have created a system ... (Alessi 2017)
+summarize opening assumptions, findings, contributions
+Policy implication, reference
+Future improvement-->
+
+<!--chapter:end:46_Conclusion.Rmd-->
+
+# References {-}
+
+<div id="refs"></div>
+
+<!--( - How to deduct optimized threshold from model threshold results)
+( - Only would work with univariate regression, since a multivariate model will have multiple
+inputs solution for a predicted response value)
+
+## Model average implimentation 
+( - Steps of averaging
+    - Do a search and bound ( paper reference here ) to find the best models with the fewest number of variables from a fully saturated model. 
+    - Occam's razor: 20000, 2*log*2000
+      - Filter them by Occam's razor based on BIC value: )
+      - Filter only models with only positive weights
+      - Filter them by Occam's razor based on psAUC value: )-->
+
+
+<!--\addtocontents{toc}{\protect\setcounter{tocdepth}{0}}-->
+\addtocontents{toc}{\protect\renewcommand\protect\cftchapaftersnum{:} \protect\setcounter{tocdepth}{0}}
+
+
+<!--# (APPENDIX) Appendix {-}-->
+\begin{appendices}
+\chapter{Chapter 2}
+
+\section{Model Estimation - Initial Values Selection}
+The starting values/priors for vector autoregressive parameters in matrix F from equation 2.10 are taken from VAR regression of the one-sided HP filter cycle decomposition of the series with $\lambda=125,000$.
+
+For $\beta_{0|0}$, I set $\tau_{0|0}$ as the value HP filtered trend component and omit the first observation from the regression. $c_{0|0}$ cycle components are also set to be equal to their HP filter counterpart. Variance $var(\tau_{0|0}) =100+50*random$, with the random value drawn from a uniform distribution (0,1). While other measures of the starting covariance are set to be at their unconditional mean values.
+
+Means and standard deviations for the prior distributions shown in subsection A.2 are also derived from the information extracted using the method above. All autoregressive parameters are jointly correlated in a multivariate normal distribution, while the variance parameters have inverse gamma distributions. The shape and scale parameters of a gamma distribution can be deducted using the methods of moments from the estimated means and variances. Lastly, the prior distribution for correlation coefficients are set to be normal distribution with arbitrary unassuming means of near zero and standard deviations of 0.25.
+
+
+\section{ Random-Walk Metropolis Hasting Sampler }\label{random-walk-MH}
+The Bayesian method is a full information-based approach that uses all moments of the observations. Together with reasonable constraints on parameters to ensure the stability of the model, we can estimate complex time series state-space models. I use the last 1 million draws from the 1.5 million (Markov chain Monte Carlo) MCMC chains for the analysis of the posterior distribution. The posterior and prior distribution graphs and the posterior chains can show us evidence of convergence or estimation stability. The posterior chain in Figure A.7 shows that there is a lack of convergence of the estimates compared to other models. This could be a signal that the model estimation is misspecified.
+
+The steps to implement a Random-Walk Metropolis Hasting sampler in a state-space setting with a Kalman filter can be referred to in chapter 5 from (Blake \& Mumtaz, 2017).
+
+
+\subsection{ Posterior and Prior Distribution} 
+```{r, echo=FALSE, out.width='85%',  fig.align='center', fig.cap = 'UK VAR(2) - Posterior and Prior Distribution'}
+knitr::include_graphics('../../../HPCredit/Regression/Bayesian_UC_VAR2_drift/OutputData/posteriorpriordistribution_UK.pdf')
+```
+
+```{r, echo=FALSE, out.width='85%',  fig.align='center', fig.cap = 'UK VAR(2) 1 cross-lag - Posterior and Prior Distribution'}
+knitr::include_graphics('../../../HPCredit/Regression/Bayesian_UC_VAR2_drift_Crosscycle1lag/OutputData/posteriorpriordistribution_UK.pdf')
+```
+
+```{r, echo=FALSE, out.width='85%',  fig.align='center', fig.cap = 'UK VAR(2) 2 cross-lags - Posterior and Prior Distribution'}
+knitr::include_graphics('../../../HPCredit/Regression/Bayesian_UC_VAR2_drift_Crosscycle2lags/OutputData/posteriorpriordistribution_UK.pdf')
+```
+
+\clearpage
+
+
+```{r, echo=FALSE, out.width='85%',  fig.align='center', fig.cap = 'US VAR(2) - Posterior and Prior Distribution'}
+knitr::include_graphics('../../../HPCredit/Regression/Bayesian_UC_VAR2_drift/OutputData/posteriorpriordistribution_US.pdf')
+```
+
+```{r, echo=FALSE, out.width='85%',  fig.align='center', fig.cap = 'US VAR(2) 1 cross-lag - Posterior and Prior Distribution'}
+knitr::include_graphics('../../../HPCredit/Regression/Bayesian_UC_VAR2_drift_Crosscycle1lag/OutputData/posteriorpriordistribution_US.pdf')
+```
+
+```{r, echo=FALSE, out.width='85%',  fig.align='center', fig.cap = 'US VAR(2) 2 cross-lags - Posterior and Prior Distribution'}
+knitr::include_graphics('../../../HPCredit/Regression/Bayesian_UC_VAR2_drift_Crosscycle2lags/OutputData/posteriorpriordistribution_US.pdf')
+```
+
+
+\clearpage
+
+\subsection{ Posterior Chain} 
+
+```{r UK-chain-VAR2, echo=FALSE, out.width='85%',  fig.align='center', fig.cap = 'UK VAR(2) - Posterior chain'}
+knitr::include_graphics('../../../HPCredit/Regression/Bayesian_UC_VAR2_drift/OutputData/posteriorchain_UK.pdf')
+```
+
+```{r, echo=FALSE, out.width='85%',  fig.align='center', fig.cap = 'UK VAR(2) 1 cross-lag - Posterior chain'}
+knitr::include_graphics('../../../HPCredit/Regression/Bayesian_UC_VAR2_drift_Crosscycle1lag/OutputData/posteriorchain_UK.pdf')
+```
+
+```{r, echo=FALSE, out.width='85%',  fig.align='center', fig.cap = 'UK VAR(2) 2 cross-lags - Posterior chain'}
+knitr::include_graphics('../../../HPCredit/Regression/Bayesian_UC_VAR2_drift_Crosscycle2lags/OutputData/posteriorchain_UK.pdf')
+```
+
+\clearpage
+
+```{r, echo=FALSE, out.width='85%',  fig.align='center', fig.cap = 'US VAR(2) - Posterior chain'}
+knitr::include_graphics('../../../HPCredit/Regression/Bayesian_UC_VAR2_drift/OutputData/posteriorchain_US.pdf')
+```
+
+```{r, echo=FALSE, out.width='85%',  fig.align='center', fig.cap = 'US VAR(2) 1 cross-lag - Posterior chain'}
+knitr::include_graphics('../../../HPCredit/Regression/Bayesian_UC_VAR2_drift_Crosscycle1lag/OutputData/posteriorchain_US.pdf')
+```
+
+```{r, echo=FALSE, out.width='85%',  fig.align='center', fig.cap = 'US VAR(2) 2 cross-lags - Posterior chain'}
+knitr::include_graphics('../../../HPCredit/Regression/Bayesian_UC_VAR2_drift_Crosscycle2lags/OutputData/posteriorchain_US.pdf')
+```
+
+\clearpage
+
+
+\subsection{ Graphs of other Countries} 
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+# Load libraries
+library(knitr)
+opts_chunk$set(fig.pos="h")
+```
+
+```{r IT-graphs, echo=FALSE, out.width='85%',  fig.align='center', fig.cap = 'Italy VAR(2) 1 cross-lag - Unobserved Components'}
+knitr::include_graphics('../../../HPCredit/Regression/Bayesian_UC_VAR2_drift_Crosscycle1lag/OutputData/cycles_IT.pdf')
+```
+
+```{r JP-graphs, echo=FALSE, out.width='85%',  fig.align='center', fig.cap = 'Japan VAR(2) 1 cross-lag - Unobserved Components'}
+knitr::include_graphics('../../../HPCredit/Regression/Bayesian_UC_VAR2_drift_Crosscycle1lag/OutputData/cycles_JP.pdf')
+```
+
+\clearpage
+
+\chapter{ Chapter 3}
+
+\section{ Graphs of Credit to GDP Ratios and Credit Gaps}
+```{r Credit-to-GDP-Ratios, echo=FALSE, out.width='85%', fig.align='center', fig.cap = 'Credit-to-GDP Ratios'}
+knitr::include_graphics('../../../HPI-Credit-Trasitory-Forecast/plots/Credit-to-GDP.pdf')
+```
+
+```{r Credit-Gap-Comparison-UK, echo=FALSE, out.width='85%', fig.align='center', fig.cap = 'Credit Gap Comparison (U.K.)'}
+knitr::include_graphics('../../../HPI-Credit-Trasitory-Forecast/plots/Credit-Gap-Comparison-UK.pdf')
+```
+
+```{r Credit-Gap-Comparison-US, echo=FALSE, out.width='85%', fig.align='center', fig.cap = 'Credit Gap Comparison (U.S.)'}
+knitr::include_graphics('../../../HPI-Credit-Trasitory-Forecast/plots/Credit-Gap-Comparison-US.pdf')
+```
+
+\chapter{ Chapter 4 }
+
+\section{ List of Decomposition Filters} \label{filterslist}
+
+All filters are in (quasi-real time) one-sided fashion. I store the value of the decomposed cycles for the current period permanently as data becomes available and will not change it when new data comes in the next period.
+
+\subsubsection*{Hodrick Prescott (HP) filters with different smoothing parameters $\lambda$:}
+- c.hp, c.hp3k, c.hp25k,  c.hp125k, c.hp221k, c.hp400k  
+
+\subsubsection*{Hamilton filters with different smoothing parameters $\theta$ (distance of past lags):}
+- c.hamilton13,   c.hamilton20,   c.hamilton24,   c.hamilton28  
+
+\subsubsection*{Linear and polynomial filter models:}
+- c.linear, c.quad, c.poly3,  c.poly4,  c.poly5,  c.poly6 
+
+\subsubsection*{Beveridge-Nelson decomposition filters with different smoothing parameters (number of lags):}
+- c.bn2,  c.bn3,  c.bn4,  c.bn5,  c.bn6,  c.bn7,  c.bn8 
+
+\subsubsection*{Structural time series model:}
+- c.stm
+
+\subsubsection*{Rolling sample with 15 and 20 years window (of all previous filters):}
+- c.hp.r15, c.hp3k.r15, c.hp25k.r15,  c.hp125k.r15, c.hp221k.r15, c.hp400k.r15, c.hamilton13.r15, c.hamilton20.r15, c.hamilton24.r15, c.hamilton28.r15, c.linear.r15, c.quad.r15, c.poly3.r15,  c.poly4.r15,  c.poly5.r15,  c.poly6.r15,  c.bn2.r15,  c.bn3.r15,  c.bn4.r15,  c.bn5.r15,  c.bn6.r15,  c.bn7.r15,  c.bn8.r15,  c.stm.r15 \\
+
+- c.hp.r20, c.hp3k.r20, c.hp25k.r20,  c.hp125k.r20, c.hp221k.r20, c.hp400k.r20, c.hamilton13.r20, c.hamilton20.r20, c.hamilton24.r20, c.hamilton28.r20, c.linear.r20, c.quad.r20, c.poly3.r20,  c.poly4.r20,  c.poly5.r20,  c.poly6.r20,  c.bn2.r20,  c.bn3.r20,  c.bn4.r20,  c.bn5.r20,  c.bn6.r20,  c.bn7.r20,  c.bn8.r20,  c.stm.r20 
+
+\subsubsection*{Hamilton filters in panel setting (with rolling samples):}
+- c.hamilton13.panel, c.hamilton20.panel, c.hamilton24.panel, c.hamilton28.panel, c.hamilton13.panelr15,  c.hamilton20.panelr15,  c.hamilton24.panelr15,  c.hamilton28.panelr15,  c.hamilton13.panelr20,  c.hamilton20.panelr20,  c.hamilton24.panelr20,  c.hamilton28.panelr20
+
+\subsubsection*{Moving Average filter:}
+- c.ma  
+
+\subsection{ Statistical Methods for Trend-Cycle Decomposition} \label{ma-stm-eq}
+
+\subsubsection*{ Bayesian Structural Time Series Model (STM)}
+\begin{align*}
+y_t = u_t + v_t,  vt \sim N(0,V)\\
+u_t = u_{t-1} + \beta_{t-1} + w_{1,t},  w_{1,t} \sim N(O,\sigma^2_{w1})\\
+\beta_t = \beta_{t_1} + w_{2,t},  w_{2,t} \sim N(0,\sigma^2_{w2})
+\end{align*}
+
+The implementation of this filter is discussed in Campagnoli et al. (2009). One feature of this filter that allows for smoother trend component is its inclusion of a time-varying local growth rate $\beta_t$. Beltran et al. (2021) optimized values of the smoothing parameters at $\sigma^2_{w1} = 1$ , $\sigma^2_{w2}=0.01$ and V = 1100.
+
+\subsubsection*{ Moving Average }
+\begin{align*}
+MA_t = y_t - \frac{\sum\nolimits^t_{i=t-q+1}y_i}{q}
+\end{align*}
+
+With q being the smoothing parameter and the length of the moving average window. Beltran et al. (2021) optimized the value for q to be 16.
+
+
+
+
+
+\section{ Out-of-Sample Forecast Graphical Analysis}
+
+\subsection{ Graphs of Selected Countries } \label{graphs-other}
+
+In this subsection, I will show graphs of credit gaps for countries that the model deems to be at risk of a future systemic financial crisis. 
+
+```{r CAseries, echo=FALSE, out.width='85%', fig.align="center", fig.cap="Canada Graph"}
+knitr::include_graphics('../../../3rdPaper/Data/Output/Graphs/All/Weighted_credit_gap_CA.pdf')
+```
+
+```{r FRseries, echo=FALSE, out.width='85%', fig.align="center", fig.cap="France Graph"}
+knitr::include_graphics('../../../3rdPaper/Data/Output/Graphs/All/Weighted_credit_gap_FR.pdf')
+```
+
+```{r HKseries, echo=FALSE, out.width='85%', fig.align="center", fig.cap="Hong Kong (SAR) Graph"}
+knitr::include_graphics('../../../3rdPaper/Data/Output/Graphs/All/Weighted_credit_gap_HK.pdf')
+```
+
+```{r JPseries, echo=FALSE, out.width='85%', fig.align="center", fig.cap="Japan Graph"}
+knitr::include_graphics('../../../3rdPaper/Data/Output/Graphs/All/Weighted_credit_gap_JP.pdf')
+```
+
+```{r KRseries, echo=FALSE, out.width='85%', fig.align="center", fig.cap="South Korea Graph"}
+knitr::include_graphics('../../../3rdPaper/Data/Output/Graphs/All/Weighted_credit_gap_KR.pdf')
+```
+
+```{r SAseries, echo=FALSE, out.width='85%', fig.align="center", fig.cap="Saudi Arabia Graph"}
+knitr::include_graphics('../../../3rdPaper/Data/Output/Graphs/All/Weighted_credit_gap_SA.pdf')
+```
+
+```{r SEseries, echo=FALSE, out.width='85%', fig.align="center", fig.cap="Sweden Graph"}
+knitr::include_graphics('../../../3rdPaper/Data/Output/Graphs/All/Weighted_credit_gap_SE.pdf')
+```
+
+```{r CHseries, echo=FALSE, out.width='85%', fig.align="center", fig.cap="Switzerland Graph"}
+knitr::include_graphics('../../../3rdPaper/Data/Output/Graphs/All/Weighted_credit_gap_CH.pdf')
+```
+
+```{r THseries, echo=FALSE, out.width='85%', fig.align="center", fig.cap="Thailand Graph"}
+knitr::include_graphics('../../../3rdPaper/Data/Output/Graphs/All/Weighted_credit_gap_TH.pdf')
+```
+
+
+
+\end{appendices}
+
+<!--[Will include periods of previous crises for those countries later]-->
+
+<!--chapter:end:51_Appendix.Rmd-->
+

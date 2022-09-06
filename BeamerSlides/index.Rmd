@@ -1,0 +1,772 @@
+---
+title: "Essays on Measuring Credit and Property Prices Gaps"
+author: "Nam Nguyen"
+institute: "UWM"
+short-institute: "UWM"
+date: '`r format(Sys.Date(), "%B %d, %Y")`'
+output: 
+  beamer_presentation:
+    theme: "default"
+    colortheme: "default"
+    fonttheme: "default"
+    keep_tex: true
+    slide_level: 2
+    includes:
+      in_header: preamble.tex
+    toc: false
+---
+# Chapter 1: Credit and House Prices Cycles
+
+## Introduction
+### Motivation
+- The study of housing prices and excessive credit has become more important in understanding financial market stability
+
+- We also observed increasing use of monetary policies, significant growth in macro balance sheet size, including real estate values and total credit lending to household
+
+- We study the dynamic relationship between housing prices and household credit in this paper
+
+## Contribution
+1. Relationship between housing prices and household credit
+
+- Apply Unobserved Component Model (Clark 1987) to extract information about trends and cycles
+
+  $\Rightarrow$ Jointly examine the two variables and their interaction both in the long-run and short-run
+
+- Specify cycles to be VAR process (cross-cycle) rather than univariate AR process
+
+  $\Rightarrow$ Test if past movement of one cycle has predictive power over another cycle
+
+## Contribution
+
+2. Technical contribution to the optimization process:
+
+- Novel numerical optimization / parameters constraint method to ensure the cyclical components are in feasible stationary region
+
+3. Overcome "curse of dimensionality" using Bayesian method:
+- Common problem in estimating complex unobserved component state space model
+- We use random walk Metropolis-Hasting method to estimate posterior distribution of parameters of interest
+
+## Literature Review
+1. Dynamics of credit changes:
+  - Kiyotaki & Moore (1997), Myerson (2012), Guerrieri & Uhlig (2016), Boissay et al (2016).
+2. Dynamics of house prices changes:
+  - Hong & Stein (1999), Glaeser et al (2008) (2017), Kishor, Kumari, & Song (2015)
+
+  
+## Literature Review
+3. House price cycles generates credit cycles:
+  - Bernanke & Gertler (1989), Bernanke et al (1999); Kiyotaki & Moore (1997)
+  ``
+  - Empirical Evidence: Fitzpatrick and McQuinn (2007), Berlinghieri (2010), Gimeno and Martinez-Carrascal (2010), Anundsen and Jansen (2013), for evidence from Ireland, USA, Spain and Norway, respectively
+4. Credit cycles genereates house price cycles:
+  - Agnello & Schuknecht (2011), Kermani (2012), Justiniano et al (2019), Schularick et al (2012) (2016)
+<!--5. Macro prudential DSGE model
+  - Quint & Rabanal (2018), Paries et al (2018).-->
+  
+$\Rightarrow$ However, the debate on which cycle causes changes on the other is still open
+
+## Data
+Bank of International Settlement (BIS)
+
+- Household Credit to GDP: Total Credit to non-financial sector (household)
+- House Price Index: Residential property prices: selected series (real value). Index = 100 at full sample average for each country
+\bigskip
+- 2 countries: US \& UK
+- Time frame: 1990:Q1 - 2021:Q3 
+
+## Model
+### Unobserved Component Model
+
+\begin{align}
+	100*ln \frac{Credit}{GDP} &= y_t = \tau_{yt} + c_{yt}
+	\\
+	100*ln HPI &= h_t = \tau_{ht} + c_{ht}
+\end{align}
+
+- Trends: $\tau_{yt}$ \& $\tau_{ht}$
+
+\begin{align*}
+		\tau_{yt} = &\mu_{yt-1} + \tau_{yt-1} +  \eta_{yt}, &\eta_{yt} \sim iidN(0,\sigma^2_{\eta y})
+\\
+&\mu_{yt} = \mu_{yt-1} + \eta_{\mu yt}, &\eta_{\mu yt} \sim iidN(0,0.01)
+\\
+\tau_{ht} = &\mu_{ht-1} + \tau_{ht-1} + \eta_{ht}, &\eta_{ht} \sim iidN(0,\sigma^2_{\eta h})
+\\
+&\mu_{ht} = \mu_{ht-1} + \eta_{\mu ht}, &\eta_{\mu ht} \sim iidN(0,0.01)  
+\end{align*}
+	
+## Model
+### Unobserved Component Model
+
+- Cycles: $c_{yt}$ \& $c_{ht}$
+
+\begin{align}
+	c_{yt} = \phi^1_{y}c_{yt-1}  
+	+ \phi^2_{y}c_{yt-2}  
+	+ \phi^{x1}_{y}c_{ht-1} 
+	+ &\phi^{x2}_{y}c_{ht-1} 
+	+ \varepsilon_{yt}\\
+	&\varepsilon_{yt} \sim iidN(0,\sigma^2_{\varepsilon y})		   
+	\\
+	c_{ht} = \phi^1_{h}c_{ht-1}  
+	+ \phi^2_{h}c_{ht-2}
+	+ \phi^{x1}_{h}c_{yt-1}  
+	+ &\phi^{x2}_{h}c_{yt-1}  
+	+ \varepsilon_{ht}\\
+	&\varepsilon_{ht} \sim iidN(0,\sigma^2_{\varepsilon h})
+\end{align}
+
+
+## Model
+### Covariance Matrix
+
+
+\begin{align}
+	Q = 
+    \begin{bmatrix}
+    \sigma^2_{\eta y} & 0  &0 & \sigma_{\eta y \eta h}  & 0 & 0 & 0 & 0 \\
+    0 & \sigma^2_{\varepsilon y}  & 0 & 0 & \sigma_{\varepsilon y \varepsilon h}  & 0 & 0 & 0 \\
+    0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+    \sigma_{\eta y \eta h}  & 0 & 0 & \sigma^2_{\eta h} & 0 & 0 & 0 & 0 \\
+    0 & \sigma_{\varepsilon y \varepsilon h}  & 0 & 0 & \sigma^2_{\varepsilon h} & 0  & 0 & 0 \\
+    0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+    0 & 0 & 0 & 0 & 0 & 0 & 0.01 & 0 \\
+    0 & 0 & 0 & 0 & 0 & 0 & 0 & 0.01
+    \end{bmatrix}
+\end{align}
+
+## Model
+### Optimization process
+
+- Kalman filter with adjusted Likelihood function:
+
+\begin{align*}
+l(\theta) = -0.5\sum_{t=1}^{T}ln\lbrack(2\pi)^2|f_{t|t-1}|\rbrack
+				-0.5\sum_{t=1}^{T}\eta'_{t|t-1}f^{-1}_{t|t-1}\eta_{t|t-1}
+				\\
+				- w1\sum_{t=1}^{T}(c_{yt}^2) - w2\sum_{t=1}^{T}(c_{ht}^2)
+\end{align*}
+
+# Empirical Results
+
+
+## VAR(2) - 1 Cross-lag Model Estimate - UK and US
+
+
+```{r UK-US-results, echo=FALSE, message=FALSE}
+  options(kableExtra.latex.load_packages = FALSE)
+  options(knitr.table.format = "pandoc")
+  library('kableExtra')
+  library(dplyr)
+  library(knitr)
+
+  country='UK'
+  filepath=sprintf('../../HPCredit/Regression/RegCombPercentile_%s.csv',country)
+  df<-read.csv(filepath, sep = ",", header=FALSE)
+  df<-df[,-c(3:4,7:8)]
+
+  country='US'
+  filepath=sprintf('../../HPCredit/Regression/RegCombPercentile_%s.csv',country)
+  df1<-read.csv(filepath, sep = ",", header=FALSE)
+  df1<-df1[,-c(1:2,3:4,7:8)]
+  df<-cbind(df,df1)
+
+  #rownames(df) <- df[,1]
+  #df<-df[,-1]
+  colnames(df) <- c("Description","Para.","Median", "[10$\\%$, 90$\\%$]", "Median", "[10$\\%$, 90$\\%$]")
+  options(knitr.kable.NA = '')
+
+  #df = df %>% mutate_if(is.numeric, format, digits=4)
+
+  #https://stackoverflow.com/questions/72388965/aesthetics-of-kable-extra-and-rmardown
+  kbl(df, "latex", booktabs = T, digits = c(4, 4, 4, 4, 4, 4), escape=FALSE, linesep=c("", "", "", "\\addlinespace"), row.names=FALSE) %>%
+    add_header_above(c(" " = 2, "UK VAR2 1-cross lag" = 2, "US VAR2 1-cross lag" = 2)) %>%
+    footnote(general="UK - US Bayesian method random walk  Metropolis-Hasting posterior distribution estimates") %>%
+    kable_styling(latex_options=c("striped","scale_down")) %>%
+    kable_paper(c("striped")) %>%
+    column_spec(c(1:6), bold = c(0,0,1,0,0,0,1,0,0,0,0,0,0,0,0))%>%
+		gsub(".(begin|end){table.*}", "", ., perl = TRUE)%>%
+  	gsub(".centering", "", ., perl = TRUE)
+```   
+
+## VAR(2) - 1 Cross-lag Model Estimate Summary
+
+
+- The sum of AR parameters of the cyclical components in all three models is smaller, although close to one
+
+- The standard deviation of the shocks in the cycles $\sigma_{ei}$ is much higher than the standard deviation of the shocks to the trend $\sigma_{ni}$ of both credit and housing prices
+
+- Variations in the housing price cyclical components $\sigma_{eh}$ of the UK are bigger than in the US
+
+- The correlation of the shocks to the cyclical components among the two variables $\rho_{eyeh}$ suggests that cyclical variation among housing price and household credit is strongly positively correlated
+
+## Cross-country Comparison of Causal Coefficients
+```{r table-cross-countries, echo=FALSE, message=FALSE}
+options(kableExtra.latex.load_packages = FALSE)
+options(knitr.table.format = "pandoc")
+library('kableExtra')
+library(dplyr)
+library(knitr)
+library(tidyr)
+
+filepath <- "../../HPCredit/Data Collection/1.Latest/Paper1/shortlistofCountries_full.csv"
+
+name1 <- read.table(filepath, header = TRUE, sep = ",")
+
+df = data.frame()
+
+for (i in seq_len(nrow(name1))) {
+country <- name1[i, 1]
+
+filepath <- sprintf("../../HPCredit/Regression/Bayesian_UC_VAR2_drift_Crosscycle1lag/OutputData/Reg_%s.csv", country)
+df1 <- read.table(filepath, header = FALSE, sep = ",")
+df1 <- df1[c(1,3:4),3:4]
+df2 = data.frame(matrix(ncol = 7, nrow = 1))
+df2[1,2:4] <- t(df1[1:3,1])
+df2[1,5:7] <- t(df1[1:3,2])
+df3 = data.frame(matrix(ncol = 5, nrow = 1))
+df3[1,1] <- name1[i, 2]
+df3[1,2] <- df2[1,2]
+df3[1,4] <- df2[1,5]
+f <- function(x){ sprintf('%.4f',x)}
+df2<- data.frame(lapply(df2, f))
+df2[1,1] <- name1[i, 2]
+df3[1,3] <- df2[,3:4] %>% 
+   unite(combined1, X3, X4 , sep = ", ", remove = TRUE) %>%
+   mutate(combined1 = sprintf("[%s]", combined1))
+df3[1,5] <- df2[,6:7] %>% 
+   unite(combined1, X6, X7 , sep = ", ", remove = TRUE) %>%
+   mutate(combined1 = sprintf("[%s]", combined1))
+df <- rbind(df,df3)
+}
+
+colnames(df) <- c("Country","Median", "[10$\\%$, 90$\\%$]", "Median", "[10$\\%$, 90$\\%$]")
+
+options(knitr.kable.NA = '')
+
+#df = df %>% mutate_if(is.numeric, format, digits=4)
+
+kbl(df, "latex", booktabs = T, digits = c(4, 4, 4, 4, 4), escape=FALSE, linesep=c("", "", "", "\\addlinespace"), row.names=FALSE) %>%
+add_header_above(c(" " = 1, "$\\\\phi^{x1}_y$ HPI on Credit" = 2, "$\\\\phi^{x1}_h$ Credit on HPI" = 2), escape=FALSE) %>%
+#footnote(general="Cross Countries causal coefficients") %>%
+kable_styling(latex_options=c("striped"), font_size = 7) %>%
+kable_paper(c("striped")) %>%
+gsub(".(begin|end){table.*}", "", ., perl = TRUE)%>%
+gsub(".centering", "", ., perl = TRUE)
+```
+
+## Cross-country Comparison of Causal Coefficients Summary
+
+- In 11 out of 17 countries, the HPI on Credit causal coefficient $\phi^{x1}_y$ are positive and significant. All 11 countries are in North America and Europe.
+
+- Only 6 countries have positive and significant Credit on HPI causal coefficient $\phi^{x1}_y$. Three of which have smaller magnitudes than their $\phi^{x1}_y$ counterpart
+
+$\rightarrow$ Overall, we found evidence that past transitory shocks to house price credit will cause a positive deviation in future transitory household credit. However, the effect in the opposite direction is much smaller and sometimes insignificant
+
+## Unobserved Component Graphs: United States 
+```{r, echo=FALSE}
+knitr::include_graphics('../../HPCredit/Regression/Bayesian_UC_VAR2_drift_Crosscycle1lag/OutputData/graphs/HP_Credit_4graphs_US.pdf')
+```
+
+## Unobserved Component Graphs: United Kingdom 
+```{r, echo=FALSE}
+knitr::include_graphics('../../HPCredit/Regression/Bayesian_UC_VAR2_drift_Crosscycle1lag/OutputData/graphs/HP_Credit_4graphs_UK.pdf')
+```
+
+
+## Conclusion
+
+- Extracting temporary and permanent components information gave insights on the dynamics of the two series housing and credit in both short-run and long-run
+- Evidence showing that past movement of a cycle (HPI) has predictive power over the other cycle (credit)
+
+
+# Chapter 2: Measuring Credit Gaps
+
+## Introduction
+### Motivation
+
+- No unanimity on how to measure excessive credit. Bank for International Settlements uses HP filter to create a credit gap measurement that performs well in predicting future financial crises. However, there are other competing gap measurements.
+
+- Nelson (2008) that the deviation of a non-stationary variable from its
+long-run trend should predict future changes of opposite sign in the variable. We utilize this idea and forecast combination method to propose a synthesized credit gap measurement.
+
+## Contribution
+
+Since
+different trend-cycle decomposition methods of credit-to-GDP ratio provide
+us different credit gap measures, we handle the model uncertainty by
+assigning weights on these different credit gap measures based on its
+relative out-of-sample predictive power based on Bates and Granger (1969)
+forecast combination method.
+
+- Our proposed credit gap measure dominates the alternate credit gaps in
+terms of its relative out-of-sample predictive power.
+
+## Methodology
+
+### Data
+
+The measure of credit is total credit to the private non-financial sector, as published in the BIS database, capturing total borrowing from all domestic and foreign sources.
+
+- Quarterly data from 1983:Q1-2020:Q2
+
+## Model
+All these trend-cycle decomposition methods are based on the premise that a non-stationary series is the sum of a trend and a stationary cyclical component:
+
+\begin{equation}
+y_{t}=\tau _{t}+c_{t}
+\end{equation}
+
+
+## Trend-cycle decomposition models
+### HP filter
+\begin{equation}
+min_{\tau}(\sum^T_{t=1}(y_t-\tau_t)^2+\lambda\sum^{T-1}_{t=2}[(\tau_{t-1}-\tau_t)-(\tau_t-\tau_{t-1})]^2)
+\end{equation}
+
+- $\lambda$ will be set at 1600, 3000, 400000 (BIS Basel Gap) in our models
+
+### Unobserved-Component model: Clark(1987)
+\begin{equation}
+\tau _{t}=\tau _{t-1}+\eta _{t},\eta _{t}\symbol{126}iid(0,\sigma _{\eta
+}^{2})
+\end{equation}
+\begin{equation*}
+c_{t}=\Phi (L)c_{t}+u_{t},u_{t}\symbol{126}iid(0,\sigma _{u}^{2})
+\end{equation*}
+
+## Trend-cycle decomposition models
+
+### Beveridge-Nelson
+\begin{equation}
+y_{t}=y_{0}+\mu t+\Psi (1)\sum_{k=1}^{t}u_{t}+\overset{\backsim }{u_{t}}-%
+\overset{\backsim }{u_{0}}
+\end{equation}
+
+### Hamilton filter (2018)
+\begin{equation}
+y_{t+h}=\alpha +\beta _{1}y_{t-1}+\beta _{2}y_{t-2}+....+\beta
+_{p}y_{t-p}+v_{t+h}
+\end{equation}
+
+## Forecasting model:
+\begin{equation}
+\Delta y_{t}=\alpha +\beta (L)\Delta y_{t-1}+\gamma (L)GAP_{t-1}+v_{t}
+\end{equation}
+
+### Baseline Model AR(1):
+\begin{equation}
+\Delta y_{t}=\alpha +\beta (L)\Delta y_{t-1}+v_{t}
+\end{equation}
+
+### Forecast combination
+\begin{equation}
+w_{m}=\frac{\widehat{\overline{\sigma }}_{m}^{2}}{\widehat{\overline{\sigma }%
+}_{1}^{2}+\widehat{\overline{\sigma }}_{2}^{2}+....\widehat{\overline{\sigma 
+}}_{M}^{2}}
+\end{equation}
+
+- where $\widehat{\overline{\sigma }}_{m}^{2}$\ is inverted out-of-sample
+forecast error variance of forecast M based on the cyclical component M.
+
+
+## Empirical Results: 
+### Forecasting Performance of Credit Gap Models (U.S.)
+
+\resizebox{\linewidth}{!}{
+\begin{threeparttable}
+\begin{tabular}{lllllllllll}
+Horizon & HP & RU & BIS & Hamilton & \ Linear\  & Quadratic & BN & UC & 
+Average & Bates-Granger \\ \hline \hline
+\  \  \  \  \  \ 1 & 0.993 & 0.987 & 1.012 & 0.994 & 1.028 & 1.005 & 1.010 & 0.985
+& 0.962 & \textbf{0.959} \\ 
+\  \  \  \  \  \ 2 & 0.974 & 0.963 & 1.016 & 0.980 & 1.058 & 1.014 & 0.975 & 0.961
+& 0.924 & \textbf{0.917} \\ 
+\  \  \  \  \  \ 3 & 0.966 & 0.953 & 1.023 & 1.011 & 1.055 & 1.036 & 0.965 & 0.937
+& 0.906 & \textbf{0.896} \\ 
+\  \  \  \  \  \ 4 & 0.982 & 0.966 & 1.022 & 1.029 & 1.055 & 1.045 & 1.033 & 0.910
+& 0.922 & \textbf{0.910} \\ 
+\  \  \ 1 - 4 & 0.964 & 0.945 & 1.030 & 1.005 & 1.081 & 1.041 & 0.978 & 0.913
+& 0.882 & \textbf{0.872} \\ \hline \hline
+&  &  &  &  &  &  &  &  &  & 
+\end{tabular}
+\begin{tablenotes}
+            \footnotesize
+            \item {The table shows the ratio of RMSEPs of different models in comparison
+to the benchmark AR(1) model. The first set of forecasts is for
+1994:Q1-1994:Q4; the final set is for 2019:Q3-2020:Q2. Q=1-4 denotes
+averages over next 4-quarters. HP is Hodrick-Prescott, RU is Ravn-Uhlig, BIS
+is based on Borio and Lowe (2002), BN is Beveridge-Nelson, UC is Unobserved
+Component Model.}
+        \end{tablenotes}
+\end{threeparttable}}
+
+## Empirical Results: 
+### Forecasting Performance of Credit Gap Models (U.K.)
+
+\resizebox{\linewidth}{!}{
+\begin{threeparttable}
+\begin{tabular}{lllllllllll}
+Horizon & HP & RU & BIS & Hamilton & \ Linear\  & Quadratic & BN & UC & 
+Average & Bates-Granger \\ \hline \hline
+\  \  \  \  \  \ 1 & 1.001 & 0.990 & 1.001 & 0.992 & 1.010 & 0.979 & 1.028 & 1.009
+& \textbf{0.977} & 0.979 \\ 
+\  \  \  \  \  \ 2 & 0.979 & 0.970 & 1.007 & 0.969 & 1.016 & 0.962 & 1.028 & 0.999
+& 0.962 & \textbf{0.957} \\ 
+\  \  \  \  \  \ 3 & 0.979 & 0.971 & 1.018 & 0.969 & 1.055 & 0.966 & 1.009 & 0.989
+& 0.959 & \textbf{0.955} \\ 
+\  \  \  \  \  \ 4 & 0.990 & 0.987 & 1.028 & 1.005 & 1.055 & 0.981 & 1.019 & 0.981
+& 0.972 & \textbf{0.967} \\ 
+\  \  \ 1 - 4 & 0.972 & 0.952 & 1.034 & 0.960 & 1.081 & 0.929 & 1.054 & 0.985
+& 0.918 & \textbf{0.910} \\ \hline \hline
+&  &  &  &  &  &  &  &  &  & \\
+\end{tabular}
+\begin{tablenotes}
+            \footnotesize
+            \item {The table shows the ratio of RMSEPs of different models in comparison
+to the benchmark AR(1) model. The first set of forecasts is for
+1994:Q1-1994:Q4; the final set is for 2019:Q3-2020:Q2. Q=1-4 denotes
+averages over next 4-quarters. HP is Hodrick-Prescott, RU is Ravn-Uhlig, BIS
+is based on Borio and Lowe (2002), BN is Beveridge-Nelson, UC is Unobserved
+Component Model.}
+        \end{tablenotes}
+\end{threeparttable}}
+
+
+## Credit Gap Comparison (U.S.)
+```{r Credit-Gap-Comparison-US, echo=FALSE, out.width='85%'}
+knitr::include_graphics('../../HPI-Credit-Trasitory-Forecast/plots/Credit-Gap-Comparison-US.pdf')
+```
+
+## Credit Gap Comparison (U.K.)
+```{r Credit-Gap-Comparison-UK, echo=FALSE, out.width='85%'}
+knitr::include_graphics('../../HPI-Credit-Trasitory-Forecast/plots/Credit-Gap-Comparison-UK.pdf')
+```
+
+## Conclusion
+
+Our results show that this method of combining credit gaps yield us a credit gap measure that dominates credit gaps from different trend-cycle decomposition methods in terms of superior out-of-sample forecasting of changes in credit-to-GDP ratio.
+
+
+
+
+# Chapter 3: Identifying Unsustainable Credit Gaps
+
+
+## Motivation
+- To overcome model uncertainty in using credit gap as an early warning indicator (EWI) of systemic financial crises, we propose using model averaging of different credit gap measurements. The method is based on Bayesian Model Average - Raftery (1995)
+
+
+## Motivation from Literature
+- Area under the curve of operating characteristic (AUROC or AUC) has been widely used as a criterion to determine the performance of a EWI. But it has recently received some criticism.
+- Borio and Drehmann (2009) and Beltran et al (2021) proposed a policy loss function constraining the relevance of the curve measurement to just a portion where Type II error rate is less than 1/3 or at least 2/3 of the crises are predicted.    
+- Detken (2014) proposed using partial standardized area under the curve (psAUC) as an alternative measurement of the performance of an EWI.
+
+## Contribution
+- Compare different credit gap measurements' performance as EWIs using a new criterion - partial standarized AUC (psAUC) contraining Type II error < 1/3.
+- Overcome model uncertainty by implementing model averaging. We incoporated psAUC values in the model selection and weighting process, instead of AUC values.
+- For ease of policy implication, we propose a single credit gap measurement from weighted averaging other popularly studied credit gap measurements. The gap has superior performance in model fit and out-of-sample prediction.
+
+
+## standardize psAUROC - Detken (2014)
+
+```{r psAUC, echo=FALSE, out.width='70%', fig.align="center"}
+knitr::include_graphics('../../3rdpaper/metadata/pAUC.png')
+```
+
+\begin{align}
+psAUROC = \frac{1}{2}\left[ 1+ \frac{pAUROC - min}{max - min}\right]
+\end{align}
+
+
+## Data
+Sample data periods: 
+
+- 1970:Q4 - 2017:Q4 quarterly data across 43 countries. 
+  + We omit periods for countries with shorter credit measurements.
+
+Systemic crisis data:
+
+- European Systemic Risk Board crisis data set (Lo Duca et al. 2017)
+- Laeven and Valencia (2018)
+
+Credit/GDP ratio data:
+
+- Bank of International Settlement (BIS)
+  + Latest credit data is available until 2021:Q3
+
+## Emprical Model
+### Credit gap decompositions
+
+\begin{align}
+	100*\frac{Credit}{GDP} &= y_t = \tau_{yt} + c_{yt}
+\end{align}
+
+- We created 90 candidate one-sided credit gap measurements based on the literature.
+  + Once a country has more than 15 years of credit measurement available, we start storing its one-sided credit gap values onward.
+  
+## Early Warning Indicator - Logistic regression:
+
+\begin{align}
+  pre.crisis_{ti} \sim credit.gap_{tij}
+\end{align}
+
+- $i$ is country indicator. $j$ is credit gap filter type
+
+- where $pre.crisis_{it}=$  1 or 0 
+
+- The pre-crisis indicator is set to 1 when t is between 5-12 quarters before a systemic crisis. 
+	
+- We discard measurements between 1-4 quarters before a crisis, periods during a crisis and post-crisis periods identified in Lo Duca et al. (2017) and Laeven and Valencia (2018). 
+  + The indicator is set to 0 at other periods.
+  + pre-crisis periods of imported crises identified in the dataset are also set to 0. However, we still discard measurements of periods during and post-crisis for imported  crises.
+
+
+## Plot of Credit gap, Threshold and Crisis periods
+
+```{r wUS, echo=FALSE, out.width='100%', fig.align="center"}
+knitr::include_graphics('../../3rdPaper/Data/Output/Graphs/Weighted_credit_gap_US.pdf')
+```
+
+
+
+## Variable selection
+### Comparing performance of individual credit gaps
+Using partial area under the curve (psAUC) values
+
+### Test for gaps combination performance
+Using Markov Chain Monte Carlo Model Comparison ($MC^3$) developed by Madigan and York (1995). The method assigns posterior probability for different credit gaps being selected in most likely models/combinations. Babecky (2014) used this $MC^3$ method to identify potential variables in EWI models.
+
+\begin{align*}
+Model_k :  pre.crisis_{ti} \sim \sum\nolimits_j \beta_j * credit.gap_{tij}
+\end{align*}
+
+### Variable selection
+We selected 29 credit gap measurements based on these 2 criteria.
+
+
+
+# Model Averaging
+
+## Bayesian Model Averging
+The Bayesian Model Average method is formalized in Raftery (1995) to account for model uncertainty.
+
+### Model posterior probability
+Model k posterior probability (weight):
+\begin{align}
+  P(M_k|D) = \frac{P(D|M_k)P(M_k)}{\sum\nolimits_{l=1}^K P(D|M_l)P(M_l)} 
+  \approx \frac{exp(-\frac{1}{2}BIC_k)}{\sum\nolimits_{l=1}^K exp(-\frac{1}{2}BIC_l)}
+\end{align}
+
+- Where $P(M_k)$ is model prior probability and can be ignored if all models are assumed equal prior weights. 
+
+- $P(D|M_k)$ is marginal likehood. And $P(D|M_k) \propto exp(-\frac{1}{2}BIC_k)$
+
+- In which $BIC_k = 2log (Bayesfactor_{sk}) = \chi^2_{sk} - df_klog(n)$. s indicates the saturated model.
+
+
+
+## Weighted credit gap creation
+### Motivation
+GLM binomial estimation: 
+\begin{align*}
+\widehat{pre.crisis}_{ti} = \widehat{probability}_{ti} = \frac {1}{1+exp(-(a+\sum\nolimits_j \hat{\beta}_j c_{tij}))}
+\end{align*}
+
+- With $\hat{\beta}_j$ = $E[\beta_j|D, \beta_j\ne 0] = \sum\limits_{A_j} \hat{\beta}_j(k)p'(M_k|D)$
+
+
+$\Rightarrow$ We propose a single weighted credit gap $\hat{c}_{ti}$ that satisfies:
+\begin{align*}
+\frac {1}{1+exp(-(a+\hat{\beta} \hat{c}_{ti}))}= \frac {1}{1+exp(-(a+\sum\nolimits_j \hat{\beta}_j c_{tij}))} \\
+\end{align*}
+OR
+\begin{align}
+\sum\limits_j \hat{\beta}_j c_{tij} = \hat{\beta} \hat{c}_{ti}
+\end{align}
+
+## Weighted averaged credit gap - creation
+\begin{align*}
+\sum\limits_j \hat{\beta}_j c_{tij} = \hat{\beta} \hat{c}_{ti}
+\end{align*}
+
+We then propose $\hat{\beta} = \sum\nolimits_j \hat{\beta}_j$
+
+Therefore, 
+
+\begin{align}
+\hat{c}_{ti} = \frac{\sum\nolimits_j (\hat{\beta}_j c_{tij})}{\sum\nolimits_j\hat{\beta}_j} = \sum\nolimits_j w_j c_{tij}
+\end{align}
+
+The weight of each candidate credit gap j is $w_j = \frac{\hat{\beta}_j}{\sum\nolimits_j\hat{\beta}_j}$
+
+## One-sided crisis weighted averaged credit gap
+
+- The weight of each candidate credit gap j is $w_j = \frac{\hat{\beta}_j}{\sum\nolimits_j\hat{\beta}_j}$
+
+- We save the weights $w_j$ at every incremental period $t$ of available data to create a one-sided weight vector $w_{tj}$. 
+
+$\Rightarrow$ To create one-sided crisis weighted averaged credit gap for each country $i$ ($\hat{c}_{ti}$), we compute:
+\begin{align}
+\hat{c}_{ti,one-sided} = \sum\nolimits_{j} w_{tj} * c_{tij}
+\end{align}
+
+# Empirical Results
+
+## Weights stacked graph
+Weights are restricted to be positive to ensure stability
+```{r weight, echo=FALSE, out.width='100%', fig.align="center"}
+knitr::include_graphics('../../3rdPaper/Data/Output/Graphs/Weights_stack.pdf')
+```
+
+## Weights series graph
+```{r weight_series, echo=FALSE, out.width='100%', fig.align="center"}
+knitr::include_graphics('../../3rdPaper/Data/Output/Graphs/Weights_series.pdf')
+```
+
+## Comparing performance of weighted gap - Full Sample
+
+```{r varcompfull, echo=FALSE, warning=FALSE, message=FALSE}
+options(kableExtra.latex.load_packages = FALSE)
+options(knitr.table.format = "pandoc")
+library('kableExtra')
+library(dplyr)
+library(knitr)
+#library(rstudioapi)
+#setwd(dirname(getActiveDocumentContext()$path))
+#getwd()
+
+filepath='../../3rdPaper/Data/Output/Modelcomparison_512_weighted_countrylist_full.csv'
+df<-read.csv(filepath, sep = ",", header=TRUE)
+
+name1<- df[,1]
+name1<- gsub("_", ".", name1)
+name1[which(name1=="c.hp400k")]<-"BIS Basel gap"
+df[,1]<-name1
+
+df<-df[-c(27:nrow(df)),-c(10:ncol(df))]
+
+#options(knitr.kable.NA = '')
+
+kbl(df, "latex", booktabs = T, digits = c(4, 4, 4, 4, 4, 4, 4, 4), escape=FALSE, linesep=c("","", "", "", "\\addlinespace")
+      , row.names = FALSE) %>%
+  kable_paper("striped") %>%
+  #add_header_above(c("Parameters" = 1, "VAR2" = 3)) %>%
+  #footnote(general="") %>%
+  kable_styling(latex_options="scale_down") %>%
+  column_spec(5, bold = TRUE) %>% #c(0,0,1,0,0,0,1,0,0,0,0,0,0,0,0))
+  row_spec(c(which(df$Cycle=="1.sided weighted.cycle"),which(df$Cycle=="BIS Basel gap")),  bold=TRUE)%>%
+  gsub(".(begin|end){table.*}", "", ., perl = TRUE)%>%
+  gsub(".centering", "", ., perl = TRUE)
+```
+
+## Comparing performance of weighted gap - Full Sample 
+
+### Out-of-sample prediction
+
+
+```{r cvvarcompfull, echo=FALSE, warning=FALSE, message=FALSE}
+
+filepath='../../3rdPaper/Data/Output/CV_Modelcomparison_512_weighted_countrylist_full.csv'
+df<-read.csv(filepath, sep = ",", header=TRUE)
+
+name1<- df[,1]
+name1<- gsub("_", ".", name1)
+name1[which(name1=="c.hp400k")]<-"BIS Basel gap"
+df[,1]<-name1
+
+df<-df[,-c(3,10:13,15,22:25)]
+df2<- as.data.frame(matrix(NA,2*nrow(df),8))
+for (i in 1:nrow(df)){
+  df2[2*(i-1)+1,c(1:8)]<-df[i,c(1:8)]
+  df2[2*(i-1)+2,c(2:8)]<-df[i,c(9:15)]
+}
+
+colnames(df2)<-c("Cycle","BIC","AUC","psAUC",
+                "c.Threshold","Type I","Type II","Policy Loss Function")
+
+
+f <- function(x){ sprintf('%.4f',x)}
+fs <- function(x){ sprintf("(%s)",x)}
+
+
+df2[,-1]<- data.frame(lapply(df2[,-1], f))
+
+for (i in 1:nrow(df)){
+df2[2*(i-1)+2,] <- df2[2*(i-1)+2,] %>% 
+   lapply(. , fs) %>% data.frame()
+}
+
+df2[ df2 == "(NA)" ] <- NA
+df2[ df2 == "(0.0000)" ] <- NA
+
+
+df2 <- df2[-c(6:11,27:nrow(df2)),]
+
+kbl(df2, "latex", booktabs = T, digits = c(4, 4, 4, 4, 4, 4, 4, 4), escape=FALSE, linesep=c("", "\\addlinespace"),row.names = FALSE) %>%
+  #add_header_above(c("Parameters" = 1, "VAR2" = 3)) %>%
+  footnote(general="3-fold cross-validation results. Standard deviations are reported in parentheses.") %>%
+  kable_styling(latex_options=c("striped","scale_down")) %>%
+  kable_paper(c("striped")) %>%   
+  column_spec(4, bold = TRUE) %>% #c(0,0,1,0,0,0,1,0,0,0,0,0,0,0,0))
+  row_spec(c(which(df2$Cycle=="1.sided weighted.cycle"),which(df2$Cycle=="1.sided weighted.cycle")+1,which(df2$Cycle=="BIS Basel gap"),which(df2$Cycle=="BIS Basel gap")+1),  bold=TRUE)%>%
+  gsub(".(begin|end){table.*}", "", ., perl = TRUE)%>%
+  gsub(".centering", "", ., perl = TRUE)
+```
+
+## Comparing performance of weighted gap as an EWI - EME
+
+```{r varcompEME, echo=FALSE, warning=FALSE, message=FALSE}
+options(kableExtra.latex.load_packages = FALSE)
+options(knitr.table.format = "pandoc")
+library('kableExtra')
+library(dplyr)
+library(knitr)
+#library(rstudioapi)
+#setwd(dirname(getActiveDocumentContext()$path))
+#getwd()
+
+filepath='../../3rdPaper/Data/Output/Modelcomparison_512_weighted_countrylist_EME.csv'
+df<-read.csv(filepath, sep = ",", header=TRUE)
+
+name1<- df[,1]
+name1<- gsub("_", ".", name1)
+name1[which(name1=="c.hp400k")]<-"BIS Basel gap"
+df[,1]<-name1
+
+df<-df[-c(27:nrow(df)),-c(10:ncol(df))]
+#options(knitr.kable.NA = '')
+
+kbl(df, "latex", booktabs = T, digits = c(4, 4, 4, 4, 4, 4, 4, 4), escape=FALSE, linesep=c("","", "", "", "\\addlinespace")
+      , row.names = FALSE) %>%
+  kable_paper("striped") %>%
+  #add_header_above(c("Parameters" = 1, "VAR2" = 3)) %>%
+  #footnote(general="") %>%
+  kable_styling(latex_options="scale_down") %>%
+  column_spec(5, bold = TRUE) %>% #c(0,0,1,0,0,0,1,0,0,0,0,0,0,0,0))
+  row_spec(c(which(df$Cycle=="1.sided weighted.cycle"),which(df$Cycle=="BIS Basel gap")),  bold=TRUE)%>%
+  gsub(".(begin|end){table.*}", "", ., perl = TRUE)%>%
+  gsub(".centering", "", ., perl = TRUE)
+```
+
+## Plot weighted gap against BIS gap
+
+```{r wUS1, echo=FALSE, out.width='100%', fig.align="center"}
+knitr::include_graphics('../../3rdPaper/Data/Output/Graphs/Weighted_credit_gap_US.pdf')
+```
+
+## Plot weighted gap against BIS gap
+
+```{r wUK, echo=FALSE, out.width='100%', fig.align="center"}
+knitr::include_graphics('../../3rdPaper/Data/Output/Graphs/Weighted_credit_gap_UK.pdf')
+```
+
+## Out-of-sample Prediction for Individual Countriess
+
+We extrapolated our one-sided weight vector from 2017:Q4 to 2021:Q3, and analyzed the weighted gap as an EWI. Our model identified 9 countries that are experiencing pre-crisis periods:
+
+- Canada, France, Hong Kong (SAR), Japan, South Korea, Saudi Arabia, Switzerland, Sweden, and Thailand
+
+## Thank You
+### I look forward to your questions and comments
+

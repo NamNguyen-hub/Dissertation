@@ -1,0 +1,228 @@
+## Empirical Results
+In this section, I will apply the unobserved components state-space model to data from 2 countries: the US and UK. Since I use a Bayesian inference technique, instead of reporting the estimated expected mean and standard deviation as in the frequentist approach, I will report the estimate of the parameters using the median of the posterior distribution and its 10th and 90th percentile value. An estimate of a parameter with a negative 10th percentile and positive 90th percentile values would mean that we do not have evidence to reject the null hypothesis of said parameter equals zero.
+
+\begin{landscape}
+
+```{r UK-results-3, echo=FALSE, message=FALSE}
+  options(kableExtra.latex.load_packages = FALSE)
+  options(knitr.table.format = "pandoc")
+  library('kableExtra')
+  library(dplyr)
+  library(knitr)
+
+  country='UK'
+  filepath=sprintf('../../../HPCredit/Regression/RegCombPercentile_%s.csv',country)
+  df<-read.csv(filepath, sep = ",", header=FALSE)
+
+  #rownames(df) <- df[,1]
+  #df<-df[,-1]
+
+  df<-df[,-1]
+  colnames(df) <- c("Parameters","Median", "[10$\\%$, 90$\\%$]", "Median", "[10$\\%$, 90$\\%$]", "Median", "[10$\\%$, 90$\\%$]")
+  options(knitr.kable.NA = '')
+
+  #df = df %>% mutate_if(is.numeric, format, digits=4)
+
+  #https://stackoverflow.com/questions/72388965/aesthetics-of-kable-extra-and-rmardown
+  kbl(df, "latex", booktabs = T, digits = c(4, 4, 4, 4, 4, 4, 4), caption ='UK Regression Results - All three models', escape=FALSE, linesep=c("", "", "", "\\addlinespace"), row.names=FALSE) %>%
+    add_header_above(c(" " = 1, "VAR2" = 2, "VAR2 1-cross lag" = 2, "VAR2 2-cross lags" = 2)) %>%
+    footnote(general="UK Bayesian method Metropolis-Hasting random walk posterior distribution estimates") %>%
+    kable_styling(latex_options=c("striped","scale_down")) %>%
+    kable_paper(c("striped")) %>%
+    column_spec(c(1,4:5), bold = c(0,0,1,0,0,0,1,0,0,0,0,0,0,0,0))
+```   
+
+```{r US-results-3, echo=FALSE, message=FALSE}
+  options(kableExtra.latex.load_packages = FALSE)
+  options(knitr.table.format = "pandoc")
+  library('kableExtra')
+  library(dplyr)
+  library(knitr)
+
+  country='US'
+  filepath=sprintf('../../../HPCredit/Regression/RegCombPercentile_%s.csv',country)
+  df<-read.csv(filepath, sep = ",", header=FALSE)
+
+  #rownames(df) <- df[,1]
+  #df<-df[,-1]
+
+  df<-df[,-1]
+  colnames(df) <- c("Parameters","Median", "[10$\\%$, 90$\\%$]", "Median", "[10$\\%$, 90$\\%$]", "Median", "[10$\\%$, 90$\\%$]")
+  options(knitr.kable.NA = '')
+
+  #df = df %>% mutate_if(is.numeric, format, digits=4)
+
+  #https://stackoverflow.com/questions/72388965/aesthetics-of-kable-extra-and-rmardown
+  kbl(df, "latex", booktabs = T, digits = c(4, 4, 4, 4, 4, 4, 4), caption ='US Regression Results - All three models', escape=FALSE, linesep=c("", "", "", "\\addlinespace"), row.names=FALSE) %>%
+    add_header_above(c(" " = 1, "VAR2" = 2, "VAR2 1-cross lag" = 2, "VAR2 2-cross lags" = 2)) %>%
+    footnote(general="US Bayesian method Metropolis-Hasting random walk posterior distribution estimates") %>%
+    kable_styling(latex_options=c("striped","scale_down")) %>%
+    kable_paper(c("striped")) %>%
+    column_spec(c(1,4:5), bold = c(0,0,1,0,0,0,1,0,0,0,0,0,0,0,0))
+```   
+
+
+```{r UK-US-results, echo=FALSE, message=FALSE}
+  options(kableExtra.latex.load_packages = FALSE)
+  options(knitr.table.format = "pandoc")
+  library('kableExtra')
+  library(dplyr)
+  library(knitr)
+
+  country='UK'
+  filepath=sprintf('../../../HPCredit/Regression/RegCombPercentile_%s.csv',country)
+  df<-read.csv(filepath, sep = ",", header=FALSE)
+  df<-df[,-c(3:4,7:8)]
+
+  country='US'
+  filepath=sprintf('../../../HPCredit/Regression/RegCombPercentile_%s.csv',country)
+  df1<-read.csv(filepath, sep = ",", header=FALSE)
+  df1<-df1[,-c(1:2,3:4,7:8)]
+  df<-cbind(df,df1)
+
+  #rownames(df) <- df[,1]
+  #df<-df[,-1]
+  colnames(df) <- c("Description","Para.","Median", "[10$\\%$, 90$\\%$]", "Median", "[10$\\%$, 90$\\%$]")
+  options(knitr.kable.NA = '')
+
+  #df = df %>% mutate_if(is.numeric, format, digits=4)
+
+  #https://stackoverflow.com/questions/72388965/aesthetics-of-kable-extra-and-rmardown
+  kbl(df, "latex", booktabs = T, digits = c(4, 4, 4, 4, 4, 4), caption ='VAR(2) 1 cross-lag : UK and US regression results', escape=FALSE, linesep=c("", "", "", "\\addlinespace"), row.names=FALSE) %>%
+    add_header_above(c(" " = 2, "UK VAR2 1-cross lag" = 2, "US VAR2 1-cross lag" = 2)) %>%
+    footnote(general="UK - US Bayesian method regression results") %>%
+    kable_styling(latex_options=c("striped","scale_down")) %>%
+    kable_paper(c("striped")) %>%
+    column_spec(c(1:6), bold = c(0,0,1,0,0,0,1,0,0,0,0,0,0,0,0))
+```   
+
+\end{landscape}
+
+    
+\clearpage
+    
+      
+The tables \@ref(tab:UK-results-3) and \@ref(tab:US-results-3) shows maximum-likelihood estimates of all three Unobserved Component VAR(2) models. The first model is a parsimonious UC VAR(2) model with no cross-cycle correlation terms ($\phi^x_y$ and $\phi^x_h$ are set to be zero). The next two models introduces one and two cross-cycle coefficients on the lags of cyclical component respectively. The model selection criteria, log-likelihood value, suggests that the best fit model is VAR(2) with 2 cross lags. But because this paper focuses on the estimate of the causal cross cycle correlation parameter, I select the second model - VAR(2) with only 1 cross lag in the cycle component as the one to limit the scope of analysis on.
+
+\subsection{Dynamic Relationship between Credit to Household and Housing Price}
+
+From Table \@ref(tab:UK-US-results), the VAR(2) - 1 cross lag model regression results suggest that transitory shocks dominate permanent shocks in terms of variation in both household credit and housing price variables. The standard deviation of the shocks in the cycle of credit $\sigma_{ey}$ is 0.8021 in the UK and 0.8631 in the US, much higher than the standard deviation of the shocks to the trend of credit $\sigma_{ny}$ in the UK of 0.2714 and the US of 0.2954. The same applies to housing prices, the standard deviation of the shocks in the cycle of housing price $\sigma_{eh}$ is 1.2242 in the UK and 0.8988 in the US, higher than the standard deviation of the shocks to the trend of housing price $\sigma_{nh}$ in the UK of 0.0789 and the US of 0.1390. This result also indicates that variations in the housing price cyclical components of the UK are bigger than in the US. In contrast, variations in other components of the UK do not differ from the US. Regarding the estimated parameters, the sum of AR parameters of the cyclical components in all three models is smaller, although close to one. This implies that shocks to the cycle are persistent but will eventually dissipate.
+    
+The correlation analysis of the shocks to the cyclical components among the two variables suggests that cyclical variation among housing price and household credit is strongly positively correlated. The estimate $\rho_{eyeh}$ at 0.2536 for the UK and 0.1537 for the US suggest that transitory shock to housing credit is closely positively correlated to transitory shock in housing price. This implies that a transitory increase in household credit is correlated with an appreciation in housing prices above their long-run trend.
+    
+The correlation analysis of the shocks to the trends $\rho_{nynh}$ among the two variables reveals no significant correlation between shocks to the trend components of household credit and housing price. The median estimate for the permanent component's correlation is much smaller than the correlation of the transitory components. 
+
+Lastly, I analyze the correlation value of the time-varying local growth rate components $\mu_{it}$ from both household credit and housing price index trends as specified in equations 2.3-2.6. After estimating the unobserved components, as in figures 2.2 and 2.5, we can calculate the correlation values between those two local growth rate components. The correlation value $\rho_{\mu yh}$ for the UK at 0.5603 is significantly higher than that for the US at -0.0574. This result supports the hypothesis that the underlying trend components of household credit and housing price index in the UK are more correlated than in the US.
+
+Overall, the above analyses' results suggest that the two variables' short-run and long-run dynamics are very different. Therefore, there is a benefit in decomposing the series into trend and cyclical components.
+
+\subsection{Trend-Cycle Decomposition}
+
+The following graphs show the UC forecast series against the actual data series. As discussed in the previous subsection, I focus our analysis on the VAR(2) 1 cross-lag model in Figures 2.2 and 2.5.
+
+\clearpage
+
+```{r, echo=FALSE, out.width='85%',  fig.align='center', fig.cap = 'UK VAR(2)'}
+knitr::include_graphics('../../../HPCredit/Regression/Bayesian_UC_VAR2_drift/OutputData/graphs/HP_Credit_4graphs_UK.pdf')
+```
+
+```{r, echo=FALSE, out.width='85%',  fig.align='center', fig.cap = 'UK VAR(2) 1 cross-lag'}
+knitr::include_graphics('../../../HPCredit/Regression/Bayesian_UC_VAR2_drift_Crosscycle1lag/OutputData/graphs/HP_Credit_4graphs_UK.pdf')
+```
+
+```{r, echo=FALSE, out.width='85%', fig.align='center', fig.cap = 'UK VAR(2) 2 cross-lags'}
+knitr::include_graphics('../../../HPCredit/Regression/Bayesian_UC_VAR2_drift_Crosscycle2lags/OutputData/graphs/HP_Credit_4graphs_UK.pdf')
+```
+
+```{r, echo=FALSE, out.width='85%',  fig.align='center', fig.cap = 'US VAR(2)'}
+knitr::include_graphics('../../../HPCredit/Regression/Bayesian_UC_VAR2_drift/OutputData/graphs/HP_Credit_4graphs_US.pdf')
+```
+
+```{r, echo=FALSE, out.width='85%',  fig.align='center', fig.cap = 'US VAR(2) 1 cross-lag'}
+knitr::include_graphics('../../../HPCredit/Regression/Bayesian_UC_VAR2_drift_Crosscycle1lag/OutputData/graphs/HP_Credit_4graphs_US.pdf')
+```
+
+```{r, echo=FALSE, out.width='85%', fig.align='center', fig.cap = 'US VAR(2) 2 cross-lags'}
+knitr::include_graphics('../../../HPCredit/Regression/Bayesian_UC_VAR2_drift_Crosscycle2lags/OutputData/graphs/HP_Credit_4graphs_US.pdf')
+```
+
+\clearpage
+
+
+
+In this subsection, I decompose the trend and cycle of household credit and housing price using the correlated unobserved component model. The stochastic trend in the multivariate UC model captures the long-run evolution in household credit, housing price, and the effect of the recent global  crisis. In the long run, there is an increasing trend in the housing price index. The household credit trend is also increasing, but since the series is credit to households as a ratio to GDP, the rate at which the household credit trend increases is lower than that of the housing price index. There was a downward movement of the trend components in both credit and housing prices after the  crisis. However, the housing price index trends made a quicker recovery than household credit. 
+
+The cyclical components of the model capture the evolution of household credit, housing price, and their dynamic relationship. In Figures 2.1-2.6, we can see an increase in the credit transitory component before the crisis of 2008-2009 happened, and there is a negative shock to the transitory component of housing price after the recession is captured in the model as well. Specifically, in Figures 2.2 and 2.5, the VAR(2) model with 1 cross-lag coefficients identified the timing of temporary gaps increase in both credit and housing price before the crisis more accurately than the one-sided HP filter could.
+
+It is also important to point out that our models capture a significantly bigger positive gap in transitory shock in both credit and house price than a Hodrick-Prescott (HP) filter would for the US in Figure 2.5. Our model utilizes additional information from decomposed long-run and short-run variables, which were extracted from a nonstochastic time series. Another approach in dealing with nonstochastic time series is to first-differencing the series, which loses much important information from a limited sample. Thus when dealing with a time series of low frequency and long-term assets such as housing prices, it is worthwhile to consider using the unobserved component model rather than simply applying an HP filter or first-differencing since it reveals more lower frequency information. The graphs indicate that the magnitude of transitory shocks the models capture is higher, and the movement frequency of the cycles is lower than that of other decomposition methods (HP filter). 
+
+
+### Predictive Ability of Cyclical Components {#predictive-para}
+A novel contribution of this paper is to introduce the cross-cycle parameter $\phi^{xt}_h$ and $\phi^{xt}_{y}$ in which it measures the effect of a change in previous periods' credit transitory component on the current housing price transitory component and vice versa. From Table \@ref(tab:UK-US-results), in both cross-cycle regressions in the UK and US, we can observe that there is a significant positive effect of last period house price cycle deviation on current household credit cycle component ($\phi^{x1}_{y}$). While the coefficients of transitory household credit deviation on housing price index ($\phi^{x1}_{h}$) are smaller, and even statistically insignificant in the case of the US. This holds true for the 2-crosscycle lags model also on the other regression results Tables \@ref(tab:UK-results-3) and \@ref(tab:US-results-3); when we take the sum of the 2-crosscycle lags coefficients, they show similar results. This showed evidence that past transitory shocks to house price credit will cause a positive deviation in future transitory household credit. On the contrary, the effect in the opposite direction is much smaller.
+
+### Cross Countries Analysis {#cross-countries}
+In this subsection, I will further discuss estimates of the causal coefficient $\phi^{xt}_y$ and $\phi^{xt}_h$ in cross-country settings. The window for sample data I selected starting from 1990:Q4 - 2021:Q3 coincides with the period when many developed countries started recording their housing price index. This created an opportunity for us to compare the estimates of the causal coefficient parameters. Specifically, I estimated our VAR(2) 1 cross-lag model using data from 17 developed countries, as shown in Table \@ref(tab:table-cross-countries). 
+
+
+```{r table-cross-countries, echo=FALSE, message=FALSE}
+options(kableExtra.latex.load_packages = FALSE)
+options(knitr.table.format = "pandoc")
+library('kableExtra')
+library(dplyr)
+library(knitr)
+library(tidyr)
+
+filepath <- "../../../HPCredit/Data Collection/1.Latest/Paper1/shortlistofCountries_full.csv"
+
+name1 <- read.table(filepath, header = TRUE, sep = ",")
+
+df = data.frame()
+
+for (i in seq_len(nrow(name1))) {
+country <- name1[i, 1]
+
+filepath <- sprintf("../../../HPCredit/Regression/Bayesian_UC_VAR2_drift_Crosscycle1lag/OutputData/Reg_%s.csv", country)
+df1 <- read.table(filepath, header = FALSE, sep = ",")
+df1 <- df1[c(1,3:4),3:4]
+df2 = data.frame(matrix(ncol = 7, nrow = 1))
+df2[1,2:4] <- t(df1[1:3,1])
+df2[1,5:7] <- t(df1[1:3,2])
+df3 = data.frame(matrix(ncol = 5, nrow = 1))
+df3[1,1] <- name1[i, 2]
+df3[1,2] <- df2[1,2]
+df3[1,4] <- df2[1,5]
+f <- function(x){ sprintf('%.4f',x)}
+df2<- data.frame(lapply(df2, f))
+df2[1,1] <- name1[i, 2]
+df3[1,3] <- df2[,3:4] %>% 
+   unite(combined1, X3, X4 , sep = ", ", remove = TRUE) %>%
+   mutate(combined1 = sprintf("[%s]", combined1))
+df3[1,5] <- df2[,6:7] %>% 
+   unite(combined1, X6, X7 , sep = ", ", remove = TRUE) %>%
+   mutate(combined1 = sprintf("[%s]", combined1))
+df <- rbind(df,df3)
+}
+
+colnames(df) <- c("Country","Median", "[10$\\%$, 90$\\%$]", "Median", "[10$\\%$, 90$\\%$]")
+
+options(knitr.kable.NA = '')
+
+#df = df %>% mutate_if(is.numeric, format, digits=4)
+
+kbl(df, "latex", booktabs = T, digits = c(4, 4, 4, 4, 4), caption ='VAR(2) 1 cross-lag : Cross countries estimates', escape=FALSE, linesep=c("", "", "", "\\addlinespace"), row.names=FALSE) %>%
+add_header_above(c(" " = 1, "$\\\\phi^{x1}_y$ HPI on Credit" = 2, "$\\\\phi^{x1}_h$ Credit on HPI" = 2), escape=FALSE) %>%
+footnote(general="Cross Countries causal coefficients") %>%
+kable_styling(latex_options=c("striped","scale_down")) %>%
+kable_paper(c("striped"))
+```
+
+The overall result shows that there is cross-countries evidence to further support the hypothesis established in the previous subsection \@ref(predictive-para) that past transitory shocks to house price credit will cause a positive deviation in future transitory household credit; or that the $\phi^{x1}_y$ coefficient parameter estimates are positive and statistically significant.
+
+Out of the 17 countries in our sample, 11 countries in Europe and North America, except for the Netherlands, have a positive and significant estimate for $\phi^{x1}_y$ (HPI on Credit causal coefficient). On the other hand, East Asian countries such as Japan, South Korea, and Hong Kong (SAR), along with Australia, and New Zealand, have insignificant estimates for $\phi^{x1}_y$.
+
+As for the other parameter, $\phi^{x1}_h$ (Credit on HPI causal coefficient), only six countries have positive and significant estimates: Australia, Finland, Japan, Norway, Sweden, and the US. Furthermore, three of those positive estimates are also smaller in magnitude compared to their counterpart $\phi^{x1}_y$, except for Australia, Japan, and Sweden. Interestingly, there are also countries with negative and significant estimates for $\phi^{x1}_h$, which are Belgium, France, Hong Kong, and New Zealand. Their negative values implied that a positive increase in transitory household credit would have a negative effect on future transitory household prices. Overall, from all 17 available countries' estimates, I found no strong evidence to support $\phi^{x1}_h$ (Credit on HPI causal effect) to be significant.
+
+The two outliers in this analysis are Japan and Italy. Italy has a much higher $\phi^{x1}_y$ (HPI on Credit causal coefficient) than other countries, this could be a result of the country experiencing a boom in house prices before the global crisis. And after its bust in 2009, house prices have not been able to recover since, see graphs in Figure \@ref(fig:IT-graphs). In contrast, Japan has a much higher $\phi^{x1}_h$ (Credit on HPI causal coefficient) than other countries. This could be due to Japan's economy's unique characteristics in which it has been experiencing three consecutive lost decades of stagnation trying to recover after the Japan Banking crisis in early 1990. Its household credit and house price index have declined ever since early 1990. However, there are signs of recovery in recent years for Japan, see graphs in Figure \@ref(fig:JP-graphs).
+
+\clearpage
+

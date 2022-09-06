@@ -1,0 +1,13 @@
+
+# Introduction
+
+&nbsp;
+
+Financial market stability has been an increasingly important topic in recent years, especially after the great recession. Among major determinants of financial market booms and busts, credit supply expansion and property prices are popularly cited and studied. In my dissertation, I try to explore different aspects of the cycle of credit supply (deviation of credit-to-GDP ratio from its long-run trend), such as its forecasting ability, its dynamic relationship with property prices, and financial stability. My analysis focuses on the US and UK economies in the first two chapters. While the third chapter uses a panel data setting with 40 countries.
+
+The first chapter of my dissertation exploits a model that allows for household credit and house prices to be jointly determined in both short run and long run. The methodology I use in this chapter allows for measuring the directions and magnitudes of the effects the two variables have on each other. More importantly, the timing of the effect can also be estimated using a state-space framework. The model empirical result suggests that, in the short run, a positive shock to house prices is associated with a future increase in household credit above its long-run trend. This result is robust in multiple structural specifications of the trend-cycle decomposition methods.
+
+The second chapter of my dissertation proposes a new method to measure the credit gap - (deviation of credit-to-GDP ratio from its long-run trend) based on its out-of-sample forecast performance. I decompose the total credit-GDP ratio series into short-run deviations and long-run trends using many relevant and popularly practiced methods. I then combine the cycles to construct a singular cyclical series with the highest predictive power on out-of-sample forecasts. The empirical results suggest that by using forecast error weighted average combination, we can produce a measurement of credit gaps that provides superior performance as an early indicator of turning points.
+
+The third chapter of my dissertation overcomes model uncertainty in using the credit gap as an early warning indicator (EWI) of systemic financial crises in a binary outcome setting. I propose using model averaging of different credit gap measurements to achieve better averaged model fit and out-of-sample prediction. I also propose a novel, superior criteria to judge the performance of an EWI than the one currently popularly used in the literature. The empirical results showed that the Bayesian averaged model I proposed could synthesize a single credit gap that out-performs any other popularly studied credit gap measurements in terms of an early warning indicator.
+

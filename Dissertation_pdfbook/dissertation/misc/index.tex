@@ -1,0 +1,671 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+  12pt,
+  openany]{book}
+\author{}
+\date{\vspace{-2.5em}}
+
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
+\usepackage[flushleft]{threeparttable}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{booktabs,caption}
+\usepackage{siunitx}
+\sisetup{round-mode = places, round-precision = 4,}
+\usepackage{pdflscape}
+\usepackage{indentfirst}
+\interfootnotelinepenalty=10000
+\usepackage{float}
+
+%\numberwithin{equation}{section}
+%\usepackage[nottoc]{tocbibind} %List of figures and tables
+
+\usepackage{alltt}
+\usepackage{placeins}
+\usepackage{setspace}
+  \doublespacing
+
+\setcounter{MaxMatrixCols}{10}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{acknowledgement}[theorem]{Acknowledgement}
+\newtheorem{algorithm}[theorem]{Algorithm}
+\newtheorem{axiom}[theorem]{Axiom}
+\newtheorem{case}[theorem]{Case}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{conclusion}[theorem]{Conclusion}
+\newtheorem{condition}[theorem]{Condition}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{criterion}[theorem]{Criterion}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{exercise}[theorem]{Exercise}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{notation}[theorem]{Notation}
+\newtheorem{problem}[theorem]{Problem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{solution}[theorem]{Solution}
+\newtheorem{summary}[theorem]{Summary}
+% \newenvironment{proof}[1][Proof]{\textbf{#1.} }{\  \rule{0.5em}{0.5em}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% University of Western Ontario Thesis Template
+% 1. Initial version by: Justin Quinn Veenstra, 2010 with thanks to Mr. (soon to be Dr.) Will Robertson.
+% 2. Adapted by: Dr. John Stuart Haberl Baxter, 2018 for his thesis.
+% 3. Dr. Baxter's thesis converted to generic template by: Dr. Jonathan C. Lau, 2018.
+% 4. Adapted for use with RMarkdown/Bookdown by: Thea Knowles (expected PhD 2019)
+%   In this version 
+%     - All of the global definitions and names will be contained in preamble.tex
+%     - All pre-body text (abstract, acknowledgements, TOC, etc)will be defined in doc_preface.tex
+
+
+%% TK notes: The following was probably good advice but the last few versions of this have not followed it.
+%%  - all \newcommand and \newenvironments etc are currently defined in this document
+%%  - I have left the following in for transparency anyways
+%%
+%% ** NOTE **
+%% You should put all of your '\newcommand', '\newenvironment', and
+%% '\newtheorem's (in other words, all the global definitions that you
+%% will need throughout your thesis) in a separate file and use
+%% "\input{filename}" to input it here.
+
+
+\usepackage{appendix}
+\usepackage{graphicx}
+%\usepackage[fleqn]{amsmath}
+\usepackage{amsmath, amsfonts, amssymb, amsthm}
+\usepackage[byname]{smartref}
+%\usepackage[]{amssymb}
+\usepackage[font=small]{caption}
+\usepackage[font=small]{subcaption}
+\usepackage{setspace}
+\usepackage{enumitem}
+\usepackage{lmodern}
+\newlength\longest
+%\usepackage{lineno}%comment out for hardcopy
+\usepackage{units}
+%\usepackage{txfonts} % doesn't work with xelatex engine, which is needed for unicode chars
+\usepackage{tocloft}
+\usepackage{tabularx}
+\usepackage{longtable}
+%\usepackage[sectionbib]{chapterbib}
+
+\usepackage{hyperref} %comment out for hardcopy
+\usepackage{tocloft}
+\usepackage{color}
+\usepackage{pdfpages}
+
+\usepackage{tabu} % Used by kable
+\usepackage{nomencl} % From Lucy's template for abbrevs
+%\renewcommand{\nompreamble}{\vspace{0.25in}} % code after main title
+\makenomenclature
+\newcommand{\nm}[2]{\nomenclature{#1}{#2}}
+
+\makeatletter
+\numberwithin{figure}{chapter}
+\newenvironment{acknowledgements}%
+{\clearemptydoublepage
+ \begin{center}
+  \section*{Acknowledgements}
+ \end{center}
+ \begingroup
+}{\newpage\endgroup}
+
+
+%\usepackage[boxruled,algochapter]{algorithm2e}
+
+
+
+\DeclareMathOperator*{\argmin}{\operatorname{argmin}}
+\DeclareMathOperator*{\Proj}{\operatorname{Proj}}
+\DeclareMathOperator*{\dvg}{\operatorname{div}}
+
+\newenvironment{dedication}%
+{\clearemptydoublepage 
+ \begin{center}
+  \section*{Dedication}
+ \end{center}
+ \begingroup
+}{\newpage\endgroup}
+
+\newenvironment{preliminary}%
+{\pagestyle{plain}\pagenumbering{roman}}%
+{\pagenumbering{arabic}}
+
+\addtoreflist{chapter}
+% \newtheorem{theorem}{Theorem}[section]
+% \newtheorem{lemma}[theorem]{Lemma}
+% \newtheorem{proposition}[theorem]{Proposition}
+% \newtheorem{corollary}[theorem]{Corollary}
+% \newtheorem{axiom}{Axiom}
+
+% \newenvironment{proof}[1][Proof]{\begin{trivlist}
+% \item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+% \newenvironment{definition}[1][Definition]{\begin{trivlist}
+% \item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+% \newenvironment{example}[1][Example]{\begin{trivlist}
+% \item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+% \newenvironment{remark}[1][Remark]{\begin{trivlist}
+% \item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+
+% \newcommand{\qed}{\nobreak \ifvmode \relax \else
+%       \ifdim\lastskip<1.5em \hskip-\lastskip
+%       \hskip1.5em plus0em minus0.5em \fi \nobreak
+%       \vrule height0.75em width0.5em depth0.25em\fi}
+
+% Default values for title page.
+
+%% To produce output with the desired line spacing, the argument of
+%% \spacing should be multiplied by 5/6 = 0.8333, so that 1 1/2 spaced
+%% corresponds to \spacing{1.5} and double spaced is \spacing{1.66}.
+%% \def\normalspacing{1.66} % default line spacing
+
+
+%% Define the "thesis" page style.
+\if@twoside % If two-sided printing.
+\def\ps@thesis{\let\@mkboth\markboth
+   \def\@oddfoot{}
+   \let\@evenfoot\@oddfoot
+   \def\@oddhead{
+      {\sc\rightmark} \hfil \rm\thepage
+      }
+   \def\@evenhead{
+      \rm\thepage \hfil {\sc\leftmark}
+      }
+   \def\chaptermark##1{\markboth{\ifnum \c@secnumdepth >\m@ne
+      Chapter \ \thechapter. \ \fi ##1}{}}
+   \def\sectionmark##1{\markright{\ifnum \c@secnumdepth >\z@
+      \thesection. \ \fi ##1}}}
+\else % If one-sided printing.
+\def\ps@thesis{\let\@mkboth\markboth
+   \def\@oddfoot{}
+   \def\@oddhead{
+      {\sc\rightmark} \hfil \rm\thepage
+      }
+   \def\chaptermark##1{\markright{\ifnum \c@secnumdepth >\m@ne
+      Chapter\ \thechapter. \ \fi ##1}}}
+\fi
+
+\if@twoside % If two-sided printing.
+\def\ps@appendix{\let\@mkboth\markboth
+   \def\@oddfoot{}
+   \let\@evenfoot\@oddfoot
+   \def\@oddhead{
+      {\sc\rightmark} \hfil \rm\thepage
+      }
+   \def\@evenhead{
+      \rm\thepage \hfil {\sc\leftmark}
+      }
+   \def\chaptermark##1{\markboth{\ifnum \c@secnumdepth >\m@ne
+      Appendix \ \thechapter. \ \fi ##1}{}}
+   \def\sectionmark##1{\markright{\ifnum \c@secnumdepth >\z@
+      \thesection. \ \fi ##1}}}
+\else % If one-sided printing.
+\def\ps@thesis{\let\@mkboth\markboth
+   \def\@oddfoot{}
+   \def\@oddhead{
+      {\sc\rightmark} \hfil \rm\thepage
+      }
+   \def\chaptermark##1{\markright{\ifnum \c@secnumdepth >\m@ne
+      Chapter\ \thechapter. \ \fi ##1}}}
+\fi
+
+\pagestyle{thesis}
+% Set up page layout.
+\setlength{\textheight}{9in} % Height of the main body of the text
+\setlength{\topmargin}{-.5in} % .5" margin on top of page
+\setlength{\headsep}{.5in}  % space between header and top of body
+\addtolength{\headsep}{-\headheight} % See The LaTeX Companion, p 85
+\setlength{\footskip}{.5in}  % space between footer and bottom of body
+\setlength{\textwidth}{6.25in} % width of the body of the text
+\setlength{\oddsidemargin}{.25in} % 1.25" margin on the left for odd pages
+\setlength{\evensidemargin}{0in} % 1.25"  margin on the right for even pages
+
+% Marginal notes
+\setlength{\marginparwidth}{.75in} % width of marginal notes
+\setlength{\marginparsep}{.125in} % space between marginal notes and text
+
+% Make each page fill up the entire page. comment this out if you
+% prefer. 
+\flushbottom
+
+\setcounter{tocdepth}{3} % Number the subsubsections 
+\def\normalspacing{1.66} % default line spacing
+
+\newcommand\isco[1]{%
+  \edef\@tempa{#1}%
+  \def\@tempb{}%
+  \ifx\@tempa\@tempb
+	\else \\\underline{Co-Supervisor:}\vspace{0.35in}\\\dots\dots\dots\dots\dots\dots\dots\\{#1}\\
+  \fi
+}
+
+\newcommand\isjoint[1]{%
+  \edef\@tempa{#1}%
+  \def\@tempb{}%
+  \ifx\@tempa\@tempb
+	\else \\\underline{Joint Supervisor:}\vspace{0.35in}\\\dots\dots\dots\dots\dots\dots\dots\\{#1}\\
+  \fi
+}
+
+\newcommand\isalt[1]{%
+  \edef\@tempa{#1}%
+  \def\@tempb{}%
+  \ifx\@tempa\@tempb
+	\else \\\underline{Alternate Supervisor:}\vspace{0.35in}\\\dots\dots\dots\dots\dots\dots\dots\\{#1}\\
+  \fi
+}
+
+\newcommand\isdefinedsig[1]{%
+  \edef\@tempa{#1}%
+  \def\@tempb{}%
+  \ifx\@tempa\@tempb
+	\else \\ \dots\dots\dots\dots\dots\dots\dots\\{#1}\\
+  \fi
+}
+\newcommand\isdefinedspinetitle[1]{%
+  \edef\@tempa{#1}%
+  \def\@tempb{}%
+  \ifx\@tempa\@tempb
+	\else (Spine title: #1)\\
+  \fi
+}
+\newcommand\coauthor[1]{%
+  \edef\@tempa{#1}%
+  \def\@tempb{}%
+  \ifx\@tempa\@tempb
+	\else \newpage \Large Co-Authorship Statement\normalsize\\\indent\\#1\\
+  \fi
+}
+
+\newcommand\acknowlege[1]{%
+  \edef\@tempa{#1}%
+  \def\@tempb{}%
+  \ifx\@tempa\@tempb
+	\else \newpage \Large Acknowledgements\normalsize\\\indent\\#1\newpage
+  \fi
+}
+% 
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% % FILL IN YOUR PERSONAL INFO HERE
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\renewcommand{\appendixtocname}{\Huge \textbf{List of Appendices} \normalsize}
+\newcommand{\blank}{\hspace{-2mm}}
+\newcommand{\super}{Dr. Kundan Kishor} %supervisor
+%\newcommand{\superj}{Dr. Supervisor2} %joint supervisor, if there is one, leave blank if not (lbin)... only one of the three.
+\newcommand{\superc}{} %co-supervisor, if there is one, leave blank if not (lbin)
+\newcommand{\supera}{} %alternate supervisor, if there is one, leave blank if not (lbin)
+\newcommand{\scob}{Dr. Committee Member 1}  %member of supervisory committee
+\newcommand{\scoc}{Dr. Committee Member 2}  %member of supervisory committee
+\newcommand{\sct}{}  %other member of supervisory committee (lbin)
+\newcommand{\examo}{Dr. Examiner 1}  %examining committee (up to four, if less leave blank)
+\newcommand{\examt}{Dr. Examiner 2}
+\newcommand{\examth}{Dr. Examiner 3}
+\newcommand{\examf}{Dr. Examiner 4}
+\newcommand{\department}{Department of Economics}
+\newcommand{\degree}{Doctor of Philosophy in Economics}
+\newcommand{\firstname}{Nam}
+\newcommand{\lastname}{Nguyen}
+\renewcommand{\author}[1]{\ifx\empty#1\else\gdef\@author{#1}\fi}
+\newcommand{\authorname}{{\firstname}{ }{\lastname}}
+\newcommand{\titl}{Essay on Measuring Credit and Property Prices Gaps}
+\newcommand{\spinetitle}{}%only if the above is more than 60 characters
+\newcommand{\thesisformat}{Monograph} %or Monograph
+\newcommand{\gyear}{\number\year}
+\newcommand{\makecoauthor}{}
+\newcommand{\makeacknowlege} {
+%Type in acknowlegements here
+}
+
+
+\renewcommand{\maketitle}
+{\begin{titlepage}
+   \setcounter{page}{1}
+   %% Set the line spacing to 1 for the title page.
+   %\begin{spacing}{1}
+   \begin{singlespace}
+   \begin{large}
+   \begin{center}
+      \mbox{}
+      \vfill
+      {\MakeUppercase{\titl}}\\
+      \isdefinedspinetitle{\spinetitle}
+      %(Thesis format: \thesisformat)\\
+      \vfill
+      by \\
+      \vfill
+      \authorname\\
+      \vfill
+      Graduate Program in {\department}\\
+      \vfill
+		A dissertation submitted in partial fulfillment\\
+		of the requirements for the degree of\\
+		\degree\\
+		\vfill
+		at\\
+		College of Letters and Science\\
+		University of Wisconsin - Milwaukee\\
+		\vfill
+      {\copyright} {\authorname} {\gyear}  \\
+      \vspace*{.2in}
+   \end{center}
+   \end{large}
+   \end{singlespace}
+%   \end{spacing}
+   \end{titlepage}
+
+}%\maketitle
+
+\newcommand{\makecert}{
+   \setcounter{page}{2}
+\vfill
+\begin{center}
+\large
+UNIVERSITY OF WISCONSIN - MILWAUKEE\\
+College of Letters and Science\\
+\vfill
+\textbf{CERTIFICATE OF EXAMINATION}
+\end{center}
+
+\vfill
+\begin{table}[ht]
+\begin{minipage}[t]{0.5\linewidth} %tabular instead?
+\begin{tabular}{l}
+\underline{Supervisor:}\vspace{0.35in}
+\isdefinedsig{\super}
+\isco{\superc}
+\isjoint{\superj}
+\isalt{\supera}
+\\
+%\underline{Supervisory Committee:}\vspace{0.35in}
+%\isdefinedsig{\scoa}\vspace{0.15in}
+%\isdefinedsig{\scob}\vspace{0.15in}
+%\isdefinedsig{\scoc}\vspace{0.15in}
+%\isdefinedsig{\sct}
+\end{tabular}
+\vfill
+\end{minipage}
+\hspace{0.5in}
+\begin{minipage}[t]{0.5\linewidth}
+\begin{tabular}{l}
+\underline{Examiners:} \\\vspace{.5cm}
+\isdefinedsig{\examo}\\
+\isdefinedsig{\examt}\\
+\isdefinedsig{\examth}\\
+\isdefinedsig{\examf}
+\end{tabular}
+\vfill
+\end{minipage}
+\vfill
+\end{table}
+\vfill
+\begin{center}
+The thesis by \\ \vfill
+\textbf{\firstname{}  \underline{\lastname}}\\
+\vfill
+entitled:\\\vfill
+\textbf{\titl}\\\vfill
+is accepted in partial fulfillment of the \\
+requirements for the degree of\\
+\degree\\
+\end{center}
+\begin{table}[ht]
+\begin{minipage}[t]{0.5\linewidth}
+\begin{tabular}{l}
+\dots\dots\dots\dots\dots\\
+Date
+\end{tabular}
+\end{minipage}
+\hspace{0.5in}
+\begin{minipage}[t]{0.5\linewidth}
+\begin{tabular}{l}
+\dots\dots\dots\dots\dots\dots\dots\dots\dots\dots\\
+Chair of the Thesis Examination Board
+\end{tabular}
+\end{minipage}
+\end{table}
+
+}
+
+\makeatother
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+
+\begin{document}
+
+
+%% This sets the page style and numbering for preliminary sections.
+\begin{preliminary}
+
+%% This generates the title page from the information given in preamble.tex.
+\maketitle
+%\addcontentsline{toc}{chapter}{Certificate of Examination}
+%\makecert
+\newpage
+
+
+%\addcontentsline{toc}{chapter}{Co-Authorship Statement}
+%\coauthor{\makecoauthor}  %comment this out if none
+%\newpage
+%\addcontentsline{toc}{chapter}{Acknowlegements}
+%\acknowlege{\makeacknowlege}	%as above
+\setcounter{page}{2}
+\addcontentsline{toc}{chapter}{Abstract}
+\Large\begin{center}\textbf{Abstract}\end{center}\normalsize
+
+\begin{center}
+	\singlespacing
+\large ESSAYS ON HOUSING MARKET
+\end{center}
+
+\doublespacing
+\begin{center}
+by\\
+\end{center}
+
+\begin{center}
+\authorname\\
+\end{center}
+
+\doublespacing
+\begin{center}
+The University of Wisconsin-Milwaukee, 2022\\
+Under the Supervision of Professor Kundan Kishor\\
+\end{center}
+
+
+%%  ***  Put your Abstract here.   ***
+%% (150 words for M.Sc. and 350 words for Ph.D.)
+%\input{abstract}
+
+My dissertation studies credit expansion and its effect on house prices and financial stability. In the first chapter, I examine the idea that house prices and credit to household are jointly determined and they affect each other both in the short-run and in the long-run. We decompose the movements of the two variables of interest into permanent long-run and transitory short-run components using an unobserved components vector autoregressive model. Our dynamic model shows findings to support the hypothesis that a short-run positive shock to house prices is associated with an increase in household credit above its long-run trend. Additionally, by utilizing additional information generated by the unobserved component model, our multivariate model performs better than univariate models do in capturing the dynamics of the household credit and house prices over the last three decades, especially during the period of the recent financial crisis. We were also able to estimate the predictive ability that cyclical components of a variable have on their counterparts by employing cross-correlation coefficients in the VAR model.
+
+In the second chapter, we propose a new method to measure credit gap-deviation of
+credit-to-GDP ratio from its long-run trend. We utilize the idea proposed in
+Nelson (2008) that the deviation of a non-stationary variable from its
+long-run trend should predict future changes in the variable. Since
+different trend-cycle decomposition methods of credit-to-GDP ratio provide
+us different credit gap measures, we handle the model uncertainty by
+assigning weights on these different credit gap measures based on its
+relative out-of-sample predictive power based on Bates and Granger (1969)
+forecast combination method. We apply this approach to estimate the credit
+gap for the U.K. and the U.S. using credit-to-GDP ratio data from 1960-2020.
+Our proposed credit gap measure dominates the alternate credit gaps
+including the one provided by the Bank of International Settlements (BIS) in
+terms of its relative out-of-sample predictive power. Our proposed gap also
+has superior features in terms of early detection of turning points and
+relative insensitivity to the endpoint problem.
+
+The third chapter of my dissertation overcomes model uncertainty in using credit gap as an early warning indicator (EWI) of systemic financial crises in a binary outcome setting, we propose using model averaging of different credit gap measurements to achieve better averaged model fit and out of sample prediction. The methodologies we use are logistic binary regression in a panel set up consisting of 40 countries. In this paper, we also propose a novel, superior criteria to judge the performance of an EWI than the one currently popularly used in the literature. The empirical results showed that our Bayesian averaged model can synthesize a single credit gap that out-performs any other popularly studied credit gap measurements in term of an early warning indicator.
+
+
+\vfill
+\noindent\textbf{JEL Codes:} C52, E44, G01.
+
+\noindent\textbf{Keywords:} Credit Gap, Trend Cycle Decomposition, Forecast
+Combination, Early Warning Indicator
+\newpage
+
+
+
+
+% \clearpage
+% 
+% \thispagestyle{empty}
+% \null\vfill
+% {
+% 	\settowidth\longest{\Large\itshape Planning to write is not writing. Outlining, researching,}
+% 	\centering
+% 	\hspace{3cm}\parbox{\longest}{%
+% 		\raggedright{\Large\itshape%
+%       Planning to write is not writing. Outlining, researching, talking to people about what you're doing, none of that is writing. Writing is writing.\par\bigskip
+% 		}   
+% 		\raggedleft\MakeUppercase{E. L. Doctorow}\par%
+% 		\raggedleft\MakeUppercase{\textit{Some book}}\par%
+% }}
+% 
+% \vfill\vfill
+% 
+% \newpage
+
+
+\addcontentsline{toc}{chapter}{Acknowledgments}
+\Large\begin{center}\textbf{Acknowledgments}\end{center}\normalsize
+%\input{acknowledgements}
+Need to write
+
+\vfill
+\newpage
+\singlespacing
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%% Table of contents %%%%%%%%%%%%%%%%%
+% Source: UWO thesis template
+\tableofcontents\newpage
+\newpage
+\addcontentsline{toc}{chapter}{List of Figures}
+\listoffigures
+\newpage
+
+%\addcontentsline{toc}{chapter}{List of Algorithms}
+
+\addcontentsline{toc}{chapter}{List of Tables}
+\listoftables
+\newpage
+
+% \addcontentsline{toc}{chapter}{List of Abbreviations, Symbols, and Nomenclature}
+% \Large \textbf{List of Abbreviations, Symbols, and Nomenclature} \normalsize
+% 
+% You can define nomenclature from the text by using printnomenclature:
+% \printnomenclature
+% 
+% You can also manually specify them:
+% 
+% \begin{tabular}{lcl}
+% \\
+% \multicolumn{3}{l}{\textbf{Terminology}}\\
+% CNR & & Contrast-to-noise ratio \\
+% SNR & \, & Signal-to-noise ratio \\
+% \\
+% \multicolumn{3}{l}{\textbf{Terms Introduced by this Thesis}}\\
+% $\mathbb{ABC}$ && ABC \\
+% DEF & \, & DEF \\
+% \end{tabular}
+% 
+% \newpage
+
+% \clearpage
+% 
+% \addcontentsline{toc}{chapter}{Preface}
+% \Large\begin{center}\textbf{Preface}\end{center}\normalsize
+% \onehalfspacing
+% %\input{preface}
+% 
+% \newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%% Table of contents %%%%%%%%%%%%%%%%%
+% Source: LDM's dissertation toolkit
+% 
+% \begin{singlespace}
+% \tableofcontents
+% \end{singlespace}
+% 
+% \clearpage
+% \addcontentsline{toc}{chapter}{\listtablename}
+% \listoftables
+% 
+% \clearpage
+% \addcontentsline{toc}{chapter}{\listfigurename}
+% \listoffigures
+% 
+% \clearpage
+% \addcontentsline{toc}{chapter}{\nomname}
+% \printnomenclature
+% 
+% \clearpage
+% \normalsize
+% \pagenumbering{arabic}
+% \setcounter{page}{1}
+
+\end{preliminary}
+%% End of the preliminary sections
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

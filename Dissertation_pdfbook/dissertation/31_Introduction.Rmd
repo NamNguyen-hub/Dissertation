@@ -1,0 +1,540 @@
+# Measuring Credit Gap {#Chapter-3}
+## Introduction
+There is a consensus in macroeconomics and finance literature about the role of credit in overall macroeconomic activity. Not surprisingly, policymakers
+and practitioners pay a significant amount of attention to examine if credit
+growth in the economy is excessive. The problem, however, is that there is
+no unanimity on how to measure excessive credit. Among different measures of
+excessive credit, the credit-to-GDP gap measure published by the Bank of
+International Settlements (BIS) and proposed by @borio_asset_2002 has
+received widespread attention. This measure is estimated by the deviations
+of the credit-to-GDP ratio from a one-sided @hodrick_postwar_1997 (HP) filter
+with a large smoothing parameter (400,000 for quarterly data). In subsequent
+work, @borio_assessing_2009, @drehmann_countercyclical_2010 , and @drehmann_anchoring_2011  show that the credit-to-GDP gap was the best
+single Early Warning Indicator across different measures that they examined.
+Based on this work at the Bank of International Settlements (BIS), the Basel
+Committee for Banking Supervision (BCBS)[-@committee_assessment_2010] has singled out the credit-to-GDP
+gap as a useful guide for setting countercyclical capital buffers (BCBS
+2010b).
+
+The credit gap ^[I use the credit gap and credit-to-GDP gap interchangeably throughout this
+paper.]  measure proposed by the BIS is a measure of the cycle based on the
+HP trend-cycle decomposition of credit-to-GDP ratio, wherein the trend is
+the best estimate of where the variable will be in the long-run and the
+cycle is temporary fluctuations around the trend. Since there is no unique
+method of decomposing a series into a trend and a cycle, it is worth asking
+if the HP cycle measure used by the BIS is an appropriate measure of the
+credit gap. In fact, in a recent work @drehmann_which_2021  make a
+similar argument and attempt to use the idea from Hamilton filter to use
+linear projections to get an estimate of the credit gap. They find that
+credit gaps based on linear projections in real time perform poorly when
+based on country-by-country estimation, and are subject to their own
+endpoint problems. But when they estimate as a panel, and impose the same
+coefficients on all economies, linear projections perform marginally better
+than the baseline credit-to-GDP gap, with somewhat larger improvements. This
+reinforces the argument that there is no unique method of decomposing a non-stationary series into a trend and a cycle, and that I need to take
+into account model uncertainty in estimating the credit gap.
+
+I propose to use the idea in @nelson_beveridgenelson_2008 , where he argues that if
+measured cycle component is temporary then it predicts future growth rates
+of the opposite sign. For example, if the credit-to-GDP ratio is below
+trend, then a recovery in the ratio will require future growth in the
+credit-to-GDP ratio at an above-average rate. Conversely, if it is above
+trend, I can reasonably expect tepid growth in the coming time period.
+According to @nelson_beveridgenelson_2008 , predictability is the essence of `transitory'
+variation, and is expected to be reversed in future periods. Predictability
+of the cycle provides us with a metric for measuring the effectiveness of
+alternative decompositions. This idea has also been emphasized by @cogley_effects_1995 , @hodrick_forecasting_2003 , @orphanides_unreliability_2002 ,
+@rotemberg_real-business-cycle_1996  and @wakerly_common_2006 . The idea of
+predictability implies that a credit gap measure that encompasses all the
+information from other measures about future movements of the credit-to-GDP
+ratio is the appropriate credit gap measure. However, in practice, I do not
+have a measure of the credit gap that possesses this property. This is
+further complicated by instability in the predictive ability of different
+credit gap measures that are ubiquitous in the macro forecasting literature.
+
+I combine the idea of predictability with model uncertainty in trend-cycle
+decomposition by combining credit gap measures obtained from different
+trend-cycle decomposition methods using weights obtained from the
+out-of-sample forecasting exercise ^[I use linear trend, quadratric trend, the HP filter, the @ravn_adjusting_2002 
+modification of the HP filter, @borio_asset_2002 modification of
+the HP filter, Clark's unobserved component model [-@clark_cyclical_1987], @beveridge_new_1981 Decomposition, @hamilton_why_2018 filter.]. The weights are based on
+the @bates_combination_1969  algorithm, where I perform a horse race among
+the most popular trend-cycle decomposition methods in an out-of-sample
+forecasting exercise ^[My forecasts are based on `quasi-real-time' data that uses revised data,
+but only the observations up to the historical date. When a decomposition
+requires estimation of parameters, they are re-estimated at each date before
+computing the cycle estimate.]. The relative weight on cycles from different
+trend-cycle decomposition methods is based on its forecast error variance in
+predicting out-of-sample credit-to-GDP ratio changes. In addition to taking
+into account model uncertainty by assigning weights on different models,
+this approach also handles the instability in the relative forecasting
+performance of different trend-cycle decomposition methods by assigning
+time-varying weights on different methods. These weights are time-varying
+since my method recalculates the weights based on the predictive ability of
+the model for each iteration in my recursive forecasting exercise.
+
+I apply this approach to the credit-to-GDP ratios of the U.K. and the U.S.
+and estimate a credit gap measure for the 1994:Q1-2020:Q2 sample period. My
+results show that the weighted credit gap measure based on my approach
+dominates credit gaps from other trend-cycle decomposition methods in
+out-of-sample forecasting of changes in the credit-to-GDP ratio. My
+combined gap measure leads to an improvement of 13 percent for the U.S. and
+9 percent for the U.K. for 1-4 quarter ahead forecast horizon over a
+benchmark AR(1) model. In contrast, the forecasting performance of the BIS
+gap is worse than the benchmark AR(1) model for both the U.S. and the U.K.
+In addition, the relative forecasting performance of different methods vary
+across two countries confirming model uncertainty in the estimation of
+credit gaps for different methods. My estimated combined credit gap measure
+for the U.S. and the U.K. exhibits smooth behavior with a smaller amplitude
+than the BIS gap. In addition, I observe a clear pattern in early detection
+of trough date by combined gap in both the countries in comparison to the
+BIS gap. Finally, the combined gap measure proposed in this paper does not
+suffer from the endpoint problem usually associated with HP filters.
+
+The remainder of the paper is organized as follows: Section 2 provides brief
+literature review; Section 3 discusses the data; Section 4 presents my
+empirical methodology; Section 3 provides a description of the data used in
+my empirical analysis; Section 5 presents the empirical results; and
+Section 6 concludes.
+
+## Related Literature
+The importance of the credit gap measured as proposed by @borio_asset_2002  can be gauged from the fact that Basel III suggests that policymakers
+use it as part of their countercyclical capital buffer frameworks. The
+baseline credit gap of @borio_asset_2002  is calculated as deviations of
+the credit-to-GDP ratio from a one-sided Hodrick-Prescott (HP) filter with large smoothing parameter-400,000 for quarterly data. The smoothing
+parameter is much larger than the one used for quarterly data in the
+business cycle literature. This choice of smoothing parameter is
+rationalized on the ground that credit cycles are on average about four
+times longer than standard business cycles and crises tend to occur once
+every 20--25 years [@drehmann_countercyclical_2010] . @drehmann_which_2021  use the
+critique of the HP filter outlined in @hamilton_why_2018 and examine different
+measures of the credit gap based on different horizons in local projection
+models. They find that credit gaps based on linear projections in real time
+perform poorly when based on country-by-country estimation, and are subject
+to their own endpoint problems. But when they estimate as a panel, and
+impose the same coefficients on all economies, linear projections perform
+marginally better than the baseline credit-to-GDP gap, with somewhat larger
+improvements concentrated in the post-2000 period and for emerging market
+economies. Several other papers have criticized the HP filter-based credit
+gap measure. These criticisms are based on the ground that HP filter-based
+cycle measures generate spurious dynamics and suffer from endpoint problems.
+
+Several papers have tried to resolve this problem. @aikman_curbing_2015  have used band-pass filters to derive a measure of the credit
+gap. @galati_measuring_2016  estimate a financial cycle using a multivariate
+unobserved-components model on the credit-to-GDP ratio, total credit, and
+house prices for six economies, and find that the resulting medium-term
+cycles vary in terms of length and amplitude across countries and over time.
+@schuler_characterising_2015  derive a financial cycle based on the
+common frequencies of credit and asset prices and find that this measure
+outperforms the credit-to-GDP gap in predicting systemic banking crises at
+horizons of one-to-three years. @aldasoro_early_2018  show
+that combining various indicators of excessive debt with property prices can
+help to improve financial crisis prediction.
+
+As is widely known, the HP filter is one measure of trend-cycle
+decomposition. Trend-cycle decomposition has a very rich history in business
+cycle literature. Yet there is no consensus on what constitutes appropriate
+decomposition methods. In this paper, I take an agnostic approach and
+utilize the idea that the cyclical component in the decomposition should
+have predictive power for future growth of the variable. This idea has been
+explored in @nelson_beveridgenelson_2008  to compare the forecasting performance of
+different trend-cycle decomposition methods for real GDP. I take the
+predictive ability argument for the cycle one step further and apply it in
+the context of the estimation of the credit gap. It is widely accepted that
+model uncertainty reigns supreme in applying a particular trend-cycle
+decomposition method. To take into account this model uncertainty, we
+weighted the cycles obtained from different decomposition methods using
+Bates and Granger forecast combination method.
+
+## The Data
+
+My sample periods include quarterly data from 1960:Q1-2020:Q2. My variable
+of interest is the credit-to-GDP ratio for the U.S. and the U.K. The data
+has been sourced from the Bank of International Settlements (BIS). The
+measure of credit is total credit to the private non-financial sector, as
+published in the BIS database, capturing total borrowing from all domestic
+and foreign sources. I do not include data for the recent pandemic period
+in my analysis. The credit-to-GDP ratios for these two countries are
+plotted in Figure \@ref(fig:Credit-to-GDP-Ratios). As can be seen from the figure, these two series are
+clearly non-stationary. Unit root tests confirm this, with the null of unit
+root not being rejected at all conventional levels. This is robust to the
+use of different unit root tests. 
+
+
+## Empirical Methodology
+### Trend-Cycle Decomposition
+
+My combined measure of the credit gap is based on different trend-cycle
+decomposition methods for the credit-to-GDP ratio. In the literature,
+several methods have been proposed to decompose a non-stationary series into
+a trend and a cycle. Since there is no consensus on the true model of
+trend-cycle decomposition, I take an agnostic view in this paper. For my
+purposes, I use seven different measures of trend inflation. All these
+trend-cycle decomposition methods are based on the premise that a
+non-stationary series is the sum of a trend and a stationary cyclical
+component:
+
+\begin{equation}
+y_{t}=\tau _{t}+c_{t}
+\end{equation}
+
+where $y_{t}$ is an I(1) process, and for my purposes, credit-to-GDP
+ratio. $\tau _{t}$ is trend component and $c_{t}$ is cyclical component, and
+is stationary. Trend is usually modeled as random walk and cycle is modeled
+as following some ARMA(p,q) process. In this paper, I use 8 different
+decomposition methods: linear trend, quadratic trend, the HP filter, the
+@ravn_adjusting_2002  modification of the HP filter, @borio_asset_2002 
+modification of the HP filter, Clark's unobserved component model (Clark's unobserved component model [-@clark_cyclical_1987] , @beveridge_new_1981 
+ Decomposition, @hamilton_why_2018  filter. I do not use
+frequency-based filters because my approach uses the forecasting property
+of the cycle. The observations at the end of the sample are either not
+available or highly volatile for frequency-based filters. The linear trend
+model is based on a deterministic time trend and assumes all variation in
+headline inflation is transitory, and hence due to cyclical components. The
+HP filter is an atheoretical smoothing method to obtain trend and cycle
+components of non-stationary series and is very popular in macroeconomics
+and finance literature. I follow the original prescription of @hodrick_postwar_1997  and use smoothing parameter $\lambda$=1600 for the
+quarterly credit-to-GDP ratio data. @ravn_adjusting_2002   have suggested
+modifying the smoothing parameter to account for the frequency of the data.
+Following their suggestion I use smoothing parameter $\lambda$=3000 for
+the other model. I call this model RU in my exercise. Higher $\lambda$
+yields a much smoother trend. My unobserved component model is based on the
+original @clark_cyclical_1987  model. In particular, trend follows a random walk
+and cycle has ARMA (p,q) representation. Both trend shocks and cyclical
+shocks have time-varying volatility.
+```{=latex}
+%
+\begin{equation}
+\tau _{t}=\tau _{t-1}+\eta _{t},\eta _{t}\symbol{126}iid(0,\sigma _{\eta
+}^{2})
+(\#eq:var-beta)
+\end{equation}%
+\begin{equation}
+c_{t}=\Phi (L)c_{t}+u_{t},u_{t}\symbol{126}iid(0,\sigma _{u}^{2})
+\end{equation}%
+```
+@beveridge_new_1981  methodology decomposes a non-stationary series into
+a random walk component and a stationary component which is the cycle of the
+non-stationary series. The BN decomposition of z$_{t}$ has the following
+representation:
+```{=latex}
+\begin{equation}
+y_{t}=y_{0}+\mu t+\Psi (1)\sum_{k=1}^{t}u_{t}+\overset{\backsim }{u_{t}}-%
+\overset{\backsim }{u_{0}}
+\end{equation}
+
+where $\Psi (1)\sum_{k=1}^{t}u_{t}$ is the stochastic trend and $\overset{%
+\backsim }{u_{t}}-\overset{\backsim }{u_{0}}$ represents the cycle. BN
+proposed that the long-run forecast is a measure of trend for time series
+such as GDP that do not follow a deterministic path in the long run. They
+showed that if the series is stationary in first differences, then the
+estimated trend is a random walk with drift that accounts for growth, and
+the cycle is stationary. In contrast to HP and UC decomposition, the BN
+decomposition attributes most variation in non-stationary series to trend
+shocks while the cycles are short and brief. 
+```
+In addition to these
+decomposition methods, I also use @hamilton_why_2018  approach to calculate
+credit gap. @hamilton_why_2018  argues that HP filter produces spurious dynamics
+that are not based on the underlying data-generating process and the
+dynamics at the ends of the sample differ from those in the middle. @hamilton_why_2018  proposes calculating cycle from the residual of the following linear projection model
+\begin{equation}
+y_{t+h}=\alpha +\beta _{1}y_{t-1}+\beta _{2}y_{t-2}+....+\beta
+_{p}y_{t-p}+v_{t+h}
+\end{equation}
+The estimated residual $\widehat{v}_{t+h}$\ is the cyclical component from
+this approach. Hamilton suggests using h=8 for quarterly data and that is
+what I follow in my estimation.
+\subsection{Forecasting Model}
+Once the credit gap measures are obtained from different trend-cycle
+decomposition methods, I regress growth rate of credit-to-GDP ratio on its
+own lags and lags of credit gap. In particular, I estimate the following
+model:
+\begin{equation}
+\Delta y_{t}=\alpha +\beta (L)\Delta y_{t-1}+\gamma (L)GAP_{t-1}+v_{t}
+\end{equation}
+The lags are chosen based on the Bayesian Information Criterion (BIC). We
+generate the forecasts from the above model for credit gaps generated from
+different trend-cycle decomposition approaches. My benchmark model is an
+AR(1) model. I compare the forecasts generated from the above model with
+this benchmark model to examine if the inclusion of lagged credit gap leads
+to an improvement in forecasting performance of growth rate of credit-to-GDP
+ratio.
+\subsection{Forecast Combination}
+Once I have different measures of cycle, I use Bates and @bates_combination_1969 
+method of forecast combination to assign weights to different cycles. The
+underlying idea is that the cyclical component should be able to predict
+changes in credit-to-GDP ratio. Bates-Granger weights are based on the
+following formula:
+\begin{equation}
+w_{m}=\frac{\widehat{\overline{\sigma }}_{m}^{2}}{\widehat{\overline{\sigma }%
+}_{1}^{2}+\widehat{\overline{\sigma }}_{2}^{2}+....\widehat{\overline{\sigma 
+}}_{M}^{2}}
+\end{equation}
+where $\widehat{\overline{\sigma }}_{m}^{2}$\ is inverted out-of-sample
+forecast error variance of forecast M based on the cyclical component M. M
+is the number of forecasts. Weights are normalized by sum of inverted
+forecast error variances. Here the weight is assigned based on the
+predictive ability of different cycles.
+
+## Empirical Results
+My analysis is performed in three steps: In the first step, I calculate
+the credit gap from 8 different trend cycle decomposition methods. These
+methods are: conventional HP filter [-@hodrick_postwar_1997], Ravn-Uhlig's [-@ravn_adjusting_2002] modification
+of the HP filter, HP filter with a high smoothing parameter (BIS gap),
+Beveridge-Nelson decomposition [-@beveridge_new_1981], Hamilton filter [-@hamilton_why_2018], Unobserved component model [@clark_cyclical_1987],
+linear trend, and quadratic trend. I perform these estimations recursively
+to preserve the 1-sided nature of the credit gap. My first estimation
+sample runs from 1960:Q1-1988:Q4 and saves the last estimate of the cycle.
+I keep adding one more observation to the estimation sample and keep saving
+the last observation of the cycle for different methods. This approach
+provides us with a 1-sided estimate of the credit gap from different
+methods. In the second step, I use these 1-sided credit gap measures to
+forecast changes in the credit-to-GDP ratio. The estimation sample for the
+first forecasts is 1989:Q2-1994:Q1. I then move ahead one quarter,
+re-estimate the forecasting model and forecast 1995:Q2-1996:Q1, etc. My
+final set of forecasts, for 2019:Q3 2020:Q2, would have been prepared in
+2019:Q2. I consider different quarterly horizon forecasts until Q=4. In
+addition to these quarterly forecasts, I also examine the average over the
+next four quarters. These averages are also used in the analysis to get
+around the noise associated with quarterly projections. 
+
+Tables \@ref(tab:table31) and \@ref(tab:table32) show the out-of-sample forecasting results for the above
+exercise for the U.K. and the U.S. The tables show the ratio of root mean
+squared errors in comparison to a benchmark AR(1) model. The ratio of less
+than unity implies that the model in question has a lower RMSEP (Root Mean Square Error of Prediction) than the
+benchmark AR (1) model. The results are reported for eight different methods
+of trend-cycle decomposition and two forecast combination methods. My
+preferred forecast combination method is Bates and Granger, though I also
+report the simple average of different forecasts. The results clearly
+suggest a significant improvement in forecasting performance using my
+combination approach. For the U.S., there is an improvement of around 13
+percent in the RMSEP over the benchmark AR(1) model if I combine the
+forecasts based on the BG approach. Interestingly, for the U.S., the
+inclusion of the BIS gap in the forecasting equation (6) leads to a
+deterioration in forecasting performance. The conventional HP filter does a
+better job than Ravn-Uhlig and the BIS measure. Deterministic trend models
+also do not perform well. The credit gap measures obtained from the BN and
+the UC models perform better than the benchmark AR(1) model implying that
+inclusion of the lagged credit gap measure improves forecasting performance.
+For the U.K., the BG method yields an improvement of 9 percent in RMSEP over
+the benchmark AR(1) model over h=1-4 forecasting horizon. Even for the U.K.,
+the BIS gap measure does not lead to an improvement in forecasting
+performance. The BN approach that improved the forecasting performance in
+the case of the U.S. performs poorly in the U.K. Overall, results for the
+forecasting exercise validate my argument that focusing on a single measure
+of trend-cycle decomposition to derive a measure of credit gap is fraught
+with severe limitations. The forecast combination that assigns weights based
+on the predictive performance not only takes into account this model
+uncertainty, but in doing so improves the metric-forecasting performance-
+that should be the evaluation criteria for different trend-cycle
+decomposition methods.
+
+
+
+Figures \@ref(fig:Credit-Gap-Comparison-UK) and \@ref(fig:Credit-Gap-Comparison-US) plot the credit gaps obtained from my forecast combination
+approach along with the BIS credit gaps for the U.K. and the U.S. The sample
+period for the credit gap is 1994:02-2020:02. There are several interesting
+features that emerge from these graphs. First, I find that both the gap
+measures do move together. This is not surprising since the combined gap
+measure is a weighted measure of different cycle measures. Both the measures
+suggest that the credit-to-GDP ratio was above its long-run trend before the
+crisis for the U.K. and the U.S. These two measures became negative in the
+aftermath of the financial crisis and stayed negative for a significant time
+period. Although these credit gap measures tend to move together broadly,
+there are also significant differences within different sub-samples. For the
+U.S., the combined credit gap became positive three years earlier than the
+BIS gap implying that the credit-to-GDP ratio was above its long-run trend
+starting in 1995:Q2. This was also the time period when the boom in the
+housing market started in the U.S. A similar pattern is observed in the
+U.K., where the combined gap became positive a year (in 1998:Q3) earlier
+than the BIS gap. Interestingly, there is no significant difference in the
+timeline when these gap measures turn negative.
+
+Secondly, I find that the combined credit gap measure is significantly less
+volatile than BIS gap. The standard deviation of the combined gap is 6.84,
+whereas it is 11.57 for the BIS gap for the U.K. The corresponding numbers
+are 5.16 and 8.66 for the U.S. This becomes particularly evident during the
+post-financial crisis period where the trough of the cycle is significantly
+lower for the BIS gap than the combined gap for both the countries. The
+lower volatility of the combined gap is expected since it is derived from a
+weighted combination of different gap measures. This difference is even more
+stark for the U.K. than the U.S. Not only is there a significant
+differential between these two different credit gap measures after the
+financial crisis, these differences have persisted for a long period of
+time. Thirdly, I observe a clear pattern in early detection of trough date
+by combined gap in both the countries. For the U.S., the trough of the cycle
+is 2012:Q3 according to the combined gap measure, whereas it occurred in
+2013:Q1 according to the BIS measure. For the U.K., the combined gap
+suggests that the gap reached its bottom in 2015:Q1, whereas the
+corresponding date was 2015:Q2 for the BIS gap. For the peak, I do not find
+significant differences in the detection of turning points. 
+
+The comparison of credit gap measures across these two countries provides
+interesting insights. The peak in the credit-to-GDP ratio was reached in the
+U.K. much earlier than the beginning of the financial crisis. The peak for
+the U.K. as measured by these credit gap measures took place at the end of
+2002 and the gap did not display any trend until the end of 2008. In the
+U.S., however, the peak occurred just before the financial crisis. Although
+both credit gap measures were positive before the crisis, the difference
+between them grew. Both the measures fell at a rapid pace for the U.S.
+during the crisis. In the U.K., however, the BIS gap measure fell at a much
+faster rate and the difference between these two measures started growing
+much earlier. The results from my forecasting exercise suggest that the
+rapid pace of fall in the credit gap for the BIS measure may have been
+overestimated. Finally, one of the
+criticisms of the HP filter is that it suffers from the endpoint problem.
+This can be observed in my figures where both BIS gap measures for the U.S.
+and the U.K. show a sudden shift at the end of the sample and display a
+ragged edge problem. My combined gap does not suffer from this problem.
+
+## Conclusions
+
+This paper proposes an alternate measure of credit gap-deviation of
+credit-to-GDP ratio from long-run trend. My credit gap estimation approach
+is based on the premise that the deviation of a non-stationary time series
+from its trend should have predictive power for subsequent movements in the
+changes in the variables as noted by Nelson (2008). In addition, I also
+take into account the model uncertainty by acknowledging that there is not a
+unique way to decompose a series into a trend and a cycle. For this purpose,
+I assign weights to different credit gaps derived from different
+trend-cycle decomposition methods. These weights are based on the
+out-of-sample forecast error variance as in Bates and Granger (1969). The model
+results show that this method of combining credit gaps yield a credit gap
+measure that dominates credit gaps from different trend-cycle decomposition
+methods including the one published by the BIS in terms of superior
+out-of-sample forecasting of changes in credit-to-GDP ratio. I apply this
+framework to the data from the U.S. for the recent time period. I also show
+that my proposed credit gap measure captures the trough in the credit cycle
+earlier than the BIS measure and also displays lower volatility. 
+
+```{=latex}
+\bigskip 
+
+\pagebreak 
+
+\allowbreak \pagebreak 
+
+\bigskip \FloatBarrier
+
+%\FRAME{ftbpFO}{5.7588in}{4.1485in}{0pt}{\Qct{Credit-to-GDP Ratios }}{}{%
+%graph_creditgapratio.wmf}{\special{language "Scientific Word";type
+%"GRAPHIC";maintain-aspect-ratio TRUE;display "USEDEF";valid_file "F";width
+%5.7588in;height 4.1485in;depth 0pt;original-width 5.7in;original-height
+%4.0992in;cropleft "0";croptop "1";cropright "1";cropbottom "0";filename
+%'graph_creditgapratio.wmf';file-properties "XNPEU";}}
+
+\bigskip 
+
+\pagebreak 
+
+\bigskip \FloatBarrier
+
+%\FRAME{ftbpFO}{5.7588in}{4.1485in}{0pt}{\Qct{Credit Gap Comparison (U.K.)}}{%
+%}{graph_gap_uk.wmf}{\special{language "Scientific Word";type
+%"GRAPHIC";maintain-aspect-ratio TRUE;display "USEDEF";valid_file "F";width
+%5.7588in;height 4.1485in;depth 0pt;original-width 5.7in;original-height
+%4.0992in;cropleft "0";croptop "1";cropright "1";cropbottom "0";filename
+%'graph_gap_uk.wmf';file-properties "XNPEU";}}
+
+\pagebreak 
+
+\bigskip \FloatBarrier
+
+
+%\FRAME{ftbpFO}{5.7588in}{4.1485in}{0pt}{\Qct{Credit Gap Comparison (U.S.)}}{%
+%}{graph_gap_us.wmf}{\special{language "Scientific Word";type
+%"GRAPHIC";maintain-aspect-ratio TRUE;display "USEDEF";valid_file "F";width
+%5.7588in;height 4.1485in;depth 0pt;original-width 5.7in;original-height
+%4.0992in;cropleft "0";croptop "1";cropright "1";cropbottom "0";filename
+%'graph_gap_us.wmf';file-properties "XNPEU";}}
+
+\pagebreak 
+
+\bigskip \FloatBarrier
+
+\begin{landscape}
+
+\begin{table}
+\begin{center}
+\caption {\label{tab:table31} Forecasting Performance of Credit Gap Models (U.K.)}
+
+\bigskip 
+\begin{equation*}
+\begin{tabular}{lllllllllll}
+Horizon & HP & RU & BIS & Hamilton & \ Linear\  & Quadratic & BN & UC & 
+Average & Bates-Granger \\ \hline \hline
+\  \  \  \  \  \ 1 & 1.001 & 0.990 & 1.001 & 0.992 & 1.010 & 0.979 & 1.028 & 1.009
+& \textbf{0.977} & 0.979 \\ 
+\  \  \  \  \  \ 2 & 0.979 & 0.970 & 1.007 & 0.969 & 1.016 & 0.962 & 1.028 & 0.999
+& 0.962 & \textbf{0.957} \\ 
+\  \  \  \  \  \ 3 & 0.979 & 0.971 & 1.018 & 0.969 & 1.055 & 0.966 & 1.009 & 0.989
+& 0.959 & \textbf{0.955} \\ 
+\  \  \  \  \  \ 4 & 0.990 & 0.987 & 1.028 & 1.005 & 1.055 & 0.981 & 1.019 & 0.981
+& 0.972 & \textbf{0.967} \\ 
+\  \  \ 1 - 4 & 0.972 & 0.952 & 1.034 & 0.960 & 1.081 & 0.929 & 1.054 & 0.985
+& 0.918 & \textbf{0.910} \\ \hline \hline
+&  &  &  &  &  &  &  &  &  & 
+\end{tabular}%
+\end{equation*}
+\end{center}
+
+\begin{flushleft}
+{\small Notes: }
+
+{\small The table shows the ratio of RMSEPs of different models in comparison
+to the benchmark AR(1) model. The first set of forecasts is for
+1994:Q1-1994:Q4; the final set is for 2019:Q3-2020:Q2. Q=1-4 denotes
+averages over next 4-quarters. HP is Hodrick-Prescott, RU is Ravn-Uhlig, BIS
+is based on Borio and Lowe (2002), BN is Beveridge-Nelson, UC is Unobserved
+Component Model. }
+{\small The smallest ratio in each row is bolded.}
+\end{flushleft}
+\end{table}
+
+\end{landscape}
+
+\pagebreak 
+
+\begin{landscape}
+
+\bigskip \FloatBarrier
+
+\begin{table}
+\begin{center}
+\caption {\label{tab:table32} Forecasting Performance of Credit Gap Models (U.S.)}
+
+\begin{equation*}
+\begin{tabular}{lllllllllll}
+Horizon & HP & RU & BIS & Hamilton & \ Linear\  & Quadratic & BN & UC & 
+Average & Bates-Granger \\ \hline \hline
+\  \  \  \  \  \ 1 & 0.993 & 0.987 & 1.012 & 0.994 & 1.028 & 1.005 & 1.010 & 0.985
+& 0.962 & \textbf{0.959} \\ 
+\  \  \  \  \  \ 2 & 0.974 & 0.963 & 1.016 & 0.980 & 1.058 & 1.014 & 0.975 & 0.961
+& 0.924 & \textbf{0.917} \\ 
+\  \  \  \  \  \ 3 & 0.966 & 0.953 & 1.023 & 1.011 & 1.055 & 1.036 & 0.965 & 0.937
+& 0.906 & \textbf{0.896} \\ 
+\  \  \  \  \  \ 4 & 0.982 & 0.966 & 1.022 & 1.029 & 1.055 & 1.045 & 1.033 & 0.910
+& 0.922 & \textbf{0.910} \\ 
+\  \  \ 1 - 4 & 0.964 & 0.945 & 1.030 & 1.005 & 1.081 & 1.041 & 0.978 & 0.913
+& 0.882 & \textbf{0.872} \\ \hline \hline
+&  &  &  &  &  &  &  &  &  & 
+\end{tabular}%
+\end{equation*}
+\end{center}
+
+\begin{flushleft}
+{\small Notes: }
+
+{\small The table shows the ratio of RMSEPs of different models in comparison
+to the benchmark AR(1) model. The first set of forecasts is for
+1994:Q1-1994:Q4; the final set is for 2019:Q3-2020:Q2. Q=1-4 denotes
+averages over next 4-quarters. HP is Hodrick-Prescott, RU is Ravn-Uhlig, BIS
+is based on Borio and Lowe (2002), BN is Beveridge-Nelson, UC is Unobserved
+Component Model. }
+{\small The smallest ratio in each row is bolded.}
+\end{flushleft}
+\end{table}
+
+\end{landscape}
+```

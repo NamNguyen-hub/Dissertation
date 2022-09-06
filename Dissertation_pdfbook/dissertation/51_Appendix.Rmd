@@ -1,0 +1,235 @@
+# References {-}
+
+<div id="refs"></div>
+
+<!--( - How to deduct optimized threshold from model threshold results)
+( - Only would work with univariate regression, since a multivariate model will have multiple
+inputs solution for a predicted response value)
+
+## Model average implimentation 
+( - Steps of averaging
+    - Do a search and bound ( paper reference here ) to find the best models with the fewest number of variables from a fully saturated model. 
+    - Occam's razor: 20000, 2*log*2000
+      - Filter them by Occam's razor based on BIC value: )
+      - Filter only models with only positive weights
+      - Filter them by Occam's razor based on psAUC value: )-->
+
+
+<!--\addtocontents{toc}{\protect\setcounter{tocdepth}{0}}-->
+\addtocontents{toc}{\protect\renewcommand\protect\cftchapaftersnum{:} \protect\setcounter{tocdepth}{0}}
+
+
+<!--# (APPENDIX) Appendix {-}-->
+\begin{appendices}
+\chapter{Chapter 2}
+
+\section{Model Estimation - Initial Values Selection}
+The starting values/priors for vector autoregressive parameters in matrix F from equation 2.10 are taken from VAR regression of the one-sided HP filter cycle decomposition of the series with $\lambda=125,000$.
+
+For $\beta_{0|0}$, I set $\tau_{0|0}$ as the value HP filtered trend component and omit the first observation from the regression. $c_{0|0}$ cycle components are also set to be equal to their HP filter counterpart. Variance $var(\tau_{0|0}) =100+50*random$, with the random value drawn from a uniform distribution (0,1). While other measures of the starting covariance are set to be at their unconditional mean values.
+
+Means and standard deviations for the prior distributions shown in subsection A.2 are also derived from the information extracted using the method above. All autoregressive parameters are jointly correlated in a multivariate normal distribution, while the variance parameters have inverse gamma distributions. The shape and scale parameters of a gamma distribution can be deducted using the methods of moments from the estimated means and variances. Lastly, the prior distribution for correlation coefficients are set to be normal distribution with arbitrary unassuming means of near zero and standard deviations of 0.25.
+
+
+\section{ Random-Walk Metropolis Hasting Sampler }\label{random-walk-MH}
+The Bayesian method is a full information-based approach that uses all moments of the observations. Together with reasonable constraints on parameters to ensure the stability of the model, we can estimate complex time series state-space models. I use the last 1 million draws from the 1.5 million (Markov chain Monte Carlo) MCMC chains for the analysis of the posterior distribution. The posterior and prior distribution graphs and the posterior chains can show us evidence of convergence or estimation stability. The posterior chain in Figure A.7 shows that there is a lack of convergence of the estimates compared to other models. This could be a signal that the model estimation is misspecified.
+
+The steps to implement a Random-Walk Metropolis Hasting sampler in a state-space setting with a Kalman filter can be referred to in chapter 5 from (Blake \& Mumtaz, 2017).
+
+
+\subsection{ Posterior and Prior Distribution} 
+```{r, echo=FALSE, out.width='85%',  fig.align='center', fig.cap = 'UK VAR(2) - Posterior and Prior Distribution'}
+knitr::include_graphics('../../../HPCredit/Regression/Bayesian_UC_VAR2_drift/OutputData/posteriorpriordistribution_UK.pdf')
+```
+
+```{r, echo=FALSE, out.width='85%',  fig.align='center', fig.cap = 'UK VAR(2) 1 cross-lag - Posterior and Prior Distribution'}
+knitr::include_graphics('../../../HPCredit/Regression/Bayesian_UC_VAR2_drift_Crosscycle1lag/OutputData/posteriorpriordistribution_UK.pdf')
+```
+
+```{r, echo=FALSE, out.width='85%',  fig.align='center', fig.cap = 'UK VAR(2) 2 cross-lags - Posterior and Prior Distribution'}
+knitr::include_graphics('../../../HPCredit/Regression/Bayesian_UC_VAR2_drift_Crosscycle2lags/OutputData/posteriorpriordistribution_UK.pdf')
+```
+
+\clearpage
+
+
+```{r, echo=FALSE, out.width='85%',  fig.align='center', fig.cap = 'US VAR(2) - Posterior and Prior Distribution'}
+knitr::include_graphics('../../../HPCredit/Regression/Bayesian_UC_VAR2_drift/OutputData/posteriorpriordistribution_US.pdf')
+```
+
+```{r, echo=FALSE, out.width='85%',  fig.align='center', fig.cap = 'US VAR(2) 1 cross-lag - Posterior and Prior Distribution'}
+knitr::include_graphics('../../../HPCredit/Regression/Bayesian_UC_VAR2_drift_Crosscycle1lag/OutputData/posteriorpriordistribution_US.pdf')
+```
+
+```{r, echo=FALSE, out.width='85%',  fig.align='center', fig.cap = 'US VAR(2) 2 cross-lags - Posterior and Prior Distribution'}
+knitr::include_graphics('../../../HPCredit/Regression/Bayesian_UC_VAR2_drift_Crosscycle2lags/OutputData/posteriorpriordistribution_US.pdf')
+```
+
+
+\clearpage
+
+\subsection{ Posterior Chain} 
+
+```{r UK-chain-VAR2, echo=FALSE, out.width='85%',  fig.align='center', fig.cap = 'UK VAR(2) - Posterior chain'}
+knitr::include_graphics('../../../HPCredit/Regression/Bayesian_UC_VAR2_drift/OutputData/posteriorchain_UK.pdf')
+```
+
+```{r, echo=FALSE, out.width='85%',  fig.align='center', fig.cap = 'UK VAR(2) 1 cross-lag - Posterior chain'}
+knitr::include_graphics('../../../HPCredit/Regression/Bayesian_UC_VAR2_drift_Crosscycle1lag/OutputData/posteriorchain_UK.pdf')
+```
+
+```{r, echo=FALSE, out.width='85%',  fig.align='center', fig.cap = 'UK VAR(2) 2 cross-lags - Posterior chain'}
+knitr::include_graphics('../../../HPCredit/Regression/Bayesian_UC_VAR2_drift_Crosscycle2lags/OutputData/posteriorchain_UK.pdf')
+```
+
+\clearpage
+
+```{r, echo=FALSE, out.width='85%',  fig.align='center', fig.cap = 'US VAR(2) - Posterior chain'}
+knitr::include_graphics('../../../HPCredit/Regression/Bayesian_UC_VAR2_drift/OutputData/posteriorchain_US.pdf')
+```
+
+```{r, echo=FALSE, out.width='85%',  fig.align='center', fig.cap = 'US VAR(2) 1 cross-lag - Posterior chain'}
+knitr::include_graphics('../../../HPCredit/Regression/Bayesian_UC_VAR2_drift_Crosscycle1lag/OutputData/posteriorchain_US.pdf')
+```
+
+```{r, echo=FALSE, out.width='85%',  fig.align='center', fig.cap = 'US VAR(2) 2 cross-lags - Posterior chain'}
+knitr::include_graphics('../../../HPCredit/Regression/Bayesian_UC_VAR2_drift_Crosscycle2lags/OutputData/posteriorchain_US.pdf')
+```
+
+\clearpage
+
+
+\subsection{ Graphs of other Countries} 
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+# Load libraries
+library(knitr)
+opts_chunk$set(fig.pos="h")
+```
+
+```{r IT-graphs, echo=FALSE, out.width='85%',  fig.align='center', fig.cap = 'Italy VAR(2) 1 cross-lag - Unobserved Components'}
+knitr::include_graphics('../../../HPCredit/Regression/Bayesian_UC_VAR2_drift_Crosscycle1lag/OutputData/cycles_IT.pdf')
+```
+
+```{r JP-graphs, echo=FALSE, out.width='85%',  fig.align='center', fig.cap = 'Japan VAR(2) 1 cross-lag - Unobserved Components'}
+knitr::include_graphics('../../../HPCredit/Regression/Bayesian_UC_VAR2_drift_Crosscycle1lag/OutputData/cycles_JP.pdf')
+```
+
+\clearpage
+
+\chapter{ Chapter 3}
+
+\section{ Graphs of Credit to GDP Ratios and Credit Gaps}
+```{r Credit-to-GDP-Ratios, echo=FALSE, out.width='85%', fig.align='center', fig.cap = 'Credit-to-GDP Ratios'}
+knitr::include_graphics('../../../HPI-Credit-Trasitory-Forecast/plots/Credit-to-GDP.pdf')
+```
+
+```{r Credit-Gap-Comparison-UK, echo=FALSE, out.width='85%', fig.align='center', fig.cap = 'Credit Gap Comparison (U.K.)'}
+knitr::include_graphics('../../../HPI-Credit-Trasitory-Forecast/plots/Credit-Gap-Comparison-UK.pdf')
+```
+
+```{r Credit-Gap-Comparison-US, echo=FALSE, out.width='85%', fig.align='center', fig.cap = 'Credit Gap Comparison (U.S.)'}
+knitr::include_graphics('../../../HPI-Credit-Trasitory-Forecast/plots/Credit-Gap-Comparison-US.pdf')
+```
+
+\chapter{ Chapter 4 }
+
+\section{ List of Decomposition Filters} \label{filterslist}
+
+All filters are in (quasi-real time) one-sided fashion. I store the value of the decomposed cycles for the current period permanently as data becomes available and will not change it when new data comes in the next period.
+
+\subsubsection*{Hodrick Prescott (HP) filters with different smoothing parameters $\lambda$:}
+- c.hp, c.hp3k, c.hp25k,  c.hp125k, c.hp221k, c.hp400k  
+
+\subsubsection*{Hamilton filters with different smoothing parameters $\theta$ (distance of past lags):}
+- c.hamilton13,   c.hamilton20,   c.hamilton24,   c.hamilton28  
+
+\subsubsection*{Linear and polynomial filter models:}
+- c.linear, c.quad, c.poly3,  c.poly4,  c.poly5,  c.poly6 
+
+\subsubsection*{Beveridge-Nelson decomposition filters with different smoothing parameters (number of lags):}
+- c.bn2,  c.bn3,  c.bn4,  c.bn5,  c.bn6,  c.bn7,  c.bn8 
+
+\subsubsection*{Structural time series model:}
+- c.stm
+
+\subsubsection*{Rolling sample with 15 and 20 years window (of all previous filters):}
+- c.hp.r15, c.hp3k.r15, c.hp25k.r15,  c.hp125k.r15, c.hp221k.r15, c.hp400k.r15, c.hamilton13.r15, c.hamilton20.r15, c.hamilton24.r15, c.hamilton28.r15, c.linear.r15, c.quad.r15, c.poly3.r15,  c.poly4.r15,  c.poly5.r15,  c.poly6.r15,  c.bn2.r15,  c.bn3.r15,  c.bn4.r15,  c.bn5.r15,  c.bn6.r15,  c.bn7.r15,  c.bn8.r15,  c.stm.r15 \\
+
+- c.hp.r20, c.hp3k.r20, c.hp25k.r20,  c.hp125k.r20, c.hp221k.r20, c.hp400k.r20, c.hamilton13.r20, c.hamilton20.r20, c.hamilton24.r20, c.hamilton28.r20, c.linear.r20, c.quad.r20, c.poly3.r20,  c.poly4.r20,  c.poly5.r20,  c.poly6.r20,  c.bn2.r20,  c.bn3.r20,  c.bn4.r20,  c.bn5.r20,  c.bn6.r20,  c.bn7.r20,  c.bn8.r20,  c.stm.r20 
+
+\subsubsection*{Hamilton filters in panel setting (with rolling samples):}
+- c.hamilton13.panel, c.hamilton20.panel, c.hamilton24.panel, c.hamilton28.panel, c.hamilton13.panelr15,  c.hamilton20.panelr15,  c.hamilton24.panelr15,  c.hamilton28.panelr15,  c.hamilton13.panelr20,  c.hamilton20.panelr20,  c.hamilton24.panelr20,  c.hamilton28.panelr20
+
+\subsubsection*{Moving Average filter:}
+- c.ma  
+
+\subsection{ Statistical Methods for Trend-Cycle Decomposition} \label{ma-stm-eq}
+
+\subsubsection*{ Bayesian Structural Time Series Model (STM)}
+\begin{align*}
+y_t = u_t + v_t,  vt \sim N(0,V)\\
+u_t = u_{t-1} + \beta_{t-1} + w_{1,t},  w_{1,t} \sim N(O,\sigma^2_{w1})\\
+\beta_t = \beta_{t_1} + w_{2,t},  w_{2,t} \sim N(0,\sigma^2_{w2})
+\end{align*}
+
+The implementation of this filter is discussed in Campagnoli et al. (2009). One feature of this filter that allows for smoother trend component is its inclusion of a time-varying local growth rate $\beta_t$. Beltran et al. (2021) optimized values of the smoothing parameters at $\sigma^2_{w1} = 1$ , $\sigma^2_{w2}=0.01$ and V = 1100.
+
+\subsubsection*{ Moving Average }
+\begin{align*}
+MA_t = y_t - \frac{\sum\nolimits^t_{i=t-q+1}y_i}{q}
+\end{align*}
+
+With q being the smoothing parameter and the length of the moving average window. Beltran et al. (2021) optimized the value for q to be 16.
+
+
+
+
+
+\section{ Out-of-Sample Forecast Graphical Analysis}
+
+\subsection{ Graphs of Selected Countries } \label{graphs-other}
+
+In this subsection, I will show graphs of credit gaps for countries that the model deems to be at risk of a future systemic financial crisis. 
+
+```{r CAseries, echo=FALSE, out.width='85%', fig.align="center", fig.cap="Canada Graph"}
+knitr::include_graphics('../../../3rdPaper/Data/Output/Graphs/All/Weighted_credit_gap_CA.pdf')
+```
+
+```{r FRseries, echo=FALSE, out.width='85%', fig.align="center", fig.cap="France Graph"}
+knitr::include_graphics('../../../3rdPaper/Data/Output/Graphs/All/Weighted_credit_gap_FR.pdf')
+```
+
+```{r HKseries, echo=FALSE, out.width='85%', fig.align="center", fig.cap="Hong Kong (SAR) Graph"}
+knitr::include_graphics('../../../3rdPaper/Data/Output/Graphs/All/Weighted_credit_gap_HK.pdf')
+```
+
+```{r JPseries, echo=FALSE, out.width='85%', fig.align="center", fig.cap="Japan Graph"}
+knitr::include_graphics('../../../3rdPaper/Data/Output/Graphs/All/Weighted_credit_gap_JP.pdf')
+```
+
+```{r KRseries, echo=FALSE, out.width='85%', fig.align="center", fig.cap="South Korea Graph"}
+knitr::include_graphics('../../../3rdPaper/Data/Output/Graphs/All/Weighted_credit_gap_KR.pdf')
+```
+
+```{r SAseries, echo=FALSE, out.width='85%', fig.align="center", fig.cap="Saudi Arabia Graph"}
+knitr::include_graphics('../../../3rdPaper/Data/Output/Graphs/All/Weighted_credit_gap_SA.pdf')
+```
+
+```{r SEseries, echo=FALSE, out.width='85%', fig.align="center", fig.cap="Sweden Graph"}
+knitr::include_graphics('../../../3rdPaper/Data/Output/Graphs/All/Weighted_credit_gap_SE.pdf')
+```
+
+```{r CHseries, echo=FALSE, out.width='85%', fig.align="center", fig.cap="Switzerland Graph"}
+knitr::include_graphics('../../../3rdPaper/Data/Output/Graphs/All/Weighted_credit_gap_CH.pdf')
+```
+
+```{r THseries, echo=FALSE, out.width='85%', fig.align="center", fig.cap="Thailand Graph"}
+knitr::include_graphics('../../../3rdPaper/Data/Output/Graphs/All/Weighted_credit_gap_TH.pdf')
+```
+
+
+
+\end{appendices}
+
+<!--[Will include periods of previous crises for those countries later]-->

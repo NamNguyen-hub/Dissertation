@@ -1,0 +1,648 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+  ignorenonframetext,
+]{beamer}
+\usepackage{pgfpages}
+\setbeamertemplate{caption}[numbered]
+\setbeamertemplate{caption label separator}{: }
+\setbeamercolor{caption name}{fg=normal text.fg}
+\beamertemplatenavigationsymbolsempty
+% Prevent slide breaks in the middle of a paragraph
+\widowpenalties 1 10000
+\raggedbottom
+\setbeamertemplate{part page}{
+  \centering
+  \begin{beamercolorbox}[sep=16pt,center]{part title}
+    \usebeamerfont{part title}\insertpart\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{section page}{
+  \centering
+  \begin{beamercolorbox}[sep=12pt,center]{part title}
+    \usebeamerfont{section title}\insertsection\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{subsection page}{
+  \centering
+  \begin{beamercolorbox}[sep=8pt,center]{part title}
+    \usebeamerfont{subsection title}\insertsubsection\par
+  \end{beamercolorbox}
+}
+\AtBeginPart{
+  \frame{\partpage}
+}
+\AtBeginSection{
+  \ifbibliography
+  \else
+    \frame{\sectionpage}
+  \fi
+}
+\AtBeginSubsection{
+  \frame{\subsectionpage}
+}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\newif\ifbibliography
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\PassOptionsToPackage{table}{xcolor}
+
+\setbeamertemplate{caption}[numbered]
+
+\setbeamertemplate{footline}{%
+	\leavevmode%
+	\hbox{\begin{beamercolorbox}[wd=.3\paperwidth,ht=2.5ex,dp=1.125ex,leftskip=.3cm plus1fill,rightskip=.3cm]{author in head/foot}%
+			\usebeamerfont{author in head/foot}\insertshortauthor~(\insertshortinstitute)
+		\end{beamercolorbox}%
+		\begin{beamercolorbox}[wd=.7\paperwidth,ht=2.5ex,dp=1.125ex,leftskip=0cm plus1fill,rightskip=.3cm]{title in head/foot}%
+			\usebeamerfont{title in head/foot}\insertshorttitle\;\;\;\;\hfill\insertframenumber\,/\,\inserttotalframenumber
+	\end{beamercolorbox}}%
+	\vskip0pt%
+}
+
+% \setbeamertemplate{footline}{%
+% 	\leavevmode%
+% 	\hbox{\begin{beamercolorbox}[wd=0.2\paperwidth,ht=2.5ex,dp=1.125ex,leftskip=.3cm plus1fill,rightskip=.3cm]{author in head/foot}%
+% 			\usebeamerfont{author in head/foot}\insertshortauthor~(\insertshortinstitute)
+% 		\end{beamercolorbox}%
+% 		\begin{beamercolorbox}[wd=0.35\paperwidth,ht=2.5ex,dp=1.125ex,leftskip=.3cm,rightskip=.3cm plus1fil]{title in head/foot}%
+% 			\usebeamerfont{title in head/foot}\insertshorttitle
+% 		\end{beamercolorbox}%
+% 		\begin{beamercolorbox}[wd=0.45\paperwidth,ht=2.5ex,dp=1.125ex,leftskip=.3cm,rightskip=.3cm plus1fil]{section in head/foot}%
+% 			\usebeamerfont{section in head/foot}\insertsection \; insertframenumber\,/\,\inserttotalframenumber
+% 		\end{beamercolorbox}}%
+% 	\vskip0pt%
+% }
+
+%\AtBeginSection{}
+\AtBeginSubsection{}
+
+\setbeamertemplate{section in toc}[sections numbered]
+\setbeamertemplate{subsection in toc}[subsections numbered]
+
+%\insertsectionnumber
+
+\setbeamertemplate{itemize items}[circle]
+
+\usepackage{amssymb,amsmath,amsfonts,eurosym,geometry,graphicx,caption,color,setspace,
+	comment,footmisc,caption,pdflscape,array}
+\usepackage{booktabs}   % for nice tables
+\usepackage{multirow}
+%\usepackage[round]{natbib}
+\setbeamertemplate{caption}[numbered]
+\usepackage[export]{adjustbox}
+
+\usepackage[skip=1pt]{caption}
+%\usepackage[capposition=top]{floatrow}
+
+%\usepackage[caption = false]{subfig}
+%\usepackage{floatrow}
+\usepackage[capposition=bottom]{floatrow}
+
+\usepackage{graphicx}
+\usepackage{tabularx}
+%\usepackage{threeparttable}
+\usepackage{float}
+\usepackage{mwe}
+%\usepackage{subfig}
+%\usepackage{polyglossia}
+\usepackage{subcaption}
+\setlength{\abovecaptionskip}{2pt}
+%\usepackage[tight,TABTOPCAP]{subfigure}
+\usepackage[round]{natbib}
+
+\usepackage{multicol, latexsym, amsmath, amssymb}
+
+\usepackage[normalem]{ulem}
+\useunder{\uline}{\ul}{}
+\usepackage{booktabs,caption}
+\usepackage[flushleft]{threeparttable}
+
+\usepackage{colortbl}
+\usepackage{tabu}
+\usepackage{makecell}
+\usepackage{xcolor}
+
+
+\usepackage{graphics}
+
+\usepackage{longtable}
+
+\usepackage{float}
+
+\usepackage{amsbsy} %boldsymbol
+
+%%in case of outdated TEX Live
+\usepackage{lmodern}
+
+\usepackage{appendixnumberbeamer}
+
+%\graphicspath{{figures/}{../figures/}{D:/Presentations\figures/}}
+\usepackage[normalem]{ulem}
+
+\usepackage{siunitx}
+\sisetup{
+	round-mode          = places, % Rounds numbers
+	round-precision     = 4, % to 2 places
+}
+
+
+\usepackage{graphicx} % Allows including images
+\usepackage{booktabs} % Allows the use of \toprule, \midrule and \bottomrule in tables
+
+\usepackage{arydshln} %can use hdashline
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={Appendix: Essays on Measuring Credit and Property Prices Gaps},
+  pdfauthor={Nam Nguyen},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Appendix: Essays on Measuring Credit and Property Prices Gaps}
+\author{Nam Nguyen}
+\date{August 11, 2022}
+\institute{UWM}
+
+\begin{document}
+\frame{\titlepage}
+
+\hypertarget{appendix}{%
+\section{Appendix}\label{appendix}}
+
+\begin{frame}{Empirical Results}
+\protect\hypertarget{empirical-results}{}
+\begin{block}{Extended Models Regression Results: United States}
+\protect\hypertarget{extended-models-regression-results-united-states}{}
+\resizebox{\linewidth}{!}{
+\begin{tabular}[t]{>{}lrl>{}r>{}lrl}
+\toprule
+\multicolumn{1}{c}{ } & \multicolumn{2}{c}{VAR2} & \multicolumn{2}{c}{VAR2 1-cross lag} & \multicolumn{2}{c}{VAR2 2-cross lags} \\
+\cmidrule(l{3pt}r{3pt}){2-3} \cmidrule(l{3pt}r{3pt}){4-5} \cmidrule(l{3pt}r{3pt}){6-7}
+Parameters & Median & {}[10$\%$, 90$\%$] & Median & {}[10$\%$, 90$\%$] & Median & {}[10$\%$, 90$\%$]\\
+\midrule
+\cellcolor{gray!6}{$\phi^1_{y}$} & \cellcolor{gray!6}{1.4826} & \cellcolor{gray!6}{{}[1.4216, 1.5446]} & \cellcolor{gray!6}{1.2074} & \cellcolor{gray!6}{{}[1.1374, 1.2785]} & \cellcolor{gray!6}{1.2004} & \cellcolor{gray!6}{{}[1.1227, 1.2753]}\\
+$\phi^2_{y}$ & -0.4887 & {}[-0.5500, -0.4280] & -0.2483 & {}[-0.3152, -0.1825] & -0.2554 & {}[-0.3209, -0.1884]\\
+\textbf{\cellcolor{gray!6}{$\phi^{x1}_{y}$}} & \cellcolor{gray!6}{} & \cellcolor{gray!6}{} & \textbf{\cellcolor{gray!6}{0.0318}} & \textbf{\cellcolor{gray!6}{{}[0.0228, 0.0407]}} & \cellcolor{gray!6}{0.0380} & \cellcolor{gray!6}{{}[0.0003, 0.0732]}\\
+$\phi^{x2}_{y}$ &  &  &  &  & -0.0088 & {}[-0.0451, 0.0297]\\
+\addlinespace
+\cellcolor{gray!6}{$\phi^1_{h}$} & \cellcolor{gray!6}{1.8594} & \cellcolor{gray!6}{{}[1.8276, 1.8915]} & \cellcolor{gray!6}{1.8038} & \cellcolor{gray!6}{{}[1.7700, 1.8363]} & \cellcolor{gray!6}{1.7999} & \cellcolor{gray!6}{{}[1.7658, 1.8345]}\\
+$\phi^2_{h}$ & -0.8728 & {}[-0.9047, -0.8408] & -0.8261 & {}[-0.8605, -0.7903] & -0.8316 & {}[-0.8687, -0.7942]\\
+\textbf{\cellcolor{gray!6}{$\phi^{x1}_{h}$}} & \cellcolor{gray!6}{} & \cellcolor{gray!6}{} & \textbf{\cellcolor{gray!6}{0.0104}} & \textbf{\cellcolor{gray!6}{{}[0.0007, 0.0204]}} & \cellcolor{gray!6}{0.3305} & \cellcolor{gray!6}{{}[0.2535, 0.4066]}\\
+$\phi^{x2}_{h}$ &  &  &  &  & -0.2882 & {}[-0.3584, -0.2163]\\
+\addlinespace
+\cellcolor{gray!6}{$\sigma_{ny}$} & \cellcolor{gray!6}{0.0942} & \cellcolor{gray!6}{{}[0.0558, 0.1285]} & \cellcolor{gray!6}{0.2954} & \cellcolor{gray!6}{{}[0.2312, 0.3414]} & \cellcolor{gray!6}{0.0853} & \cellcolor{gray!6}{{}[0.0530, 0.1136]}\\
+$\sigma_{ey}$ & 0.8282 & {}[0.7616, 0.9059] & 0.8631 & {}[0.8287, 0.9012] & 0.7278 & {}[0.6672, 0.7955]\\
+\cellcolor{gray!6}{$\sigma_{nh}$} & \cellcolor{gray!6}{0.0193} & \cellcolor{gray!6}{{}[0.0150, 0.0265]} & \cellcolor{gray!6}{0.1390} & \cellcolor{gray!6}{{}[0.1222, 0.1618]} & \cellcolor{gray!6}{0.0190} & \cellcolor{gray!6}{{}[0.0147, 0.0258]}\\
+$\sigma_{eh}$ & 0.8360 & {}[0.7713, 0.9111] & 0.8988 & {}[0.8641, 0.9355] & 0.8001 & {}[0.7321, 0.8735]\\
+\addlinespace
+\cellcolor{gray!6}{$\rho_{nynh}$} & \cellcolor{gray!6}{0.0082} & \cellcolor{gray!6}{{}[-0.3118, 0.3230]} & \cellcolor{gray!6}{0.0082} & \cellcolor{gray!6}{{}[-0.3117, 0.3226]} & \cellcolor{gray!6}{0.0167} & \cellcolor{gray!6}{{}[-0.2998, 0.3328]}\\
+$\rho_{eyeh}$ & 0.1000 & {}[-0.0181, 0.2185] & 0.1537 & {}[0.0399, 0.2619] & 0.1642 & {}[0.0460, 0.2764]\\
+\cellcolor{gray!6}{$llv$} & \cellcolor{gray!6}{197.7900} & \cellcolor{gray!6}{{}[195.5700, 201.0700]} & \cellcolor{gray!6}{204.9400} & \cellcolor{gray!6}{{}[202.4200, 208.4500]} & \cellcolor{gray!6}{187.7900} & \cellcolor{gray!6}{{}[184.8500, 192.1700]}\\
+\bottomrule
+\multicolumn{7}{l}{\rule{0pt}{1em}\textit{Note: }}\\
+\multicolumn{7}{l}{\rule{0pt}{1em}US Bayesian method random walk Metropolis-Hasting posterior distribution estimates}\\
+\end{tabular}}
+\end{block}
+\end{frame}
+
+\begin{frame}{Empirical Results}
+\protect\hypertarget{empirical-results-1}{}
+\begin{block}{Extended Models Regression Results: United Kingdom}
+\protect\hypertarget{extended-models-regression-results-united-kingdom}{}
+\resizebox{\linewidth}{!}{
+\begin{tabular}[t]{>{}lrl>{}r>{}lrl}
+\toprule
+\multicolumn{1}{c}{ } & \multicolumn{2}{c}{VAR2} & \multicolumn{2}{c}{VAR2 1-cross lag} & \multicolumn{2}{c}{VAR2 2-cross lags} \\
+\cmidrule(l{3pt}r{3pt}){2-3} \cmidrule(l{3pt}r{3pt}){4-5} \cmidrule(l{3pt}r{3pt}){6-7}
+Parameters & Median & {}[10$\%$, 90$\%$] & Median & {}[10$\%$, 90$\%$] & Median & {}[10$\%$, 90$\%$]\\
+\midrule
+\cellcolor{gray!6}{$\phi^1_{y}$} & \cellcolor{gray!6}{1.9827} & \cellcolor{gray!6}{{}[1.9770, 1.9898]} & \cellcolor{gray!6}{1.4238} & \cellcolor{gray!6}{{}[1.3585, 1.4892]} & \cellcolor{gray!6}{1.4354} & \cellcolor{gray!6}{{}[1.3627, 1.5080]}\\
+$\phi^2_{y}$ & -1.0056 & {}[-1.0126, -0.9985] & -0.4698 & {}[-0.5305, -0.4090] & -0.4946 & {}[-0.5599, -0.4301]\\
+\textbf{\cellcolor{gray!6}{$\phi^{x1}_{y}$}} & \cellcolor{gray!6}{} & \cellcolor{gray!6}{} & \textbf{\cellcolor{gray!6}{0.0238}} & \textbf{\cellcolor{gray!6}{{}[0.0154, 0.0319]}} & \cellcolor{gray!6}{0.0023} & \cellcolor{gray!6}{{}[-0.0208, 0.0257]}\\
+$\phi^{x2}_{y}$ &  &  &  &  & 0.0165 & {}[-0.0075, 0.0399]\\
+\addlinespace
+\cellcolor{gray!6}{$\phi^1_{h}$} & \cellcolor{gray!6}{1.4119} & \cellcolor{gray!6}{{}[1.3987, 1.4238]} & \cellcolor{gray!6}{1.3173} & \cellcolor{gray!6}{{}[1.2647, 1.3701]} & \cellcolor{gray!6}{1.2844} & \cellcolor{gray!6}{{}[1.2233, 1.3458]}\\
+$\phi^2_{h}$ & -0.4323 & {}[-0.4464, -0.4227] & -0.3315 & {}[-0.3885, -0.2746] & -0.3041 & {}[-0.3686, -0.2409]\\
+\textbf{\cellcolor{gray!6}{$\phi^{x1}_{h}$}} & \cellcolor{gray!6}{} & \cellcolor{gray!6}{} & \textbf{\cellcolor{gray!6}{-0.0173}} & \textbf{\cellcolor{gray!6}{{}[-0.0464, 0.0062]}} & \cellcolor{gray!6}{0.4847} & \cellcolor{gray!6}{{}[0.2707, 0.6894]}\\
+$\phi^{x2}_{h}$ &  &  &  &  & -0.4960 & {}[-0.6698, -0.3198]\\
+\addlinespace
+\cellcolor{gray!6}{$\sigma_{ny}$} & \cellcolor{gray!6}{0.1055} & \cellcolor{gray!6}{{}[0.0896, 0.1254]} & \cellcolor{gray!6}{0.2714} & \cellcolor{gray!6}{{}[0.2150, 0.3155]} & \cellcolor{gray!6}{0.0737} & \cellcolor{gray!6}{{}[0.0463, 0.0987]}\\
+$\sigma_{ey}$ & 0.8113 & {}[0.7957, 0.8259] & 0.8021 & {}[0.7699, 0.8376] & 0.6336 & {}[0.5803, 0.6925]\\
+\cellcolor{gray!6}{$\sigma_{nh}$} & \cellcolor{gray!6}{0.0062} & \cellcolor{gray!6}{{}[0.0055, 0.0072]} & \cellcolor{gray!6}{0.0789} & \cellcolor{gray!6}{{}[0.0742, 0.0845]} & \cellcolor{gray!6}{0.0062} & \cellcolor{gray!6}{{}[0.0055, 0.0071]}\\
+$\sigma_{eh}$ & 1.8647 & {}[1.8332, 1.8845] & 1.2242 & {}[1.1886, 1.2613] & 1.5020 & {}[1.4080, 1.6063]\\
+\addlinespace
+\cellcolor{gray!6}{$\rho_{nynh}$} & \cellcolor{gray!6}{0.0589} & \cellcolor{gray!6}{{}[0.0418, 0.0808]} & \cellcolor{gray!6}{0.0189} & \cellcolor{gray!6}{{}[-0.3049, 0.3393]} & \cellcolor{gray!6}{0.0150} & \cellcolor{gray!6}{{}[-0.3101, 0.3306]}\\
+$\rho_{eyeh}$ & 0.3373 & {}[0.2938, 0.3485] & 0.2536 & {}[0.1713, 0.3337] & 0.2533 & {}[0.1582, 0.3426]\\
+\cellcolor{gray!6}{$llv$} & \cellcolor{gray!6}{607.7600} & \cellcolor{gray!6}{{}[605.0700, 610.0600]} & \cellcolor{gray!6}{578.6200} & \cellcolor{gray!6}{{}[576.1600, 582.1500]} & \cellcolor{gray!6}{559.5500} & \cellcolor{gray!6}{{}[556.6400, 563.6200]}\\
+\bottomrule
+\multicolumn{7}{l}{\rule{0pt}{1em}\textit{Note: }}\\
+\multicolumn{7}{l}{\rule{0pt}{1em}UK Bayesian method random walk Metropolis-Hasting posterior distribution estimates}\\
+\end{tabular}}
+\end{block}
+\end{frame}
+
+\begin{frame}{Model}
+\protect\hypertarget{model}{}
+\begin{block}{State Space Representation}
+\protect\hypertarget{state-space-representation}{}
+\begin{itemize}
+\item
+  Transition equation: \begin{align}
+        \beta_t = F\beta_{t-1} + \tilde{v}_t
+    \end{align}
+\item
+  Where the transitory components are:
+
+  \begin{align*}
+    \begin{bmatrix}
+    \tau_{yt} \\
+    c_{yt}    \\
+    c_{yt-1}    \\
+    \tau_{ht} \\
+    c_{ht}    \\
+    c_{ht-1}  \\
+    \mu_{yt} \\
+    \mu_{ht}  
+    \end{bmatrix}
+    =
+    %F matrix
+    \begin{bmatrix}
+    1 & 0 & 0 & 0 & 0 & 0 & 1 & 0 \\
+    0 & \phi^1_y  & \phi^2_y  & 0 & \phi^{x1}_y & \phi^{x2}_y & 0 & 0\\
+    0 & 1 & 0 & 0 & 0 & 0 & 0 & 0\\
+    0 & 0 & 0 & 1 & 0 & 0 & 0 & 1\\
+    0 & \phi^{x1}_h & \phi^{x2}_h & 0 &\phi^1_h & \phi^2_h  & 0 & 0\\
+    0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 \\
+    0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 \\
+    0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 
+    \end{bmatrix}
+    %Bt-1 matrix
+    \begin{bmatrix}
+    \tau_{yt-1} \\
+    c_{yt-1}    \\
+    c_{yt-2}    \\
+    \tau_{ht-1} \\
+    c_{ht-1}    \\
+    c_{ht-2}    \\
+    \mu_{yt-1} \\
+    \mu_{ht-1} 
+    \end{bmatrix}
+    +
+    \begin{bmatrix}
+    \eta_{yt} \\
+    \varepsilon_{yt}    \\
+    0 \\
+    \eta_{ht} \\
+    \varepsilon_{ht}    \\
+    0 \\
+    \eta_{\mu yt} \\
+    \eta_{\mu ht}
+    \end{bmatrix}
+    \end{align*}
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}{Chapter 2: Measuring Credit Gaps}
+\protect\hypertarget{chapter-2-measuring-credit-gaps}{}
+\begin{block}{Table of Contents}
+\protect\hypertarget{table-of-contents}{}
+\begin{block}{Introduction}
+\protect\hypertarget{introduction}{}
+\begin{itemize}
+\tightlist
+\item
+  Motivation
+\item
+  Contribution
+\end{itemize}
+\end{block}
+
+\begin{block}{Methodology}
+\protect\hypertarget{methodology}{}
+\begin{itemize}
+\tightlist
+\item
+  Data
+\item
+  Empirical Model
+\item
+  Results
+\end{itemize}
+\end{block}
+
+\begin{block}{Conclusion}
+\protect\hypertarget{conclusion}{}
+\end{block}
+\end{block}
+\end{frame}
+
+\begin{frame}{Empirical Results}
+\protect\hypertarget{empirical-results-2}{}
+We perform these estimations recursively to preserve the 1-sided nature
+of the credit gap.
+
+Our first estimation sample runs from 1983:Q1-1988:Q4 and saves the last
+estimate of the cycle. We keep adding one more observation to the
+estimation sample and keep saving the last observation of the cycle for
+different methods.
+
+\begin{itemize}
+\tightlist
+\item
+  This approach provides us with a 1-sided estimate of the credit gap
+  from different methods.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Credit-to-GDP Ratios}
+\protect\hypertarget{credit-to-gdp-ratios}{}
+\includegraphics[width=0.85\linewidth]{../../HPI-Credit-Trasitory-Forecast/plots/Credit-to-GDP}
+\end{frame}
+
+\begin{frame}{Chapter 3: Identifying Unsustainable Credit Gaps}
+\protect\hypertarget{chapter-3-identifying-unsustainable-credit-gaps}{}
+\begin{block}{Table of Contents}
+\protect\hypertarget{table-of-contents-1}{}
+\begin{block}{Introduction}
+\protect\hypertarget{introduction-1}{}
+\begin{itemize}
+\tightlist
+\item
+  Motivation
+\item
+  Contribution
+\item
+  Literature Review
+\end{itemize}
+\end{block}
+
+\begin{block}{Methodology}
+\protect\hypertarget{methodology-1}{}
+\begin{itemize}
+\tightlist
+\item
+  Data
+\item
+  Empirical Model
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Model Selection
+  \item
+    Model Averaging
+  \item
+    Weighted gap creation
+  \end{itemize}
+\end{itemize}
+\end{block}
+
+\begin{block}{Results}
+\protect\hypertarget{results}{}
+\end{block}
+\end{block}
+\end{frame}
+
+\begin{frame}{Literature Review}
+\protect\hypertarget{literature-review}{}
+Beltran (2021) - measured and the performance of BIS Basel credit gap,
+along with other decomposition methods and optimized the smoothing
+parameters \(\rho\) in those filters to minimize policy loss function.
+
+\begin{align*}
+L_{\theta,\rho}=\alpha TypeI(\theta)+(1-\alpha)TypeII(\theta)|TPR\ge2/3
+\end{align*}
+
+\begin{itemize}
+\tightlist
+\item
+  \(\theta\) is the optimized threshold that minizes loss function.
+\end{itemize}
+
+Galán (2019) proposed rolling sample of 15 and 20 years when creating
+one sided cycle.
+
+Drehmann (2021) created Hamilton filter in a panel setting with fixed
+coefficients on independent variables across countries.
+\end{frame}
+
+\begin{frame}{AUROC}
+\protect\hypertarget{auroc}{}
+Each logistic regression with a different gap measurement yields a Area
+Under Curve (AUC) of receiver operating characteristic value. There is
+an underlying assumption that the higher the AUC value is the better
+overall performance of a credit gap is as an EWI.
+
+\begin{itemize}
+\tightlist
+\item
+  However, the AUC value received some criticism regarding the area on
+  its lower left corner, where the predictive power of the threshold
+  (TPR) is low.
+\end{itemize}
+
+\begin{align*}
+AUC = \int_0^1 TPR d(FPR)
+\end{align*}
+
+A ROC curve in the EWI setting represents True Positive Rate (TPR) and
+False Positive Rate (FPR) of different credit gap thresholds indicating
+a pre-crisis period.
+\end{frame}
+
+\begin{frame}{partial standardised AUROC (psAUROC)}
+\protect\hypertarget{partial-standardised-auroc-psauroc}{}
+To overcome the issue of unnecessary information included in the full
+AUC. An approach to estimate partial AUC was proposed by Detken et al
+(2014) in the early warning literature.
+
+\begin{itemize}
+\tightlist
+\item
+  psAUC can reveal useful additional information as long as the partial
+  area does not become too restricted
+\end{itemize}
+\end{frame}
+
+\begin{frame}{pAUROC (or pAUC)}
+\protect\hypertarget{pauroc-or-pauc}{}
+Beltran (2021) constrainted the policy loss function to TPR \(\ge 2/3\)
+or Type II error rate \(< 1/3\). They then estimated the policy loss
+function value at different points on the ROC curve by assigning
+different policy preferences \(\alpha\).
+
+\(\Rightarrow\) In this paper, we propose to restrict the consideration
+of the ROC curve to TPR \(\ge 2/3\), then estimate the psAUC of the
+restricted ROC curve region instead.
+
+\begin{align}
+pAUROC = \int_{\frac{2}{3}}^1 TNR \, d(TPR)
+\end{align}
+
+\begin{itemize}
+\tightlist
+\item
+  TNR = 1- FPR
+\item
+  FPR = Type I error rate, FNR = Type II error rate
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Variable selection (top 23 gaps ranked by psAUC)}
+\protect\hypertarget{variable-selection-top-23-gaps-ranked-by-psauc}{}
+\resizebox{\linewidth}{!}{
+\begin{tabular}[t]{lrrr>{}rrrrr}
+\toprule
+Cycles & BIC & AIC & AUC & psAUC & c.Threshold & Type.I & Type.II & Policy.Loss.Function\\
+\midrule
+null & 0.0000 & 0.0000 & 0.5000 & \textbf{0.5000} &  & 1.0000 & 0.0000 & 1.0000\\
+c.bn6.r20 & -108.0679 & -114.4506 & 0.7048 & \textbf{0.6379} & 0.6581 & 0.3962 & 0.3019 & 0.2481\\
+c.hamilton28.panel & -149.8518 & -156.2346 & 0.7107 & \textbf{0.6359} & 9.7674 & 0.3912 & 0.3066 & 0.2470\\
+c.hamilton13.panelr20 & -150.2442 & -156.6269 & 0.7036 & \textbf{0.6333} & 5.9895 & 0.4261 & 0.2547 & 0.2464\\
+c.hamilton24.panel & -134.4093 & -140.7920 & 0.6991 & \textbf{0.6322} & 7.1794 & 0.4383 & 0.2689 & 0.2644\\
+\addlinespace
+c.hamilton20.panelr20 & -151.5617 & -157.9445 & 0.7048 & \textbf{0.6313} & 7.9350 & 0.4321 & 0.3066 & 0.2807\\
+c.ma & -120.8108 & -127.1936 & 0.6922 & \textbf{0.6313} & 5.7813 & 0.3989 & 0.3160 & 0.2590\\
+c.hamilton20.panelr15 & -135.3713 & -141.7540 & 0.6985 & \textbf{0.6312} & 7.5244 & 0.4616 & 0.2689 & 0.2854\\
+c.hamilton13.panelr15 & -126.2968 & -132.6796 & 0.6924 & \textbf{0.6311} & 6.5289 & 0.4297 & 0.2830 & 0.2647\\
+c.hamilton28.panelr20 & -164.6015 & -170.9842 & 0.7158 & \textbf{0.6302} & 10.8558 & 0.3948 & 0.2925 & 0.2414\\
+\addlinespace
+c.hamilton24.panelr20 & -155.8638 & -162.2466 & 0.7096 & \textbf{0.6301} & 9.1672 & 0.4251 & 0.2830 & 0.2608\\
+c.hamilton24.panelr15 & -143.2235 & -149.6062 & 0.7033 & \textbf{0.6299} & 10.4963 & 0.3984 & 0.3160 & 0.2586\\
+c.hamilton20.panel & -126.8625 & -133.2452 & 0.6907 & \textbf{0.6288} & 5.6212 & 0.4686 & 0.2830 & 0.2997\\
+c.hamilton28.panelr15 & -154.4533 & -160.8361 & 0.7091 & \textbf{0.6270} & 11.5510 & 0.3854 & 0.2972 & 0.2369\\
+c.hamilton13.panel & -133.9347 & -140.3175 & 0.6922 & \textbf{0.6250} & 4.9769 & 0.4285 & 0.2877 & 0.2664\\
+\addlinespace
+c.bn2.r20 & -109.3128 & -115.6955 & 0.6963 & \textbf{0.6218} & 0.2776 & 0.4080 & 0.3255 & 0.2724\\
+c.linear & -135.4069 & -141.7896 & 0.6879 & \textbf{0.6204} & 3.9989 & 0.4616 & 0.2925 & 0.2986\\
+c.bn2 & -135.9914 & -142.3741 & 0.6842 & \textbf{0.6165} & 0.1864 & 0.4530 & 0.3113 & 0.3021\\
+c.bn6 & -132.7915 & -139.1742 & 0.6835 & \textbf{0.6113} & 0.4710 & 0.4371 & 0.2830 & 0.2712\\
+c.bn6.r15 & -54.9953 & -61.3781 & 0.6756 & \textbf{0.6070} & 0.5680 & 0.4179 & 0.3255 & 0.2806\\
+\addlinespace
+c.bn2.r15 & -83.9469 & -90.3297 & 0.6749 & \textbf{0.6047} & 0.1349 & 0.4761 & 0.3302 & 0.3357\\
+c.poly4.r20 & 3.5738 & -2.8090 & 0.5772 & \textbf{0.6011} & 0.1651 & 0.4980 & 0.3302 & 0.3570\\
+BIS Basel gap & -121.5910 & -127.9738 & 0.6733 & \textbf{0.5960} & 3.0578 & 0.4441 & 0.3255 & 0.3032\\
+c.bn4 & -169.1186 & -175.5014 & 0.6892 & \textbf{0.5943} & 1.2840 & 0.3837 & 0.3255 & 0.2532\\
+c.bn4.r15 & -89.6147 & -95.9975 & 0.6669 & \textbf{0.5929} & 0.4435 & 0.4792 & 0.2925 & 0.3152\\
+\addlinespace
+c.bn5.r20 & -99.7674 & -106.1501 & 0.6744 & \textbf{0.5928} & 0.5016 & 0.4234 & 0.3302 & 0.2883\\
+\bottomrule
+\end{tabular}}
+\end{frame}
+
+\begin{frame}{Model posterior probability}
+\protect\hypertarget{model-posterior-probability}{}
+\begin{itemize}
+\tightlist
+\item
+  \(BIC_k = 2log (Bayesfactor_{sk}) = \chi^2_{sk} - df_klog(n)\)
+\item
+  \(\chi^2_{sk}\) is the deviance of model K from the the saturated
+  model
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \(\chi^2_{sk} = 2(ll(Ms) - ll(Mk))\)
+  \item
+    \(ll(Mk)\) is the log-likelihood of model Mk given data D
+  \end{itemize}
+\end{itemize}
+
+\begin{block}{Alternate deviance measurement}
+\protect\hypertarget{alternate-deviance-measurement}{}
+We propose using psAUC instead of log-likelihood in the measurement of
+deviance. Hence, an alternative BIC value can be estimated at:
+
+\begin{align}
+BIC_{alt,k} &= 2log (Bayesfactor_{alt,sk}) \\
+&= 2(1000*(psAUC_s-psAUC_k)) - df_klog(n)
+\end{align} - We scaled the psAUC value by 1000 since \(0<psAUC<1\).
+Also, by design, \(psAUC_s=1\).
+\end{block}
+\end{frame}
+
+\begin{frame}{Posterior distribution of coefficients of interest:}
+\protect\hypertarget{posterior-distribution-of-coefficients-of-interest}{}
+\(\beta_j\) is the coefficient of credit gap j (\(c_j\)) in a logistic
+regression model k against pre-crisis indicator. When considering a
+particular \(\beta_1\) :
+
+\begin{align*}
+p(\beta_1|D, \beta_1\ne 0) = \sum\nolimits_{A_1} p(\beta_1|D,M_k)p'(M_k|D)
+\end{align*}
+
+\begin{itemize}
+\tightlist
+\item
+  where \(p'(M_k|D)=p(M_k|D)/ pr[\beta_1 \ne 0|D]\)
+\item
+  and \(pr[\beta_1 \ne 0|D] = \sum\limits_{A_1} p(M_k|D)\)
+
+  \begin{itemize}
+  \tightlist
+  \item
+    this is the probability that \(\beta_1\) is in the averaged model
+  \item
+    \(A_1= \{M_k: k=1,...,K; \beta_1 \ne 0\}\), is the set of models
+    that includes \(\beta_1\)
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Approximation of point estimate:}
+\protect\hypertarget{approximation-of-point-estimate}{}
+\begin{align}
+\hat{\beta}_1 = E[\beta_1|D, \beta_1\ne 0] = \sum\limits_{A_1} \hat{\beta}_1(k)p'(M_k|D)
+\end{align}
+
+\(SD^2[\beta_1|D, \beta_1\ne 0] =[\sum\limits_{A_1}[se_1^2(k)+]+\hat{\beta_1}(k)]p'(M_k|D) - E[\beta_1|D, \beta_1\ne 0]^2\)
+
+\begin{itemize}
+\tightlist
+\item
+  Where \(\hat{\beta}_1(k)\) and \(se_1^2(k)\) are respectively the MLE
+  and standard error of \(\beta_1\) under the model \(M_k\). (Leamer
+  1978, p.118; Raftery 1993a)
+\end{itemize}
+\end{frame}
+
+\end{document}
