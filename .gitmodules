@@ -1,0 +1,3 @@
+[submodule "Projects/HPCredit"]
+	path = Projects/HPCredit
+	url = https://github.com/NamNguyen-hub/HPCredit.git
