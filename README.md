@@ -1,9 +1,7 @@
-# Dissertation
-
-## Dissertation: 
+# Dissertation: 
 fulltext pdf: [nnguyen_dissertation.pdf](../Dissertation_pdfbook/dissertation/docs/nnguyen_dissertation.pdf)
 
-## Presentation Slides: 
+# Presentation Slides: 
 BeamerSlides: [index.pdf](../BeamerSlides/index.pdf)
 
 ## Nam Nguyen's Dissertation codes repositories:
