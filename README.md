@@ -1,10 +1,10 @@
 # Dissertation
 
 ## Dissertation: 
-Dissertation_pdfbook/dissertation/docs/nnguyen_dissertation.pdf
+fulltext pdf: [nnguyen_dissertation.pdf](../Dissertation_pdfbook/dissertation/docs/nnguyen_dissertation.pdf)
 
 ## Presentation Slides: 
-BeamerSlides/presentation.pdf
+BeamerSlides: [index.pdf](../BeamerSlides/index.pdf)
 
 ## Nam Nguyen's Dissertation codes repositories:
 - 1. HPCredit
